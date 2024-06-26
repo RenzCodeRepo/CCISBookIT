@@ -18,5 +18,34 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    padding: 5px;
 }
+
+.loginpage {
+    background-image: url('/images/bg-pup.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure the background covers the full viewport height */
+}
+
+.loginform {
+    width: 720px;
+    height: 1014px;
+    background: linear-gradient(138deg, rgba(255, 255, 255, 0.40) 0%, rgba(134.35, 12.75, 12.75, 0.40) 50%, rgba(244.46, 238.36, 92.13, 0.40) 100%);
+    border-radius: 15px;
+    border: 1px white solid;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo-pup {
+    width: 208px;
+    height: 207px;
+    display: block; /*centering the logo form*/
+    margin: 0 auto;
+}
+
