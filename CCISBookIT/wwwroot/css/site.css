@@ -31,7 +31,7 @@ body {
 
 .loginform {
     width: 720px;
-    height: 1014px;
+    height: 1000px;
     background: linear-gradient(138deg, rgba(255, 255, 255, 0.40) 0%, rgba(134.35, 12.75, 12.75, 0.40) 50%, rgba(244.46, 238.36, 92.13, 0.40) 100%);
     border-radius: 15px;
     border: 1px white solid;

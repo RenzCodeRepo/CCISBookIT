@@ -1,0 +1,126 @@
+/* NAVIGATION BAR STYLING*/
+
+/* Import Poppins SemiBold font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* Apply Poppins SemiBold to the body */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    height: 70px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 2px -2px gray; /* Adds the shadow effect */
+}
+
+#appLogo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #8b0000;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#appLogo img {
+    height: 45px;
+    margin-right: 10px;
+}
+
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-content {
+    display: block;
+    color: #8b0000;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.navbar-content:hover {
+    background-color: #ddd;
+    color: #5D0101;
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown .dropbtn {
+    font-size: 17px;    
+    border: none;
+    outline: none;
+    color: #8b0000; 
+    padding: 14px 20px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 600; 
+}
+
+.dropdown .dropbtn img {
+    height: 30px;
+    margin-right: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Align dropdown content to the right */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 120px;
+    margin-right: 40px;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #8b0000; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex; 
+    align-items: center;
+    text-align: left;
+    font-weight: 600;
+}
+
+.dropdown-content a img {
+    height: 30px; 
+    margin-right: 10px;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.arrow.down {
+    border: solid #8b0000; 
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: 5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}

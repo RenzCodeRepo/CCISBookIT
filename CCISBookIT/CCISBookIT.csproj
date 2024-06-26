@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\dashboard.cshtml" />
+    <Content Remove="Views\navigationBar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\dashboard.cshtml" />
+    <None Include="Views\navigationBar.cshtml" />
+  </ItemGroup>
+
 </Project>

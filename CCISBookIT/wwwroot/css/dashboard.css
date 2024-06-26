@@ -1,0 +1,83 @@
+/* DASHBOARD STYLING*/
+
+/* Import Poppins SemiBold font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* Apply Poppins SemiBold to the body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.background-container {
+    position: relative; /* Positioning context for the blur */
+    height: 100vh; /* Sets the height to 100% of the viewport height */
+    overflow: hidden; /* Ensures content doesn't spill out */
+    margin: 0; /* Removes any default margin */
+}
+
+.background-container::before {
+    content: "";
+    background-image: url('backgroundIMG.jpg');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(3px); /* Applies the blur effect */
+    z-index: -1; /* Places the background behind the content */
+}
+
+.homepageText {
+    text-align: center;
+}
+
+h1 {
+    font-family: arial black;
+    font-size: 80px;
+    font-weight: bold;
+    color: #ffd700; /* Fallback color */
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Shadow for better visibility */
+    -webkit-text-stroke: 2px white; /* White border around the letters */
+    text-stroke: 2px white; /* For non-webkit browsers */
+    margin-bottom: 10px; /* Reduce the bottom margin to bring the texts closer */
+}
+
+span.yellow {
+    color: #ffd700; 
+}
+
+span.red {
+    color: #800000;
+}
+
+.appDesc {
+    font-family: arial;
+    font-size: 50px; /* Adjust the size as needed */
+    color: white;
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4); /* Shadow for better visibility */
+    -webkit-text-stroke: 0.8px #5e6062; /* White border around the letters */
+    text-stroke: 0.8px #5e6062; /* For non-webkit browsers */
+    margin-top: 0; /* Remove the top margin */
+}
+
+footer {
+    text-align: center;
+    height: auto;
+    padding: 2px;
+    background-color: #800000;
+    width: 100%;    /* Take the full width of the viewport */
+  }
+
+.footer-content {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
