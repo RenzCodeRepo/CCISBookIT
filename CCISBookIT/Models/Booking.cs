@@ -1,23 +1,25 @@
 ﻿using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CCISBookIT.Data.Enum;
 
 namespace CCISBookIT.Models
 {
     public class Booking
     {
+        //structure of the table
         [Key]
-        public string bookingId { get; set; }
+        public string BookingId { get; set; }
         [ForeignKey("User")]
-        public string facultyId { get; set; }
-        public DateTime date { get; set; }
-        public TimeOnly startTime { get; set; }
-        public int duration { get; set; }
-        public TimeOnly endTime { get; set; }
+        public string FacultyId { get; set; }
+        public DateTime Date { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public int Duration { get; set; }
+        public TimeOnly EndTime { get; set; }
         [ForeignKey("Rooms")]
-        public string roomNo { get; set; }
-        public string purpose { get; set; }
-        public string status { get; set; }
+        public string RoomNo { get; set; }
+        public string Purpose { get; set; }
+        public Status Status { get; set; }
 
     }
 }
