@@ -10,6 +10,8 @@ namespace CCISBookIT.Models
         public string RoomNo { get; set; }
         public RoomType RoomType { get; set; }
 
+        //relationships
+
 
     }
 }

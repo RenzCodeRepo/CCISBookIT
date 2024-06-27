@@ -12,5 +12,9 @@ namespace CCISBookIT.Models
         public string PhoneNumber { get; set; }
         public string PasswordHash { get; set; }
 
+        //relationship
+
+        public List<Booking> Booking { get; set; }
+
     }
 }

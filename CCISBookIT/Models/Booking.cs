@@ -22,5 +22,12 @@ namespace CCISBookIT.Models
         public string Purpose { get; set; }
         public Status Status { get; set; }
 
+        //relationships
+
+        public List<User> User { get; set; }
+
+        public List<Room> Room { get; set; }
+  
+
     }
 }
