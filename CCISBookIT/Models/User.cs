@@ -4,12 +4,13 @@ namespace CCISBookIT.Models
 {
     public class User
     {
+        //structure of the table
         [Key]
-        public string facultyID { get; set; }
-        public string fullName { get; set; }
-        public string email { get; set; }
-        public string phoneNumber { get; set; }
-        public string password { get; set; }
+        public string FacultyID { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PasswordHash { get; set; }
 
     }
 }
