@@ -12,9 +12,9 @@ namespace CCISBookIT.Data
 
                 context.Database.EnsureCreated();
 
-                if (!context.users.Any()) 
+                if (!context.Users.Any()) 
                 {
-                    context.users.AddRange(new List<User>()
+                    context.Users.AddRange(new List<User>()
                     {
                         new User()
                         {

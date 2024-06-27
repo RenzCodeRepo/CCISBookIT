@@ -10,6 +10,7 @@ namespace CCISBookIT.Models
         //structure of the table
         [Key]
         public string BookingId { get; set; }
+      
         [ForeignKey("User")]
         public string FacultyId { get; set; }
         public DateTime Date { get; set; }

@@ -2,6 +2,8 @@ using CCISBookIT.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
+
 namespace CCISBookIT.Controllers
 {
     public class HomeController : Controller

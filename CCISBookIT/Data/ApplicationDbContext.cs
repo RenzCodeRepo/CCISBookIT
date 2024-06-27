@@ -7,7 +7,7 @@ namespace CCISBookIT.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            
         }
         //the tables
         public DbSet<Booking> Bookings { get; set; }

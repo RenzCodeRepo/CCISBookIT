@@ -1,3 +1,5 @@
+using System;
+
 namespace CCISBookIT.Models
 {
     public class ErrorViewModel
