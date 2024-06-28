@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCISBookIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240626160529_InitialCreate")]
+    [Migration("20240628073858_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,15 +41,14 @@ namespace CCISBookIT.Migrations
 
                     b.Property<string>("FacultyId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Purpose")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoomNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RoomNo")
+                        .HasColumnType("int");
 
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
@@ -59,20 +58,27 @@ namespace CCISBookIT.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.ToTable("bookings");
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("RoomNo");
+
+                    b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("CCISBookIT.Models.Rooms", b =>
+            modelBuilder.Entity("CCISBookIT.Models.Room", b =>
                 {
-                    b.Property<string>("RoomNo")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoomNo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomNo"));
 
                     b.Property<int>("RoomType")
                         .HasColumnType("int");
 
                     b.HasKey("RoomNo");
 
-                    b.ToTable("rooms");
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("CCISBookIT.Models.User", b =>
@@ -88,7 +94,7 @@ namespace CCISBookIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -96,9 +102,42 @@ namespace CCISBookIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("FacultyID");
 
-                    b.ToTable("users");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CCISBookIT.Models.Booking", b =>
+                {
+                    b.HasOne("CCISBookIT.Models.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CCISBookIT.Models.Room", "Room")
+                        .WithMany("Bookings")
+                        .HasForeignKey("RoomNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CCISBookIT.Models.Room", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("CCISBookIT.Models.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

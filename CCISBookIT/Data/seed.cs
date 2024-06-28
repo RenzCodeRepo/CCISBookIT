@@ -2,19 +2,21 @@
 
 namespace CCISBookIT.Data
 {
-    public class seed
+    public class Seed
     {
         public static void Populate(IApplicationBuilder applicationBuilder)
         {
             using (var ServiceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = ServiceScope.ServiceProvider.GetService<ApplicationDbContext>();
-
+                
+                // Ensure the database is created
                 context.Database.EnsureCreated();
-
-                if (!context.users.Any()) 
+                
+                // Seed users if none exist
+                if (!context.Users.Any()) 
                 {
-                    context.users.AddRange(new List<User>()
+                    context.Users.AddRange(new List<User>()
                     {
                         new User()
                         {
