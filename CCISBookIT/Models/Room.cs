@@ -7,7 +7,7 @@ namespace CCISBookIT.Models
     {
         //structure of the table
         [Key]
-        public int RoomNo { get; set; }
+        public string RoomNo { get; set; }
         public RoomType RoomType { get; set; }
         // Navigation property: each room can have many bookings
         public ICollection<Booking> Bookings { get; set; }

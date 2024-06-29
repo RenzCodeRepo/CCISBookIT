@@ -15,8 +15,7 @@ namespace CCISBookIT.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    RoomNo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -47,11 +46,11 @@ namespace CCISBookIT.Migrations
                     BookingId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    Duration = table.Column<int>(type: "int", nullable: false),
+                    Duration = table.Column<double>(type: "float", nullable: false),
                     EndTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    RoomNo = table.Column<int>(type: "int", nullable: false),
+                    RoomNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FacultyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>

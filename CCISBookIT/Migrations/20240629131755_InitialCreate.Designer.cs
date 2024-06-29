@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCISBookIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240628073858_InitialCreate")]
+    [Migration("20240629131755_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,8 +33,8 @@ namespace CCISBookIT.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
 
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
@@ -47,8 +47,9 @@ namespace CCISBookIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoomNo")
-                        .HasColumnType("int");
+                    b.Property<string>("RoomNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
@@ -67,11 +68,8 @@ namespace CCISBookIT.Migrations
 
             modelBuilder.Entity("CCISBookIT.Models.Room", b =>
                 {
-                    b.Property<int>("RoomNo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomNo"));
+                    b.Property<string>("RoomNo")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RoomType")
                         .HasColumnType("int");
