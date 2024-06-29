@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CCISBookIT.Data.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace CCISBookIT.Models
 {
@@ -11,7 +12,9 @@ namespace CCISBookIT.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string PasswordHash { get; set; }
-        public string Role { get; set; }
+        public UserRole Role { get; set;} 
+
+     
 
         // Navigation property: each user can have many bookings
         public ICollection<Booking> Bookings { get; set; }

@@ -1,5 +1,6 @@
 ﻿using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CCISBookIT.Data
 {
@@ -87,15 +88,160 @@ namespace CCISBookIT.Data
                     });
                 }
 
-                //Users
+                //Users FuLLName = First Name, Middle Name, Last Name
                 if (!context.Users.Any())
                 {
-
+                    context.Users.AddRange(new List<User>()
+                    {
+                        new User()
+                        {
+                            FacultyID = "CCISF001",
+                            FullName = "Maloi Ricalde Manzana",
+                            Email = "maloimanzana@gmail.com",
+                            PhoneNumber = "09171234567",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF002",
+                            FullName = "Chaeyoung Marie Reyes Mendoza",
+                            Email = "chaemacle@gmail.com",
+                            PhoneNumber = "09182345678",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF003",
+                            FullName = "Sheena Mae Burgos Catacutan",
+                            Email = "shecaminute@gmail.com",
+                            PhoneNumber = "09193456789",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF004",
+                            FullName = "Ariana Grande Bautista",
+                            Email = "arigaba@gmail.com",
+                            PhoneNumber = "09204567890",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF005",
+                            FullName = "Frank Morales Ocean",
+                            Email = "frankoceanlover911@gmail.com",
+                            PhoneNumber = "09215678901",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },new User()
+                        {
+                            FacultyID = "CCISF006",
+                            FullName = "Freddie Mercury Watson",
+                            Email = "freddiequeen@gmail.com",
+                            PhoneNumber = "09226789012",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty ,
+                        },new User()
+                        {
+                            FacultyID = "CCISF007",
+                            FullName = "",
+                            Email = "jmg123@gmail.com",
+                            PhoneNumber = "09237890123",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty ,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF008",
+                            FullName = "Renz Niño Baladjay",
+                            Email = "jamescarl",
+                            PhoneNumber = "09248901234",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF009",
+                            FullName = "Jamescarl Quitarinio Dean",
+                            Email = "jamescarl@gmail.com",
+                            PhoneNumber = "09259012345",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISF010",
+                            FullName = "Michelle Clemente Lopez",
+                            Email = "michellelopez@gmail.com",
+                            PhoneNumber = "09260123456",
+                            PasswordHash = "",
+                            Role = UserRole.Faculty,
+                        },
+                        new User()
+                        {
+                            FacultyID = "CCISA011",
+                            FullName = "Zabdiel Joseph De Belen Manzana",
+                            Email = "zabdielpogi123@gmail.com",
+                            PhoneNumber = "09271234567",
+                            PasswordHash = "",
+                            Role = UserRole.Admin,
+                        }
+                    });
                 }
 
                 //Rooms
                 if (!context.Rooms.Any())
                 {
+                    context.Rooms.AddRange(new List<Room>()
+                    {
+                        new Room()
+                        {
+                            RoomNo = "S501",
+                            RoomType = RoomType.Laboratory,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S502",
+                            RoomType = RoomType.Laboratory,
+                        },new Room()
+                        {
+                            RoomNo = "S503A",
+                            RoomType = RoomType.Laboratory,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S503B",
+                            RoomType = RoomType.Laboratory,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S504",
+                            RoomType = RoomType.Lecture,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S509",
+                            RoomType = RoomType.Laboratory,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S5010",
+                            RoomType = RoomType.Laboratory,
+                        },
+                        new Room()
+                        {
+                            RoomNo = "S5011",
+                            RoomType = RoomType.Laboratory,
+                        },
+
+
+
+
+                    });
 
                 }
             }
