@@ -51,8 +51,9 @@ namespace CCISBookIT.Migrations
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookingId");
 
@@ -68,8 +69,9 @@ namespace CCISBookIT.Migrations
                     b.Property<string>("RoomNo")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("RoomType")
-                        .HasColumnType("int");
+                    b.Property<string>("RoomType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoomNo");
 

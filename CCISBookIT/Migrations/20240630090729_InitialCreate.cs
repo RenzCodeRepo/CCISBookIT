@@ -16,7 +16,7 @@ namespace CCISBookIT.Migrations
                 columns: table => new
                 {
                     RoomNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoomType = table.Column<int>(type: "int", nullable: false)
+                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,7 @@ namespace CCISBookIT.Migrations
                     Duration = table.Column<double>(type: "float", nullable: false),
                     EndTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoomNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FacultyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },

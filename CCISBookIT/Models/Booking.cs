@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CCISBookIT.Data.Enum;
@@ -7,22 +7,23 @@ namespace CCISBookIT.Models
 {
     public class Booking
     {
-        //structure of the table
         [Key]
-        public string BookingId { get; set; }
+        public string BookingId { get; set; } // Since BookingId is typically unique and non-nullable
+
         public DateTime Date { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public Double Duration { get; set; }
-        public TimeOnly EndTime { get; set; }
-        public string Purpose { get; set; }
-        public Status Status { get; set; }
+        public TimeOnly StartTime { get; set; } // Consider using TimeSpan instead of TimeOnly for database compatibility
+        public double Duration { get; set; }
+        public TimeOnly EndTime { get; set; } // Consider using TimeSpan instead of TimeOnly for database compatibility
+        public string Purpose { get; set; } // Purpose should generally be non-nullable unless it's truly optional
+        [EnumDataType(typeof(Status))]
+        public string Status { get; set; }
 
         [ForeignKey("Room")]
         public string RoomNo { get; set; }
-        public Room Room { get; set; } // Navigation property
+        public Room Room { get; set; }
 
         [ForeignKey("User")]
         public string FacultyId { get; set; }
-        public User User { get; set; } // Navigation property
+        public User User { get; set; }
     }
 }

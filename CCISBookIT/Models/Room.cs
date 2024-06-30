@@ -1,16 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using CCISBookIT.Data.Enum;
 
 namespace CCISBookIT.Models
 {
     public class Room
     {
-        //structure of the table
         [Key]
         public string RoomNo { get; set; }
-        public RoomType RoomType { get; set; }
-        // Navigation property: each room can have many bookings
-        public ICollection<Booking> Bookings { get; set; }
+        [EnumDataType(typeof(RoomType))]
+        public string RoomType { get; set; }
 
+        public ICollection<Booking> Bookings { get; set; } // Navigation property
+
+        public Room()
+        {
+            Bookings = new List<Booking>(); // Initialize navigation property collection in constructor
+        }
     }
 }

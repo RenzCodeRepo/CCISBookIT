@@ -1,22 +1,26 @@
-﻿using CCISBookIT.Data.Enum;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CCISBookIT.Data.Enum;
 
 namespace CCISBookIT.Models
 {
     public class User
     {
-        //structure of the table
         [Key]
         public string FacultyID { get; set; }
+
         public string FullName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string PasswordHash { get; set; }
-        public UserRole Role { get; set;} 
+        [EnumDataType(typeof(UserRole))]
+        public string Role { get; set; }
 
-     
+        public ICollection<Booking> Bookings { get; set; } // Navigation property
 
-        // Navigation property: each user can have many bookings
-        public ICollection<Booking> Bookings { get; set; }
+        public User()
+        {
+            Bookings = new List<Booking>(); // Initialize navigation property collection in constructor
+        }
     }
 }
