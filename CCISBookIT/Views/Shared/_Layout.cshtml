@@ -7,17 +7,53 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CCISBookIT.styles.css" asp-append-version="true" />
+    <title>CCIS-BookIT</title>
+    <!-- Link to .css file -->
+    <link rel="stylesheet" href="navigationBar.css">
+    <link rel="icon" type="image" src="C:\Users\Renz Niño Baladjay\source\repos\CCISBookIT\CCISBookIT\wwwroot\images\CCISBookITLogo.png">
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <div class="navbar">
+        <a id="appLogo" href="dashboard.html">
+            <img src="~/images/CCISBookITLogo.png" alt="CCIS-BookIT LOGO">CCISBookIT
+        </a>
+        <div class="navbar-center">
+            <a class="navbar-content" href="dashboard.html">HOME</a>
+            <a class="navbar-content" href="#">ADD RESERVATION</a>
+            <a class="navbar-content" href="#">VIEW RESERVATION</a>
+            <a class="navbar-content" href="#">FAQs</a>
+        </div>
 
-    </header>
-    <div>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <img src="~/images/userIcon.png" alt="Profile Icon">
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#"><img src="~/images/userIcon.png" alt="View Profile Icon"> VIEW PROFILE</a>
+                <a href="#"><img src="~/images/logoutIcon.png" alt="Log Out Icon"> LOG OUT</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
+    <footer class="container-fluid">
+        <div class="footer-content">
+            <h2>ABOUT US</h2>
+            <p>
+                CCIS BOOKIT is a web-based application developed to simplify the process of
+                booking of lecture rooms and laboratories for the College of Computer and Information
+                Sciences (CCIS) at the Polytechnic University of the Philippines.
+            </p>
+            <p style="color: #ffd700;">&copy; 2024 CCIS-BookIT. All rights reserved.</p>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
