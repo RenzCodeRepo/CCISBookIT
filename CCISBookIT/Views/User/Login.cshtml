@@ -1,0 +1,64 @@
+﻿@model User
+
+@{
+	ViewData["Title"] = "Login";
+}
+
+
+<!-- LOGIN PAGE -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tab icon & web-app name -->
+    <title>CCISBookIT - Login</title>
+    <link rel="icon" type="image" href="/images/CCISBookITLogo.png">
+
+    <!-- Link to .css file -->
+    <link rel="stylesheet" href="/css/login.css">
+
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="transparent-container">
+        <!-- Logo and web-app name -->
+        <img src="/images/CCISBookITLogo.png" alt="Logo" class="logo">
+        <h1><span class="yellow">CCIS</span><span class="red">BOOKIT</span></h1>
+
+        <!-- Link back end to "#" to save the inputted data from the <form> -->
+        <form action="#">
+            <div class="form-group">
+                <!-- Input for Faculty ID -->
+                <label asp-for="FacultyID" class="control-label"> FACULTY ID</label>
+                <input asp-for="FacultyID" class="form-control" />
+                <span asp-validation-for="FacultyID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <!-- Input for Password -->
+                <label asp-for="PasswordHash" class="control-label">PASSWORD</label>
+                <input asp-for="PasswordHash" class="form-control" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <div class="button-container">
+                <!-- Login button & backend link-->
+                <button type="submit">LOGIN</button>
+
+                <!-- Sign Up button & backend link -->
+                <button type="button" onclick="location.href='Signup'">SIGN UP</button>
+            </div>
+
+            <div class="forgot-password">
+                <!-- Forgot function & backend link-->
+                <a href="ForgotPassword">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
