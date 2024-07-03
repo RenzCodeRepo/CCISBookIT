@@ -1,0 +1,32 @@
+﻿@model User
+@*
+
+*@
+@{ViewData["Title"] = "User Details";
+}
+<h1>User Details</h1>
+
+<table class="table">
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.FacultyID)</strong></td>
+        <td>@Html.DisplayFor(model => model.FacultyID)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.FullName)</strong></td>
+        <td>@Html.DisplayFor(model => model.FullName)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
+        <td>@Html.DisplayFor(model => model.Email)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.PhoneNumber)</strong></td>
+        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Role)</strong></td>
+        <td>@Html.DisplayFor(model => model.Role)</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
