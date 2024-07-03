@@ -8,16 +8,17 @@ namespace CCISBookIT.Models
     {
         [Key]
         [Display(Name = "Room Number")]
-        public string RoomNo { get; set; }
+        public string RoomNo { get; set; }  // Room number, serves as the primary key
+
         [EnumDataType(typeof(RoomType))]
         [Display(Name = "Type of Room")]
-        public string RoomType { get; set; }
+        public string RoomType { get; set; }  // Type of room, validated against RoomType enum
 
-        public ICollection<Booking> Bookings { get; set; } // Navigation property
+        public ICollection<Booking> Bookings { get; set; }  // Navigation property to Booking entities
 
         public Room()
         {
-            Bookings = new List<Booking>(); // Initialize navigation property collection in constructor
+            Bookings = new List<Booking>();  // Initialize the navigation property collection in the constructor
         }
     }
 }

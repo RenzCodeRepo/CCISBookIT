@@ -1,20 +1,24 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CCISBookIT.Controllers
 {
     public class BookingController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBookingService _bookingService;
 
-        public BookingController(ApplicationDbContext context)
+        public BookingController(IBookingService bookingService)
         {
-            _context = context;
+            _bookingService = bookingService; // Constructor injection
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var booking = _context.Bookings.ToList();
-            return View(booking);
+            var bookings = await _bookingService.GetAll(); // Retrieve all bookings
+
+            return View(bookings); // Pass bookings to the "Index" view
         }
     }
 }

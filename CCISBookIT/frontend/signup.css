@@ -1,0 +1,108 @@
+
+/* CREATE ACCOUNT PAGE */
+
+/* Import Poppins SemiBold font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* General body styling */
+body {
+    font-family: 'Poppins', sans-serif;             /* Set font family */
+    color: #fff;                                  /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;                              /* Full viewport height */
+    margin: 0;                                      /* Remove default margin */
+    background-image: url("backgroundIMG.jpg");     /* Background image */
+    background-size: cover;                         /* Cover entire background */
+    background-position: center;                    /* Center background */
+    padding: 30px;                                  /* Add padding to create space at the top and bottom */
+}
+
+/* Style for the transparent container */
+.transparent-container {
+    width: 1000px;                   /* Adjust width */
+    height: 700px;                  /* Adjust height */
+    text-align: center;             /* Center text */
+    background: linear-gradient(138deg, rgba(255, 255, 255, 0.40) 0%, rgba(134, 12, 12, 0.40) 50%, rgba(244, 238, 92, 0.40) 100%); /* Gradient background */
+    border-radius: 15px;            /* Rounded corners */
+    border: 1px white solid;      /* White border */
+    padding-top: 50px;              /* Top padding */
+    padding-bottom: 30px;           /* Bottom padding */
+}
+  
+/* Style for the logo */
+.logo {
+    width: 150px;           /* Logo width */
+    height: auto;           /* Maintain aspect ratio */
+    margin-top: 5px;       /* Top margin */
+}
+  
+h1 {
+    font-family: 'Arial Black', sans-serif;               /* Set font family */
+    font-size: 30px;                                      /* Font size */
+    color: #800000;                                     /* (FORGOT PASSWORD) Set text color to red */
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);     /* Text shadow for better visibility */
+    -webkit-text-stroke: 0.5px white;                   /* White border around the letters for WebKit */
+    margin-bottom: 30px;
+}
+  
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+  
+.form-group {
+    width: 50%;
+    text-align: left;
+}
+  
+/* Style for labels */
+label {
+    display: block;             /* Block level display for labels */
+    margin-bottom: 5px;         /* Bottom margin for labels */
+    font-size: 18px;            /* Font size for labels */
+    margin-left: 30px;          /* Left margin for labels */
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.4);     /* Text shadow for labels */
+}
+  
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 90%;                         /* 90% width */
+    padding: 12px;                      /* Padding for inputs */
+    border: 1px solid #ccc;           /* Border color */
+    border-radius: 5px;                 /* Border radius */
+    box-sizing: border-box;             /* Box sizing */
+    margin-left: 30px;                  /* Left margin */
+    font-size: 15px;                    /* Font size */
+    font-family: 'arial', sans-serif;   /* Set font family */
+}
+  
+.spaced-row {
+    margin-top: 30px;
+}
+  
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+  
+button {
+    padding: 10px 25px;             /* Padding for buttons */
+    background-color: #b11e1e;    /* Background color */
+    border: none;                   /* No border */
+    border-radius: 5px;             /* Border radius */
+    cursor: pointer;                /* Pointer cursor */
+    font-size: 20px;                /* Font size */
+    font-weight: bold;              /* Bold font weight */
+    color: #fff;                  /* Text color */
+}
+
+button:hover {
+    background-color: #ffd700;    /* Hover background color */
+}

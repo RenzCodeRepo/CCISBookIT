@@ -1,0 +1,82 @@
+
+/* DASHBOARD STYLING */
+
+/* Import Poppins SemiBold font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* General body styling */
+body {
+    margin: 0;                          /* Remove default margin */
+    padding: 0;                         /* Remove default padding */
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+/* Styling for the background container */
+.background-container {
+    position: relative;     /* Positioning context for the blur */
+    height: 100vh;          /* Set the height to 100% of the viewport height */
+    overflow: hidden;       /* Ensure content doesn't spill out */
+    margin: 0;              /* Remove any default margin */
+}
+
+.background-container::before {
+    content: "";                                    /* Empty content for pseudo-element */
+    background-image: url('backgroundIMG.jpg');     /* Set the background image */
+    background-size: cover;                         /* Ensure the image covers the entire background */
+    background-position: center;                    /* Center the image */
+    background-repeat: no-repeat;                   /* Prevent the image from repeating */
+    position: absolute;                             /* Position absolutely within the parent */
+    top: 0;                                         /* Position at the top */
+    left: 0;                                        /* Position at the left */
+    width: 100%;                                    /* Set width to 100% */
+    height: 100%;                                   /* Set height to 100% */
+    filter: blur(3px);                              /* Apply blur effect */
+    z-index: -1;                                    /* Place the background behind the content */
+}
+
+.homepageText {
+    text-align: center; /* Center align the text */
+}
+
+h1 {
+    font-family: 'Arial Black', sans-serif;           /* Set font family */
+    font-size: 80px;                                  /* Set font size */
+    font-weight: bold;                                /* Set font weight */
+    color: #ffd700;                                 /* Set fallback text color */
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Add shadow for better visibility */
+    -webkit-text-stroke: 2px white;                 /* Add white border around the letters for webkit browsers */
+    margin-bottom: 10px;                              /* Reduce bottom margin to bring texts closer */
+}
+
+span.yellow {
+    color: #ffd700; /* (CCIS) Set text color to yellow */
+}
+
+span.red {
+    color: #800000; /* (BOOKIT) Set text color to red */
+}
+
+.appDesc {
+    font-family: arial, sans-serif;                       /* Set font family */
+    font-size: 50px;                                      /* Set font size */
+    color: white;                                       /* Set text color */
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);     /* Add shadow for better visibility */
+    -webkit-text-stroke: 0.8px #5e6062;                 /* Add border around the letters for webkit browsers */
+    margin-top: 0;                                        /* Remove top margin */
+}
+
+footer {
+    text-align: center; 
+    height: auto;                   /* Set height to auto */
+    padding: 2px;                   /* Add padding */
+    background-color: #800000;    /* Set background color */
+    width: 100%;                    /* Set width to 100% of the viewport */
+}
+
+.footer-content {
+    font-family: 'Poppins', sans-serif;     /* Apply Poppins font */
+    font-size: 12px;                        /* Set font size */
+    color: white;                         /* Set text color */
+    padding-left: 20px;                     /* Add padding to the left */
+    padding-right: 20px;                    /* Add padding to the right */
+}

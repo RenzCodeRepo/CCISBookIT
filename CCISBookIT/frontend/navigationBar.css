@@ -1,0 +1,142 @@
+
+/* NAVIGATION BAR STYLING */
+
+/* Import Poppins SemiBold font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* General body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Style for the navigation bar container */
+.navbar {
+    height: 70px;                      /* Set the height of the navbar */
+    overflow: hidden; 
+    background-color: white;         /* Set the background color to white */
+    display: flex; 
+    align-items: center;               /* Center items vertically */
+    justify-content: space-between;    /* Space out items evenly */
+    padding: 0 20px;                   /* Add padding to the left and right */
+    box-shadow: 0 4px 2px -2px gray; /* Adds the shadow effect */
+}
+
+/* Style for the logo and app name */
+.appLogo {
+    display: flex;      
+    align-items: center;    /* Center items vertically */
+    text-decoration: none;  /* Remove underline from text */
+    font-size: 22px;        /* Set font size */
+    font-weight: 600;       /* Set font weight */
+    color: #8b0000;       /* Set text color */
+}
+
+/* Style for the logo image */
+.appLogo img {
+    height: 45px;       /* Set image height */
+    margin-right: 10px; /* Add space to the right of the image */
+}
+
+/* Centering the web-app navigation main function links */
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* Style for the web-app navigation main function links */
+.navbar-content {
+    display: block;
+    text-align: center;     /* Center text */
+    padding: 14px 20px;     /* Add padding */
+    text-decoration: none;  /* Remove underline from text */
+    font-size: 17px;        /* Set font size */
+    font-weight: 600;       /* Set font weight */
+    color: #8b0000;       /* Set text color */
+}
+
+/* Hover effect for navigation bar */
+.navbar-content:hover {
+    background-color: #ddd; /* Set background color on hover */
+    color: #5D0101;         /* Set text color on hover */
+}
+
+/* Container for the dropdown button */
+.dropdown {
+    display: flex;
+    align-items: center;    /* Center items vertically */
+}
+
+/* Style for the dropdown button */
+.dropdown .dropbtn {
+    font-size: 17px;            /* Set font size */  
+    font-weight: 600;           /* Set font weight */
+    color: #8b0000;           /* Set text color */
+    border: none;               /* Remove border */
+    outline: none;              /* Remove outline */
+    padding: 14px 20px;         /* Add padding */
+    background-color: inherit;  /* Inherit background color */
+    font-family: inherit;       /* Inherit font family */
+    margin: 0;                  /* Remove margin */
+    cursor: pointer;            /* Set cursor to pointer */
+    display: flex;              /* Use flexbox layout */
+    align-items: center;        /* Center items vertically */
+}
+
+/* Style for the dropdown button image */
+.dropdown .dropbtn img {
+    height: 30px;       /* Set image height */
+    margin-right: 5px;  /* Add space to the right of the image */
+}
+
+/* Style for the dropdown menu */
+.dropdown-content {
+    display: none;               /* Hide dropdown content */
+    position: absolute;          /* Position dropdown content absolutely */
+    right: 0;                    /* Align dropdown content to the right */
+    background-color: #f9f9f9; /* Set background color */
+    width: 200px;                /* Set width */
+    height: 120px;               /* Set height */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add box shadow */
+    margin-top: 120px;          /* Add top margin */
+    margin-right: 40px;         /* Add right margin */
+}
+
+/* Style for the functions (view profile & logout) inside the dropdown menu */
+.dropdown-content a {
+    float: none; 
+    padding: 12px 16px;         /* Add padding */
+    text-decoration: none;      /* Remove underline from text */
+    display: flex;            
+    align-items: center;        /* Center items vertically */
+    text-align: left;           /* Align text to the left */
+    font-weight: 600;           /* Set font weight */
+    color: #8b0000;           /* Set text color */
+}
+
+/* Style for the images inside the dropdown menu */
+.dropdown-content a img {
+    height: 30px;       /* Set image height */
+    margin-right: 10px; /* Add space to the right of the image */
+}
+
+/* Hover effect for the functions (view profile & logout) inside the dropdown menu */
+.dropdown-content a:hover {
+    background-color: #ddd;  /* Set background color on hover */
+}
+
+/* Show the dropdown menu when hovering over the dropdown container */
+.dropdown:hover .dropdown-content {
+    display: block; /* Display dropdown content when being hovered */
+}
+
+/* Style for the down arrow icon in the dropdown button */
+.arrow.down {
+    border: solid #8b0000;            /* Set border color */
+    border-width: 0 3px 3px 0;          /* Set border width */
+    display: inline-block;              /* Display as inline block */
+    padding: 3px;                       /* Add padding */
+    margin-left: 5px;                   /* Add space to the left */
+    transform: rotate(45deg);           /* Rotate the arrow */
+    -webkit-transform: rotate(45deg);   /* Rotate the arrow for webkit browsers */
+}

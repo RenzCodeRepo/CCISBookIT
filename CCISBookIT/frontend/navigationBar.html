@@ -1,0 +1,46 @@
+
+    <!-- NAVIGATION BAR -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Tab icon & web-app name -->
+    <title>CCIS-BookIT</title>
+    <link rel="icon" type="image" href="CCISBookITLogo.png">
+
+    <!-- Link to .css file -->
+    <link rel="stylesheet" href="navigationBar.css">
+
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <!-- Web-app logo and name -->
+        <a class="appLogo" href="dashboard.html">
+            <img src="CCISBookITLogo.png" alt="CCIS-BookIT LOGO">CCISBookIT</a>
+
+            <!-- Link to web-app main functions -->
+            <div class="navbar-center">
+            <a class="navbar-content" href="dashboard.html">HOME</a>
+            <a class="navbar-content" href="#">ADD RESERVATION</a>
+            <a class="navbar-content" href="#">VIEW RESERVATION</a>
+            <a class="navbar-content" href="#">FAQs</a>
+        </div>
+
+        <!-- Drop-down button -->
+        <div class="dropdown">
+            <button class="dropbtn">
+                <img src="userIcon.png" alt="Profile Icon">
+                <i class="arrow down"></i>
+            </button>
+
+            <!-- Drop-down function -->
+            <div class="dropdown-content">
+                <a href="userprofile.html"><img src="userIcon.png" alt="View Profile Icon"> VIEW PROFILE</a>
+                <a href="#"><img src="logoutIcon.png" alt="Log Out Icon"> LOG OUT</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

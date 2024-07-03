@@ -1,21 +1,25 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CCISBookIT.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserService _userService;
 
-        public UserController(ApplicationDbContext context)
+        public UserController(IUserService userService)
         {
-            _context = context;
+            _userService = userService; // Constructor injection
         }
-        public  IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var user = _context.Users.OrderBy(u => u.FacultyID).ToList(); 
-            return View(user);
+            var users = (await _userService.GetAll()).OrderBy(u => u.FacultyID).ToList(); // Retrieve and sort users by FacultyID
+
+            return View(users); // Pass sorted users to the "Index" view
         }
     }
 }

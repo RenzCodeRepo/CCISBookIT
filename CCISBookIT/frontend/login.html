@@ -1,0 +1,56 @@
+
+  <!-- LOGIN PAGE -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Tab icon & web-app name -->
+    <title>CCISBookIT - Login</title>
+    <link rel="icon" type="image" href="CCISBookITLogo.png">
+    
+    <!-- Link to .css file -->
+    <link rel="stylesheet" href="login.css">
+    
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="transparent-container">
+      <!-- Logo and web-app name -->
+      <img src="CCISBookITLogo.png" alt="Logo" class="logo">
+      <h1><span class="yellow">CCIS</span><span class="red">BOOKIT</span></h1>
+    
+    <!-- Link back end to "#" to save the inputted data from the <form> -->
+    <form action="#">
+      <div class="form-group">
+        <!-- Input for Faculty ID -->
+        <input type="text" id="facultyId" name="facultyId" required>
+        <label for="facultyId">FACULTY ID</label>
+      </div>
+
+      <div class="form-group">
+        <!-- Input for Password -->
+        <input type="password" id="password" name="password" required>
+        <label for="password">PASSWORD</label>
+      </div>
+      
+      <div class="button-container">
+        <!-- Login button & backend link-->
+        <button type="submit">LOGIN</button>
+
+        <!-- Sign Up button & backend link -->
+        <button type="button" onclick="location.href='signup.html'">SIGN UP</button>
+      </div>
+
+      <div class="forgot-password">
+        <!-- Forgot function & backend link-->
+        <a href="forgotpassword.html">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

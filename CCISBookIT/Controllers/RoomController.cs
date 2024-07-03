@@ -1,20 +1,24 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CCISBookIT.Controllers
 {
     public class RoomController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRoomService _roomService;
 
-        public RoomController(ApplicationDbContext context)
+        public RoomController(IRoomService roomService)
         {
-            _context = context;
+            _roomService = roomService; // Constructor injection
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var rooms = _context.Rooms.ToList();
-            return View(rooms);
+            var rooms = await _roomService.GetAll(); // Retrieve all rooms asynchronously
+
+            return View(rooms); // Pass rooms to the "Index" view
         }
     }
 }

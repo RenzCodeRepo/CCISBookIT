@@ -1,11 +1,15 @@
 using CCISBookIT.Data;
+using CCISBookIT.Services_and_Interfaces.Interfaces;
+using CCISBookIT.Services_and_Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IRoomService, RoomServices>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

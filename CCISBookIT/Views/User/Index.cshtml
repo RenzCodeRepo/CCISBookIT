@@ -4,50 +4,54 @@
     ViewData["Title"] = "List of Users";
 }
 
-@*Write Code*@
-
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-10 offset-md-1">
+        <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
+
         <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.FacultyID)</th>
-                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Email)</th>
-                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-                    <th>@Html.DisplayNameFor(model => model.Role)</th>
-                    <th>Actions</th>
+                    <th>@Html.DisplayNameFor(model => model.FacultyID)</th> <!-- Display header for FacultyID -->
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th> <!-- Display header for FullName -->
+                    <th>@Html.DisplayNameFor(model => model.Email)</th> <!-- Display header for Email -->
+                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th> <!-- Display header for PhoneNumber -->
+                    <th>@Html.DisplayNameFor(model => model.Role)</th> <!-- Display header for Role -->
+                    <th>Actions</th> <!-- Display header for Actions -->
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model) @* <!-- Loop through each user in the model --> *@
                 {
-                    <tr class ="text-center">
+                    <tr class="text-center">
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.FacultyID)
+                            @Html.DisplayFor(modelItem => item.FacultyID) <!-- Display FacultyID for each user -->
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.FullName)
+                            @Html.DisplayFor(modelItem => item.FullName) <!-- Display FullName for each user -->
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Email)
+                            @Html.DisplayFor(modelItem => item.Email) <!-- Display Email for each user -->
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            @Html.DisplayFor(modelItem => item.PhoneNumber) <!-- Display PhoneNumber for each user -->
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Role)
+                            @Html.DisplayFor(modelItem => item.Role) <!-- Display Role for each user -->
                         </td>
                         <td class="align-middle">
-                            <a class="btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a> |
-                            <a class="btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
-                            <a class="btn-danger"><i class="bi bi-trash"></i>Delete </a>
+                            <a href="@Url.Action("Edit", "User", new { id = item.FacultyID })" class="btn btn-outline-primary">
+                                <i class="bi bi-pencil-square"></i> Edit <!-- Edit button with icon -->
+                            </a>
+                            <a href="@Url.Action("Details", "User", new { id = item.FacultyID })" class="btn btn-outline-info">
+                                <i class="bi bi-eye"></i> Details <!-- Details button with icon -->
+                            </a>
+                            <a href="@Url.Action("Delete", "User", new { id = item.FacultyID })" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Delete <!-- Delete button with icon -->
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
-
         </table>
     </div>
-
 </div>
