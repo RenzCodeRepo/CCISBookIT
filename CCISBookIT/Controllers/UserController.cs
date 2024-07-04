@@ -9,14 +9,9 @@ using System.Threading.Tasks;
 
 namespace CCISBookIT.Controllers
 {
-    public class UserController : Controller
+    public class UserController(IUserService userService) : Controller
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
-        {
-            _userService = userService; // Constructor injection
-        }
+        private readonly IUserService _userService = userService;
 
         public async Task<IActionResult> Index()
         {
@@ -69,20 +64,45 @@ namespace CCISBookIT.Controllers
             };
             return View(newUser);
         }
-           
+
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")]User user)
+        public async Task<IActionResult> Create([Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] User user)
         {
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
+
+            if (await _userService.UserExists(user.FacultyID))
+            {
+                ModelState.AddModelError(string.Empty, $"User with FacultyID '{user.FacultyID}' already exists.");
+                return View(user);
+            }
+
             if (string.IsNullOrEmpty(user.Role))
             {
                 user.Role = "Faculty";
             }
+
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
-            _userService.Add(user);
+            await _userService.Add(user);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public async Task<IActionResult> Delete(string FacultyID)
+        {
+            var user = await _userService.GetById(FacultyID);
+            if (user == null) return View("Not Found");
+
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+
+        public IActionResult DeleteConfirmed(string FacultyID)
+        {
+            _userService.Delete(FacultyID);
             return RedirectToAction(nameof(Index));
         }
     }

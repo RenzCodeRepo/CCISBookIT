@@ -39,13 +39,13 @@
                             @Html.DisplayFor(modelItem => item.Role) <!-- Display Role for each user -->
                         </td>
                         <td class="align-middle">
-                            <a href="@Url.Action("Edit", "User", new { id = item.FacultyID })" class="btn btn-outline-primary">
+                            <a href="@Url.Action("Edit", "User", new { FacultyID = item.FacultyID })" class="btn btn-outline-primary">
                                 <i class="bi bi-pencil-square"></i> Edit <!-- Edit button with icon -->
                             </a>
-                            <a href="@Url.Action("Detail", "User", new { id = item.FacultyID })" class="btn btn-outline-info">
+                            <a href="@Url.Action("Detail", "User", new { FacultyID = item.FacultyID })" class="btn btn-outline-info">
                                 <i class="bi bi-eye"></i> Detail <!-- Details button with icon -->
                             </a>
-                            <a href="@Url.Action("Delete", "User", new { id = item.FacultyID })" class="btn btn-danger">
+                            <a href="@Url.Action("Delete", "User", new { FacultyID = item.FacultyID })" class="btn btn-danger">
                                 <i class="bi bi-trash"></i> Delete <!-- Delete button with icon -->
                             </a>
                         </td>

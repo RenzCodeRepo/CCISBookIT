@@ -9,29 +9,30 @@ using System.Threading.Tasks;
 
 namespace CCISBookIT.Services_and_Interfaces.Services
 {
-    public class UserService : IUserService
+    public class UserService(ApplicationDbContext context) : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = context;
 
-        public UserService(ApplicationDbContext context)
+        public async Task Add(User user)
         {
-            _context = context;
-        }
-
-        public void Add(User user)
-        {
+            if (await UserExists(user.FacultyID))
+            {
+                throw new ArgumentException($"User with FacultyID '{user.FacultyID}' already exists.");
+            }
             _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(string facultyId)
+        public Task Delete(string facultyId)
         {
-            var user = _context.Users.Find(facultyId);
+            var user = _context.Users.FirstOrDefault(u => u.FacultyID == facultyId);
             if (user != null)
             {
                 _context.Users.Remove(user);
                 _context.SaveChanges();
             }
+
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<User>> GetAll()
@@ -46,9 +47,10 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             return updatedUser;
         }
 
-        public bool UserExists(string facultyId)
+        public async Task<bool> UserExists(string facultyId)
         {
-            return _context.Users.Any(e => e.FacultyID == facultyId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.FacultyID == facultyId);
+            return user != null;
         }
 
         public bool UserLogin(string username, string password)
@@ -56,9 +58,16 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             throw new NotImplementedException();
         }
 
-        public async Task<User> GetById(string facultyID)
+        public async Task<User> GetById(string facultyId)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.FacultyID == facultyID);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.FacultyID == facultyId);
+            if (user == null)
+            {
+                throw new ArgumentException($"User with FacultyID '{facultyId}' not found.");
+                // or alternatively return a default user
+                // return new User { FacultyID = facultyId, FullName = "Unknown", Email = "Unknown" };
+            }
+            return user;
         }
     }
 }
