@@ -8,10 +8,8 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
     {
         Task<IEnumerable<Room>> GetAll(); // Retrieves all rooms.
         Task<IEnumerable<Room>> GetRoomsByType(string roomType); // Retrieves rooms by room type.
-        Room GetbyRoomNo(string roomNo); // Retrieves a room by room number.
-        void Add(Room newRoom); // Adds a new room.
+        Task<Room> GetbyRoomNo(string roomNo); // Retrieves a room by room number.
         bool RoomExists(string roomNo); // Checks if a room exists by room number.
-        void Update(Room updatedRoom); // Updates an existing room.
-        void Delete(string roomNo); // Deletes a room by room number.
+        Task<Room> Update(string roomNo, Room updatedRoom); // Updates an existing room
     }
 }

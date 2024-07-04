@@ -1,0 +1,29 @@
+﻿@model Room // Specifies that the model for this view is of type Room
+
+
+@{
+    ViewData["Title"] = "Edit Room"; // Sets the title of the view
+}
+
+<h2>Edit Profile</h2> <!-- Main heading -->
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Validation summary for model errors -->
+
+    <div class="form-group">
+        <label asp-for="RoomNo"></label> <!-- Label for FacultyID -->
+        <input asp-for="RoomNo" class="form-control" readonly /> <!-- Readonly input field for FacultyID -->
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RoomType"></label> <!-- Label for RoomType -->
+        <select asp-for="RoomType" class="form-control">
+            <option value="Laboratory">Laboratory</option> <!-- Option for Laboratory -->
+            <option value="Lecture">Lecture</option> <!-- Option for Lecture -->
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button> <!-- Save button to submit the form -->
+</form>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a> <!-- Button/link to navigate back to the list of users -->

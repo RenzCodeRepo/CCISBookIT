@@ -1,0 +1,20 @@
+﻿@model Room // Specifies that the model for this view is of type Room
+
+@{
+    ViewData["Title"] = "Room Details"; // Sets the title of the view
+}
+
+<h1>Room Details</h1> <!-- Main heading -->
+
+<table class="table">
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.RoomNo)</strong></td>
+        <td>@Html.DisplayFor(model => model.RoomNo)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.RoomType)</strong></td>
+        <td>@Html.DisplayFor(model => model.RoomType)</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a> <!-- Button/link to navigate back to the list of rooms -->

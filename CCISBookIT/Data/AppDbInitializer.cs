@@ -22,10 +22,10 @@ namespace CCISBookIT.Data
                 {
                     new Room { RoomNo = "S501", RoomType = RoomType.Laboratory.ToString() },
                     new Room { RoomNo = "S502", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S503A", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S503B", RoomType = RoomType.Laboratory.ToString() },
+                    new Room { RoomNo = "S503", RoomType = RoomType.Laboratory.ToString() },
                     new Room { RoomNo = "S504", RoomType = RoomType.Lecture.ToString() },
-                    new Room { RoomNo = "S509", RoomType = RoomType.Laboratory.ToString() },
+                    new Room { RoomNo = "S505", RoomType = RoomType.Laboratory.ToString() },
+                    new Room { RoomNo = "S508", RoomType = RoomType.Laboratory.ToString() },
                     new Room { RoomNo = "S510", RoomType = RoomType.Laboratory.ToString() },
                     new Room { RoomNo = "S511", RoomType = RoomType.Laboratory.ToString() }
                 });
@@ -210,7 +210,7 @@ namespace CCISBookIT.Data
                             EndTime = new TimeOnly(12,30),
                             Purpose = "Lecture",
                             Status = Status.Cancelled.ToString(),
-                            RoomNo = "S503B",
+                            RoomNo = "S503",
                             FacultyId = "CCISF005",
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S503B")
                         }

@@ -12,24 +12,20 @@ namespace CCISBookIT.Services_and_Interfaces.Services
         {
             _context = context;
         }
-        void IRoomService.Add(Room newRoom)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRoomService.Delete(string roomNo)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IEnumerable<Room>> GetAll()
         {
             return await _context.Rooms.ToListAsync();
         }
 
-        Room IRoomService.GetbyRoomNo(string roomNo)
+        public async Task<Room> GetbyRoomNo(string roomNo)
         {
-            throw new NotImplementedException();
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNo == roomNo);
+            if (room == null)
+            {
+                throw new ArgumentException($"Room with '{roomNo}' not found.");
+            }
+            return room;
         }
 
         Task<IEnumerable<Room>> IRoomService.GetRoomsByType(string roomType)
@@ -42,9 +38,11 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             throw new NotImplementedException();
         }
 
-        void IRoomService.Update(Room updatedRoom)
+        public async Task<Room> Update(string roomNo, Room updatedRoom)
         {
-            throw new NotImplementedException();
+            _context.Update(updatedRoom);
+            await _context.SaveChangesAsync();
+            return updatedRoom;
         }
     }
 }
