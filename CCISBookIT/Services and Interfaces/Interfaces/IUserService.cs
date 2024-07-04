@@ -14,9 +14,9 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
 
         bool UserLogin(string username, string password); // Placeholder for user login functionality.
 
-        Task<User> Update(string FacultyID, User updatedUser); // Updates an existing user asynchronously.
+        Task<User> Update(string facultyId, User updatedUser); // Updates an existing user asynchronously.
 
-        Task Delete(string facultyId); // Deletes a user by their Faculty ID synchronously.
+        Task Delete(string facultyId); // Deletes a user by their Faculty ID asynchronously.
 
         Task<User> GetById(string facultyId); // Retrieves a user by their Faculty ID asynchronously.
     }

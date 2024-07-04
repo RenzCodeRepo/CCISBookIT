@@ -1,10 +1,10 @@
-﻿@model User
-@*
+﻿@model User // Specifies that the model for this view is of type User
 
-*@
-@{ViewData["Title"] = "User Details";
+@{
+    ViewData["Title"] = "User Details"; // Sets the title of the view
 }
-<h1>User Details</h1>
+
+<h1>User Details</h1> <!-- Main heading -->
 
 <table class="table">
     <tr>
@@ -29,4 +29,4 @@
     </tr>
 </table>
 
-<a asp-action="Index" class="btn btn-primary">Back to List</a>
+<a asp-action="Index" class="btn btn-primary">Back to List</a> <!-- Button/link to navigate back to the list of users -->
