@@ -104,6 +104,7 @@ namespace CCISBookIT.Controllers
             };
             return View(newBooking); // Return create view with a new user instance;
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Booking model)
@@ -119,10 +120,17 @@ namespace CCISBookIT.Controllers
 
             // Check if the booking already exists
             bool existingBooking = await _bookingService.BookingExists(model.BookingId);
-            
+
             if (existingBooking)
             {
                 ModelState.AddModelError(string.Empty, "A booking with the same ID already exists. Please modify the booking details.");
+                return View(model);
+            }
+
+            // Check if the selected date is in the past
+            if (model.Date.Date < DateTime.Today)
+            {
+                ModelState.AddModelError(nameof(model.Date), "Booking dates in the past are not allowed.");
                 return View(model);
             }
 
@@ -135,7 +143,7 @@ namespace CCISBookIT.Controllers
                 return View(model);
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Create the booking entity
                 var booking = new Booking
@@ -160,7 +168,6 @@ namespace CCISBookIT.Controllers
             // If ModelState is not valid, return the form with errors
             return View(model);
         }
-
 
     }
 }
