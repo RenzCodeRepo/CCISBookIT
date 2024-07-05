@@ -15,13 +15,13 @@
 
     <div class="form-group">
         <label asp-for="Duration"></label>
-        <input asp-for="Duration" type="number" class="form-control" />
+        <input asp-for="Duration" type="number" step="0.1" class="form-control" />
         <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="EndTime"></label>
-        <input asp-for="EndTime" class="form-control" readonly /> <!-- Display EndTime as read-only -->
+        <input asp-for="EndTime" class="form-control" readonly />
     </div>
 
     <div class="form-group">
@@ -42,24 +42,26 @@
         <span asp-validation-for="FacultyId" class="text-danger"></span>
     </div>
 
+    <!-- Display validation summary -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <button type="submit" class="btn btn-primary">Create Booking</button>
 </form>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
     <script>
-        // Function to calculate EndTime based on StartTime and Duration
         function calculateEndTime() {
             var startTime = document.getElementById("StartTime").value;
             var duration = parseFloat(document.getElementById("Duration").value);
 
-            // Parse StartTime to TimeOnly format
             var startTimeParts = startTime.split(":");
             var startHour = parseInt(startTimeParts[0]);
             var startMinute = parseInt(startTimeParts[1]);
             var startDate = new Date();
             startDate.setHours(startHour, startMinute, 0, 0);
 
-            // Calculate EndTime based on StartTime and Duration
             var endTimeDate = new Date(startDate.getTime() + duration * 60 * 60 * 1000);
             var endHour = endTimeDate.getHours();
             var endMinutes = endTimeDate.getMinutes().toString().padStart(2, "0");
@@ -67,18 +69,14 @@
             endHour = endHour % 12;
             endHour = endHour ? endHour : 12;
 
-            // Format EndTime as 12-hour format
             var endTime = endHour + ':' + endMinutes + ' ' + period;
 
-            // Set calculated EndTime to EndTime input field
             document.getElementById("EndTime").value = endTime;
         }
 
-        // Bind calculateEndTime function to changes in StartTime and Duration inputs
         document.getElementById("StartTime").addEventListener("change", calculateEndTime);
         document.getElementById("Duration").addEventListener("input", calculateEndTime);
 
-        // Calculate EndTime initially on page load
         calculateEndTime();
     </script>
 }

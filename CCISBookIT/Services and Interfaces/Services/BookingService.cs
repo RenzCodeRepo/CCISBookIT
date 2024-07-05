@@ -63,5 +63,18 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.BookingId == BookingID);
             return booking != null;
         }
+        public async Task<bool> IsBookingOverlap(DateTime date, TimeOnly startTime, double duration, string roomNo)
+        {
+            TimeOnly endTime = startTime.AddHours(duration);
+            var overlappingBooking = await _context.Bookings
+                .Where(b => b.Date == date && b.RoomNo == roomNo && b.Status != "Cancelled" &&
+                            ((startTime >= b.StartTime && startTime < b.StartTime.AddHours(b.Duration)) ||
+                             (endTime > b.StartTime && endTime <= b.StartTime.AddHours(b.Duration)) ||
+                             (startTime <= b.StartTime && endTime >= b.StartTime.AddHours(b.Duration))))
+                .FirstOrDefaultAsync();
+
+            return overlappingBooking != null;
+        }
+
     }
 }

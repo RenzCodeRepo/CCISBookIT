@@ -11,6 +11,6 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
         Task Cancel(string BookingID);
         void GenerateReport(DateTime Date);
         Task<bool> BookingExists(string BookingID);
-
+        Task<bool> IsBookingOverlap(DateTime date, TimeOnly startTime, double duration, string roomNo);
     }
 }

@@ -104,7 +104,6 @@ namespace CCISBookIT.Controllers
             };
             return View(newBooking); // Return create view with a new user instance;
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Booking model)
@@ -112,14 +111,32 @@ namespace CCISBookIT.Controllers
             // Ensure Status is set to Active
             model.Status = "Active";
 
+            // Generate BookingId
+            model.BookingId = $"{model.RoomNo}-{model.Date:yyyyMMdd}-{model.StartTime:HHmm}";
+
+            // Calculate EndTime based on StartTime and Duration
+            model.EndTime = model.StartTime.AddHours(model.Duration);
+
+            // Check if the booking already exists
+            bool existingBooking = await _bookingService.BookingExists(model.BookingId);
+            
+            if (existingBooking)
+            {
+                ModelState.AddModelError(string.Empty, "A booking with the same ID already exists. Please modify the booking details.");
+                return View(model);
+            }
+
+            // Check if there's overlap with existing bookings
+            bool isOverlap = await _bookingService.IsBookingOverlap(model.Date, model.StartTime, model.Duration, model.RoomNo);
+
+            if (isOverlap)
+            {
+                ModelState.AddModelError(string.Empty, "Booking overlaps with an existing booking. Please choose a different Room.");
+                return View(model);
+            }
+
             if (!ModelState.IsValid)
             {
-                // Generate BookingId
-                model.BookingId = $"{model.RoomNo}-{model.Date:yyyyMMdd}-{model.StartTime:HHmm}";
-
-                // Calculate EndTime based on StartTime and Duration
-                model.EndTime = model.StartTime.AddHours(model.Duration);
-
                 // Create the booking entity
                 var booking = new Booking
                 {
@@ -136,14 +153,13 @@ namespace CCISBookIT.Controllers
 
                 // Add booking to the context and save changes
                 await _bookingService.Add(booking);
-                
+
                 return RedirectToAction(nameof(Index));
             }
 
             // If ModelState is not valid, return the form with errors
             return View(model);
         }
-
 
 
     }
