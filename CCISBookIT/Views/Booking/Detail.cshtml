@@ -1,0 +1,48 @@
+﻿@model CCISBookIT.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<h1>Booking Details</h1>
+
+<table class="table">
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.BookingId)</strong></td>
+        <td>@Html.DisplayFor(model => model.BookingId)</td>
+    </tr>
+    <tr>
+        <td><strong>Date</strong></td>
+        <td>@Model.Date.ToString("MM/dd/yyyy")</td> <!-- Format Date as MM/dd/yyyy -->
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.StartTime)</strong></td>
+        <td>@Html.DisplayFor(model => model.StartTime)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Duration)</strong></td>
+        <td>@Html.DisplayFor(model => model.Duration)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.EndTime)</strong></td>
+        <td>@Html.DisplayFor(model => model.EndTime)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Purpose)</strong></td>
+        <td>@Html.DisplayFor(model => model.Purpose)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Status)</strong></td>
+        <td>@Html.DisplayFor(model => model.Status)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.RoomNo)</strong></td>
+        <td>@Html.DisplayFor(model => model.RoomNo)</td>
+    </tr>
+    <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.FacultyId)</strong></td>
+        <td>@Html.DisplayFor(model => model.FacultyId)</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

@@ -13,14 +13,27 @@ namespace CCISBookIT.Services_and_Interfaces.Services
         {
             _context = context;
         }
-        void IBookingService.Add(Booking newBooking)
+        public async Task Add(Booking newBooking)
         {
-            throw new NotImplementedException();
+            if (newBooking == null)
+            {
+                throw new ArgumentNullException(nameof(newBooking));
+            }
+
+            _context.Bookings.Add(newBooking);
+            await _context.SaveChangesAsync();
         }
 
-        void IBookingService.Cancel(string BookingID)
+        public async Task Cancel(string BookingID)
         {
-            throw new NotImplementedException();
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.BookingId == BookingID);
+            if (booking == null)
+            {
+                throw new ArgumentException($"Booking with Booking ID '{BookingID}' not found.");
+            }
+
+            booking.Status = "Cancelled";
+            await _context.SaveChangesAsync();
         }
 
         Task<IEnumerable<Booking>> IBookingService.FilterBooking(DateTime Date, Room RoomType, User FullName)
@@ -35,7 +48,20 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 
         public async Task<IEnumerable<Booking>> GetAll()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.Bookings.OrderByDescending(b => b.Date).ToListAsync();
+        }
+
+        public async Task<Booking> GetByBookingID(string BookingID)
+        {
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.BookingId == BookingID);
+            if (booking == null) { throw new ArgumentException($"Booking with Booking ID '{BookingID}' not found."); }
+            return booking;
+        }
+
+        public async Task<bool> BookingExists(string BookingID)
+        {
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.BookingId == BookingID);
+            return booking != null;
         }
     }
 }

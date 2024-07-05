@@ -6,9 +6,11 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
     {
         Task<IEnumerable<Booking>> GetAll(); // Retrieves all Bookings.
         Task<IEnumerable<Booking>> FilterBooking(DateTime Date, Room RoomType, User FullName);
-        void Add(Booking newBooking);
-        void Cancel(string BookingID);
+        Task<Booking> GetByBookingID(string BookingID);
+        Task Add(Booking newBooking);
+        Task Cancel(string BookingID);
         void GenerateReport(DateTime Date);
+        Task<bool> BookingExists(string BookingID);
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Booking>
+﻿@model IEnumerable<CCISBookIT.Models.Booking>
 
 @{
     ViewData["Title"] = "List of Bookings";
@@ -8,44 +8,93 @@
     <div class="col-md-12 offset-md-0">
         <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
 
+        <form asp-action="Index" asp-controller="Booking" method="get">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="filterDate" class="form-label">Filter by Date:</label>
+                    <input type="date" id="filterDate" name="filterDate" class="form-control" />
+                </div>
+                <div class="col">
+                    <label for="filterStatus" class="form-label">Filter by Status:</label>
+                    <select id="filterStatus" name="filterStatus" class="form-control">
+                        <option value="">All</option>
+                        <option value="Active">Active</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <label for="filterRoomNo" class="form-label">Filter by Room:</label>
+                    <input type="text" id="filterRoomNo" name="filterRoomNo" class="form-control" />
+                </div>
+                <div class="col">
+                    <label for="filterUserId" class="form-label">Filter by User ID:</label>
+                    <input type="text" id="filterUserId" name="filterUserId" class="form-control" />
+                </div>
+                <div class="col align-self-end">
+                    <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+                </div>
+            </div>
+        </form>
+
         <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.BookingId)</th>
-                    <th>@Html.DisplayNameFor(model => model.Date)</th>
-                    <th>@Html.DisplayNameFor(model => model.StartTime)</th>
-                    <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                    <th>@Html.DisplayNameFor(model => model.EndTime)</th>
-                    <th>@Html.DisplayNameFor(model => model.Purpose)</th>
-                    <th>@Html.DisplayNameFor(model => model.Status)</th>
-                    <th>@Html.DisplayNameFor(model => model.RoomNo)</th>
-                    <th>@Html.DisplayNameFor(model => model.FacultyId)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().BookingId)</th>
+                    <th>Date</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().StartTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Duration)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().EndTime)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Purpose)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Status)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FacultyId)</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model) @* <!-- Loop through each booking in the model --> *@
+                @foreach (var item in Model)
                 {
                     <tr class="text-center">
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.BookingId)</td> <!-- Display BookingId for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Date)</td> <!-- Display Date for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.StartTime)</td> <!-- Display StartTime for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Duration)</td> <!-- Display Duration for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.EndTime)</td> <!-- Display EndTime for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td> <!-- Display Purpose for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td> <!-- Display Status for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td> <!-- Display RoomNo for each booking -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyId)</td> <!-- Display FacultyId for each booking -->
+                        <!-- Other columns -->
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.BookingId)</td>
+                        <td class="align-middle">@item.Date.ToString("MM/dd/yyyy")</td> <!-- Format Date as MM/dd/yyyy -->
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.StartTime)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Duration)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.EndTime)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyId)</td>
                         <td class="align-middle">
-                            <a href="@Url.Action("Edit", "Booking", new { id = item.BookingId })" class="btn btn-outline-primary">
-                                <i class="bi bi-pencil-square"></i> Edit <!-- Edit button with icon -->
-                            </a>
-                            <a href="@Url.Action("Delete", "Booking", new { id = item.BookingId })" class="btn btn-danger">
-                                <i class="bi bi-trash"></i> Delete <!-- Delete button with icon -->
+                            @if (item.Status == "Expired" || item.Status == "Cancelled")
+                            {
+                                <button type="button" class="btn btn-secondary" disabled>
+                                    @if (item.Status == "Expired")
+                                    {
+                                        <span>Expired</span>
+                                    }
+                                    else if (item.Status == "Cancelled")
+                                    {
+                                        <span>Cancelled</span>
+                                    }
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
+                                    <i class="bi bi-x-circle"></i> Cancel <!-- Cancel button with icon -->
+                                </a>
+                            }
+                            <!-- Details button -->
+                            <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
+                                <i class="bi bi-info-circle"></i> Details <!-- Details button with icon -->
                             </a>
                         </td>
                     </tr>
                 }
+
             </tbody>
         </table>
     </div>
