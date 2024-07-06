@@ -123,7 +123,7 @@ namespace CCISBookIT.Controllers
 
             if (existingBooking)
             {
-                ModelState.AddModelError(string.Empty, "A booking with the same ID already exists. Please modify the booking details.");
+                ModelState.AddModelError(string.Empty, "The same booking already exists. Please modify the booking details."); //applied in general not for each user
                 return View(model);
             }
 

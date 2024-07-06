@@ -119,10 +119,10 @@ namespace CCISBookIT.Controllers
         // POST: User/DeleteConfirmed/{facultyId}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string facultyId)
+        public async Task<IActionResult> DeleteConfirmed(string facultyId)
         {
-            _userService.Delete(facultyId); // Delete user by FacultyID
-            return RedirectToAction(nameof(Index)); // Redirect to Index action after successful deletion
+            await _userService.Delete(facultyId);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

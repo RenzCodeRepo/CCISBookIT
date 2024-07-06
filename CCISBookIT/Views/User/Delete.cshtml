@@ -20,7 +20,7 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="Delete" method="post">
         <!-- Form to submit the deletion action -->
         <input type="hidden" asp-for="FacultyID" /> <!-- Hidden field to store the FacultyID of the user to be deleted -->
         <input type="submit" value="Delete" class="btn btn-danger" /> <!-- Delete button -->

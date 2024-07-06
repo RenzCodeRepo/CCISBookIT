@@ -38,8 +38,9 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             {
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
-            }
+            }   
         }
+
 
         // Retrieve all users sorted by FacultyID
         public async Task<IEnumerable<User>> GetAll()
