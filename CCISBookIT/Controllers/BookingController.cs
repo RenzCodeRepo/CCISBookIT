@@ -26,7 +26,7 @@ namespace CCISBookIT.Controllers
             // Apply filters if provided
             if (filterDate.HasValue)
             {
-                bookings = bookings.Where(b => b.Date.Date == filterDate.Value.Date);
+                bookings = bookings.Where(b => b.Date.Date == filterDate.Value);
             }
 
             if (!string.IsNullOrEmpty(filterStatus))

@@ -48,9 +48,17 @@
         </form>
 
         <div class="text-right mb-3">
-            @if (!string.IsNullOrEmpty(ViewBag.FilterDate) || !string.IsNullOrEmpty(ViewBag.FilterStatus) || !string.IsNullOrEmpty(ViewBag.FilterRoomNo) || !string.IsNullOrEmpty(ViewBag.FilterUserId))
+            @if (!string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
+            !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
+            !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString()) ||
+            !string.IsNullOrEmpty(ViewBag.FilterUserId?.ToString()))
             {
-                <a href="@Url.Action("DownloadBookingsCsv", "Booking", new { filterDate = ViewBag.FilterDate, filterStatus = ViewBag.FilterStatus, filterRoomNo = ViewBag.FilterRoomNo, filterUserId = ViewBag.FilterUserId })" class="btn btn-success">Download CSV</a>
+                <a href="@Url.Action("DownloadBookingsCsv", "Booking", new {
+                    filterDate = ViewBag.FilterDate,
+                    filterStatus = ViewBag.FilterStatus,
+                    filterRoomNo = ViewBag.FilterRoomNo,
+                    filterUserId = ViewBag.FilterUserId
+                })" class="btn btn-success">Download CSV</a>
             }
         </div>
 
