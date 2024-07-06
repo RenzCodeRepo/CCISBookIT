@@ -19,5 +19,6 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
         Task Delete(string facultyId); // Deletes a user by their Faculty ID asynchronously.
 
         Task<User> GetById(string facultyId); // Retrieves a user by their Faculty ID asynchronously.
+        byte[] GenerateUsers();
     }
 }

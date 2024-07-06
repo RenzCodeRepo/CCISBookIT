@@ -124,5 +124,16 @@ namespace CCISBookIT.Controllers
             await _userService.Delete(facultyId);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult DownloadFacultyUsersCsv()
+        {
+            var csvData = _userService.GenerateUsers();
+
+            // Generate file name with current date
+            string fileName = $"FacultyUsers_{DateTime.Now.ToString("yyyyMMdd")}.csv";
+
+            // Return the CSV file as a FileResult with appropriate headers
+            return File(csvData, "text/csv", fileName);
+        }
     }
 }

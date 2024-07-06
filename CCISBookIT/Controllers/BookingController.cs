@@ -143,7 +143,7 @@ namespace CCISBookIT.Controllers
                 return View(model);
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 // Create the booking entity
                 var booking = new Booking

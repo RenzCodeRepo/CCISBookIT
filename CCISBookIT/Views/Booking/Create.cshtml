@@ -1,6 +1,9 @@
 ﻿@model Booking
 
-<form asp-action="Create">
+<form asp-action="Create" method="post">
+    <!-- Display validation summary -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="form-group">
         <label asp-for="Date"></label>
         <input asp-for="Date" type="date" class="form-control" />
@@ -42,9 +45,7 @@
         <span asp-validation-for="FacultyId" class="text-danger"></span>
     </div>
 
-    <!-- Display validation summary -->
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    
     <button type="submit" class="btn btn-primary">Create Booking</button>
 </form>
 

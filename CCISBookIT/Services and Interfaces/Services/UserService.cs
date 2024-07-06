@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CCISBookIT.Services_and_Interfaces.Services
@@ -78,6 +79,29 @@ namespace CCISBookIT.Services_and_Interfaces.Services
                 throw new ArgumentException($"User with FacultyID '{facultyId}' not found.");
             }
             return user;
+        }
+
+        public byte[] GenerateUsers()
+        {
+            var facultyUsers = _context.Users
+           .Where(u => u.Role == "Faculty") // Adjust based on your user role structure
+           .Select(u => new User
+           {
+               FullName = u.FullName,
+               Email = u.Email
+               // Map other properties as needed
+           })
+           .ToList();
+
+            var csvBuilder = new StringBuilder();
+            csvBuilder.AppendLine("User Name,Email");
+
+            foreach (var user in facultyUsers)
+            {
+                csvBuilder.AppendLine($"{user.FullName},{user.Email}");
+            }
+
+            return Encoding.UTF8.GetBytes(csvBuilder.ToString());
         }
     }
 }

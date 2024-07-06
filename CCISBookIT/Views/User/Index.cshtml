@@ -6,48 +6,58 @@
 
 <div class="row">
     <div class="col-md-10 offset-md-1">
-        <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
+        <h2>@ViewData["Title"]</h2>
+        <a href="@Url.Action("DownloadFacultyUsersCsv", "User")" class="btn btn-primary">Download Faculty Users CSV</a>
 
         <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.FacultyID)</th> <!-- Display header for FacultyID -->
-                    <th>@Html.DisplayNameFor(model => model.FullName)</th> <!-- Display header for FullName -->
-                    <th>@Html.DisplayNameFor(model => model.Email)</th> <!-- Display header for Email -->
-                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th> <!-- Display header for PhoneNumber -->
-                    <th>@Html.DisplayNameFor(model => model.Role)</th> <!-- Display header for Role -->
-                    <th>Actions</th> <!-- Display header for Actions -->
+                    <th>@Html.DisplayNameFor(model => model.FacultyID)</th>
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.Role)</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model) @* <!-- Loop through each user in the model --> *@
+                @foreach (var item in Model)
                 {
                     <tr class="text-center">
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.FacultyID) <!-- Display FacultyID for each user -->
+                            @Html.DisplayFor(modelItem => item.FacultyID)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.FullName) <!-- Display FullName for each user -->
+                            @Html.DisplayFor(modelItem => item.FullName)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Email) <!-- Display Email for each user -->
+                            @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.PhoneNumber) <!-- Display PhoneNumber for each user -->
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Role) <!-- Display Role for each user -->
+                            @Html.DisplayFor(modelItem => item.Role)
                         </td>
                         <td class="align-middle">
                             <a href="@Url.Action("Edit", "User", new { FacultyID = item.FacultyID })" class="btn btn-primary">
-                                <i class="bi bi-pencil-square"></i> Edit <!-- Edit button with icon -->
+                                <i class="bi bi-pencil-square"></i> Edit
                             </a>
                             <a href="@Url.Action("Detail", "User", new { FacultyID = item.FacultyID })" class="btn btn-info">
-                                <i class="bi bi-eye"></i> Detail <!-- Details button with icon -->
+                                <i class="bi bi-eye"></i> Detail
                             </a>
-                            <a href="@Url.Action("Delete", "User", new { FacultyID = item.FacultyID })" class="btn btn-danger">
-                                <i class="bi bi-trash"></i> Delete <!-- Delete button with icon -->
-                            </a>
+                            @if (item.Role == "Admin")
+                            {
+                                <button class="btn btn-danger disabled" disabled>
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Delete", "User", new { FacultyID = item.FacultyID })" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            }
                         </td>
                     </tr>
                 }

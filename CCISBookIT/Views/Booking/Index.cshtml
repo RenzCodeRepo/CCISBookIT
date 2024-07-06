@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "List of Bookings";
+    var roomNumbers = new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" }; // Room numbers from your image
 }
 
 <div class="row">
@@ -26,8 +27,15 @@
 
                 <div class="col">
                     <label for="filterRoomNo" class="form-label">Filter by Room:</label>
-                    <input type="text" id="filterRoomNo" name="filterRoomNo" class="form-control" />
+                    <select id="filterRoomNo" name="filterRoomNo" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var room in roomNumbers)
+                        {
+                            <option value="@room">@room</option>
+                        }
+                    </select>
                 </div>
+
                 <div class="col">
                     <label for="filterUserId" class="form-label">Filter by User ID:</label>
                     <input type="text" id="filterUserId" name="filterUserId" class="form-control" />
@@ -35,6 +43,7 @@
                 <div class="col align-self-end">
                     <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
                 </div>
+
             </div>
         </form>
 
@@ -94,7 +103,6 @@
                         </td>
                     </tr>
                 }
-
             </tbody>
         </table>
     </div>
