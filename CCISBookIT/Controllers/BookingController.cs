@@ -39,17 +39,19 @@ namespace CCISBookIT.Controllers
                 bookings = bookings.Where(b => b.RoomNo == filterRoomNo);
             }
 
-
             if (!string.IsNullOrEmpty(filterUserId))
             {
-                bookings = bookings.Where(b => b.FacultyId == filterUserId); // Assuming FacultyId is the user ID in this context
+                bookings = bookings.Where(b => b.FacultyId == filterUserId);
             }
+
+            // Pass filters to view via ViewBag or model if needed
+            ViewBag.FilterDate = filterDate;
+            ViewBag.FilterStatus = filterStatus;
+            ViewBag.FilterRoomNo = filterRoomNo;
+            ViewBag.FilterUserId = filterUserId;
 
             return View(bookings.ToList());
         }
-
-
-
 
         [HttpGet("Booking/Detail/{BookingId}")]
         public async Task<IActionResult> Detail(string BookingId)
@@ -169,5 +171,41 @@ namespace CCISBookIT.Controllers
             return View(model);
         }
 
+        // Action to download CSV based on filters
+        public async Task<IActionResult> DownloadBookingsCsv(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId)
+        {
+            var filteredBookings = await _bookingService.GetFilteredBookingsAsync(filterDate, filterStatus, filterRoomNo, filterUserId);
+
+            // Generate CSV file content
+            byte[] csvData = _bookingService.GenerateCsvFile(filteredBookings);
+
+            // Generate file name with current date and filters
+            string filters = GetFilterString(filterDate, filterStatus, filterRoomNo, filterUserId);
+            string fileName = $"Bookings_{DateTime.Now.ToString("yyyyMMdd")}_{filters}.csv";
+
+            // Return the CSV file as a FileResult with appropriate headers
+            return File(csvData, "text/csv", fileName);
+        }
+
+        private string GetFilterString(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId)
+        {
+            // Example implementation of generating a filter string
+            // Customize as per your filter requirements
+            string filters = "";
+            if (filterDate.HasValue)
+                filters += $"Date-{filterDate.Value.ToString("yyyyMMdd")}_";
+            if (!string.IsNullOrEmpty(filterStatus))
+                filters += $"Status-{filterStatus}_";
+            if (!string.IsNullOrEmpty(filterRoomNo))
+                filters += $"RoomNo-{filterRoomNo}_";
+            if (!string.IsNullOrEmpty(filterUserId))
+                filters += $"UserId-{filterUserId}";
+
+            // Remove trailing underscore
+            if (filters.EndsWith("_"))
+                filters = filters.Substring(0, filters.Length - 1);
+
+            return filters;
+        }
     }
 }

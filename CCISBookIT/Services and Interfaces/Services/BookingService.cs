@@ -2,6 +2,7 @@
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace CCISBookIT.Services_and_Interfaces.Services
 {
@@ -41,11 +42,6 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             throw new NotImplementedException();
         }
 
-        void IBookingService.GenerateReport(DateTime Date)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Booking>> GetAll()
         {
             return await _context.Bookings.OrderByDescending(b => b.Date).ToListAsync();
@@ -76,5 +72,54 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             return overlappingBooking != null;
         }
 
+        public async Task<List<Booking>> GetAllAsync()
+        {
+            return await _context.Bookings.ToListAsync(); // Example, adjust to retrieve bookings from your database
+        }
+
+        public async Task<List<Booking>> GetFilteredBookingsAsync(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId)
+        {
+            var bookings = _context.Bookings.AsQueryable(); // Start with all bookings
+
+            // Apply filters
+            if (filterDate.HasValue)
+            {
+                bookings = bookings.Where(b => b.Date.Date == filterDate.Value.Date);
+            }
+
+            if (!string.IsNullOrEmpty(filterStatus))
+            {
+                bookings = bookings.Where(b => b.Status.ToString() == filterStatus);
+            }
+
+            if (!string.IsNullOrEmpty(filterRoomNo))
+            {
+                bookings = bookings.Where(b => b.RoomNo == filterRoomNo);
+            }
+
+            if (!string.IsNullOrEmpty(filterUserId))
+            {
+                bookings = bookings.Where(b => b.FacultyId == filterUserId);
+            }
+
+            return await bookings.ToListAsync();
+        }
+
+
+        public byte[] GenerateCsvFile(List<Booking> bookings)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // Header
+            sb.AppendLine("BookingId,Date,StartTime,Duration,EndTime,Purpose,Status,RoomNo,FacultyId");
+
+            // Data rows
+            foreach (var booking in bookings)
+            {
+                sb.AppendLine($"{booking.BookingId},{booking.Date},{booking.StartTime},{booking.Duration},{booking.EndTime},{booking.Purpose},{booking.Status},{booking.RoomNo},{booking.FacultyId}");
+            }
+
+            return Encoding.UTF8.GetBytes(sb.ToString());
+        }
     }
 }

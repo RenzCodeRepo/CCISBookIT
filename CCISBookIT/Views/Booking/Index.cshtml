@@ -13,7 +13,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="filterDate" class="form-label">Filter by Date:</label>
-                    <input type="date" id="filterDate" name="filterDate" class="form-control" />
+                    <input type="date" id="filterDate" name="filterDate" class="form-control" value="@ViewBag.FilterDate?.ToString("yyyy-MM-dd")" />
                 </div>
                 <div class="col">
                     <label for="filterStatus" class="form-label">Filter by Status:</label>
@@ -46,6 +46,13 @@
 
             </div>
         </form>
+
+        <div class="text-right mb-3">
+            @if (!string.IsNullOrEmpty(ViewBag.FilterDate) || !string.IsNullOrEmpty(ViewBag.FilterStatus) || !string.IsNullOrEmpty(ViewBag.FilterRoomNo) || !string.IsNullOrEmpty(ViewBag.FilterUserId))
+            {
+                <a href="@Url.Action("DownloadBookingsCsv", "Booking", new { filterDate = ViewBag.FilterDate, filterStatus = ViewBag.FilterStatus, filterRoomNo = ViewBag.FilterRoomNo, filterUserId = ViewBag.FilterUserId })" class="btn btn-success">Download CSV</a>
+            }
+        </div>
 
         <table class="table">
             <thead>
