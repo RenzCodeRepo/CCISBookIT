@@ -1,22 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CCISBookIT.Models;
-using CCISBookIT.Data.Enum;
-using System;
 
 namespace CCISBookIT.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
 
-        // DbSet properties for your entities
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<User> Users { get; set; }
 
-        // Override OnModelCreating to configure entity relationships or other model settings
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure relationships, keys, indices, etc.
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Room)
                 .WithMany(r => r.Bookings)
@@ -27,7 +28,9 @@ namespace CCISBookIT.Data
                 .WithMany(u => u.Bookings)
                 .HasForeignKey(b => b.FacultyId);
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .ToTable("AspNetUsers")
+                .HasKey(u => u.FacultyID);
         }
     }
 }

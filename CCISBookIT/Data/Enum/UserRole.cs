@@ -3,6 +3,6 @@
     public enum UserRole
     {
         Faculty,
-        Admin
+        Admin   
     }
 }

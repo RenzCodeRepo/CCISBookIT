@@ -2,6 +2,7 @@
 using CCISBookIT.Models;
 using BCrypt.Net;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.AspNetCore.Identity;
 
 namespace CCISBookIT.Data
 {
@@ -9,6 +10,8 @@ namespace CCISBookIT.Data
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
+            var adminRole = new IdentityRole { Name = UserRole.Admin.ToString(), NormalizedName = UserRole.Admin.ToString().ToUpper() };
+            var facultyRole = new IdentityRole { Name = UserRole.Faculty.ToString(), NormalizedName = UserRole.Faculty.ToString().ToUpper() };
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
@@ -44,7 +47,7 @@ namespace CCISBookIT.Data
                             Email = "maloimanzana@gmail.com",
                             PhoneNumber = "09171234567",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Maloi@567"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -53,7 +56,7 @@ namespace CCISBookIT.Data
                             Email = "chaemacle@gmail.com",
                             PhoneNumber = "09182345678",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Chaeyoung@567"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -62,7 +65,7 @@ namespace CCISBookIT.Data
                             Email = "shecaminute@gmail.com",
                             PhoneNumber = "09193456789",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Sheena@789"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -71,7 +74,7 @@ namespace CCISBookIT.Data
                             Email = "arigaba@gmail.com",
                             PhoneNumber = "09204567890",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Ariana@890"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -80,7 +83,7 @@ namespace CCISBookIT.Data
                             Email = "frankoceanlover911@gmail.com",
                             PhoneNumber = "09215678901",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Frank@901"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },new User()
                         {
                             FacultyID = "CCISF006",
@@ -88,7 +91,7 @@ namespace CCISBookIT.Data
                             Email = "freddiequeen@gmail.com",
                             PhoneNumber = "09226789012",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Freddie@012"),
-                            Role = UserRole.Faculty.ToString() ,
+                            Role = UserRole.Faculty ,
                         },new User()
                         {
                             FacultyID = "CCISF007",
@@ -96,7 +99,7 @@ namespace CCISBookIT.Data
                             Email = "Lebron@gmail.com",
                             PhoneNumber = "09237890123",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Lebron@123"),
-                            Role = UserRole.Faculty.ToString() ,
+                            Role = UserRole.Faculty ,
                         },
                         new User()
                         {
@@ -105,7 +108,7 @@ namespace CCISBookIT.Data
                             Email = "renznino@gmail.com",
                             PhoneNumber = "09248901234",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Renz@234"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -114,7 +117,7 @@ namespace CCISBookIT.Data
                             Email = "jamescarl@gmail.com",
                             PhoneNumber = "09259012345",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("James@345"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -123,7 +126,7 @@ namespace CCISBookIT.Data
                             Email = "michellelopez@gmail.com",
                             PhoneNumber = "09260123456",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Michelle@456"),
-                            Role = UserRole.Faculty.ToString(),
+                            Role = UserRole.Faculty,
                         },
                         new User()
                         {
@@ -132,7 +135,7 @@ namespace CCISBookIT.Data
                             Email = "zabdielpogi123@gmail.com",
                             PhoneNumber = "09271234567",
                             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Zabdiel@567"),
-                            Role = UserRole.Admin.ToString(),
+                            Role = UserRole.Admin,
                         }
                     });
                     context.SaveChanges();
@@ -215,6 +218,8 @@ namespace CCISBookIT.Data
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S503B")
                         }
                     });
+                    context.Roles.Add(adminRole);
+                    context.Roles.Add(facultyRole);
                     context.SaveChanges();
                 }
 

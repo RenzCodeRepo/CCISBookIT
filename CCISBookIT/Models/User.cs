@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CCISBookIT.Data.Enum;
+using Microsoft.AspNetCore.Identity;
 
 namespace CCISBookIT.Models
 {
-    public class User
+    public class User : IdentityUser
     {
         [Key]
         [RegularExpression(@"^CCISF\d{3}$", ErrorMessage = "Faculty ID must be in the format CCISF followed by three digits.")]
@@ -30,7 +31,7 @@ namespace CCISBookIT.Models
 
         [EnumDataType(typeof(UserRole))]
         [Display(Name = "Role")]
-        public string Role { get; set; }  // Role of the user, validated against UserRole enum
+        public UserRole Role { get; set; }  // Role of the user, validated against UserRole enum
 
         public ICollection<Booking> Bookings { get; set; }  // Navigation property to Booking entities
 

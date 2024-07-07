@@ -1,4 +1,5 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -84,7 +85,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
         public byte[] GenerateUsers()
         {
             var facultyUsers = _context.Users
-           .Where(u => u.Role == "Faculty") // Adjust based on your user role structure
+           .Where(u => u.Role == UserRole.Faculty) // Adjust based on your user role structure
            .Select(u => new User
            {
                FullName = u.FullName,

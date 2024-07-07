@@ -46,7 +46,7 @@
                             <a href="@Url.Action("Detail", "User", new { FacultyID = item.FacultyID })" class="btn btn-info">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
-                            @if (item.Role == "Admin")
+                            @if (item.Role == CCISBookIT.Data.Enum.UserRole.Admin)
                             {
                                 <button class="btn btn-danger disabled" disabled>
                                     <i class="bi bi-trash"></i> Delete

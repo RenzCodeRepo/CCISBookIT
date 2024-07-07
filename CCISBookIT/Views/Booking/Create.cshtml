@@ -35,7 +35,17 @@
 
     <div class="form-group">
         <label asp-for="RoomNo"></label>
-        <input asp-for="RoomNo" class="form-control" />
+        <select asp-for="RoomNo" class="form-control">
+            <option value="">Select Room Number</option>
+            <option value="S501">S501</option>
+            <option value="S502">S502</option>
+            <option value="S503">S503</option>
+            <option value="S504">S504</option>
+            <option value="S505">S505</option>
+            <option value="S508">S508</option>
+            <option value="S510">S510</option>
+            <option value="S511">S511</option>
+        </select>
         <span asp-validation-for="RoomNo" class="text-danger"></span>
     </div>
 
@@ -45,7 +55,6 @@
         <span asp-validation-for="FacultyId" class="text-danger"></span>
     </div>
 
-    
     <button type="submit" class="btn btn-primary">Create Booking</button>
 </form>
 

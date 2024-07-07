@@ -1,4 +1,5 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -73,8 +74,8 @@ namespace CCISBookIT.Controllers
         {
             var newUser = new User
             {
-                Role = "Faculty" // Set default role to "Faculty"
-            };
+                Role = UserRole.Faculty// Set default role to "Faculty"
+            }; 
             return View(newUser); // Return create view with a new user instance
         }
 
@@ -94,9 +95,9 @@ namespace CCISBookIT.Controllers
                 return View(user); // Return the create view with error message if user already exists
             }
 
-            if (string.IsNullOrEmpty(user.Role))
+            if (string.IsNullOrEmpty(user.Role.ToString()))
             {
-                user.Role = "Faculty"; // Set default role if not provided
+                user.Role = UserRole.Faculty; // Set default role if not provided
             }
 
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash); // Hash the user's password
