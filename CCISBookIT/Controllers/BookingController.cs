@@ -21,6 +21,8 @@ namespace CCISBookIT.Controllers
 
         public async Task<IActionResult> Index(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId)
         {
+            await _bookingService.UpdateExpiredBookings();
+
             var bookings = await _bookingService.GetAll(); // Retrieve all bookings
 
             // Apply filters if provided

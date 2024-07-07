@@ -13,6 +13,7 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
         Task<bool> IsBookingOverlap(DateTime date, TimeOnly startTime, double duration, string roomNo);
         Task<List<Booking>> GetFilteredBookingsAsync(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId);
         byte[] GenerateCsvFile(List<Booking> bookings);
+        Task UpdateExpiredBookings();
     }
 }
 

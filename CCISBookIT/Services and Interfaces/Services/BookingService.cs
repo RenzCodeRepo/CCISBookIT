@@ -1,4 +1,5 @@
 ﻿using CCISBookIT.Data;
+using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -120,6 +121,24 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             }
 
             return Encoding.UTF8.GetBytes(sb.ToString());
+        }
+
+        public async Task UpdateExpiredBookings()
+        {
+            var bookings = await _context.Bookings
+                .Where(b => b.Status == Status.Active.ToString())
+                .ToListAsync();
+
+            foreach (var booking in bookings)
+            {
+                if (booking.Date < DateTime.Now.Date ||
+                    (booking.Date == DateTime.Now.Date && booking.EndTime <= TimeOnly.FromDateTime(DateTime.Now)))
+                {
+                    booking.Status = Status.Expired.ToString();
+                }
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }
