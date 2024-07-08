@@ -1,6 +1,5 @@
 ﻿using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
-using BCrypt.Net;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CCISBookIT.Data
@@ -43,7 +42,7 @@ namespace CCISBookIT.Data
                             FullName = "Maloi Ricalde Manzana",
                             Email = "maloimanzana@gmail.com",
                             PhoneNumber = "09171234567",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Maloi@567"),
+                            PasswordHash = "Maloi@567",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -52,7 +51,7 @@ namespace CCISBookIT.Data
                             FullName = "Chaeyoung Marie Reyes Mendoza",
                             Email = "chaemacle@gmail.com",
                             PhoneNumber = "09182345678",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Chaeyoung@567"),
+                            PasswordHash = "Chaeyoung@567",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -61,7 +60,7 @@ namespace CCISBookIT.Data
                             FullName = "Sheena Mae Burgos Catacutan",
                             Email = "shecaminute@gmail.com",
                             PhoneNumber = "09193456789",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Sheena@789"),
+                            PasswordHash = "Sheena@789",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -70,7 +69,7 @@ namespace CCISBookIT.Data
                             FullName = "Ariana Grande Bautista",
                             Email = "arigaba@gmail.com",
                             PhoneNumber = "09204567890",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Ariana@890"),
+                            PasswordHash = "Ariana@890",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -79,7 +78,7 @@ namespace CCISBookIT.Data
                             FullName = "Frank Morales Ocean",
                             Email = "frankoceanlover911@gmail.com",
                             PhoneNumber = "09215678901",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Frank@901"),
+                            PasswordHash = "Frank@901",
                             Role = UserRole.Faculty.ToString(),
                         },new User()
                         {
@@ -87,7 +86,7 @@ namespace CCISBookIT.Data
                             FullName = "Freddie Mercury Watson",
                             Email = "freddiequeen@gmail.com",
                             PhoneNumber = "09226789012",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Freddie@012"),
+                            PasswordHash = "Freddie@012",
                             Role = UserRole.Faculty.ToString() ,
                         },new User()
                         {
@@ -95,7 +94,7 @@ namespace CCISBookIT.Data
                             FullName = "Lebron James Bryan",
                             Email = "Lebron@gmail.com",
                             PhoneNumber = "09237890123",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Lebron@123"),
+                            PasswordHash = "Lebron@123",
                             Role = UserRole.Faculty.ToString() ,
                         },
                         new User()
@@ -104,7 +103,7 @@ namespace CCISBookIT.Data
                             FullName = "Renz Niño Baladjay",
                             Email = "renznino@gmail.com",
                             PhoneNumber = "09248901234",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Renz@234"),
+                            PasswordHash = "Renz@234",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -113,7 +112,7 @@ namespace CCISBookIT.Data
                             FullName = "Jamescarl Quitarinio Dean",
                             Email = "jamescarl@gmail.com",
                             PhoneNumber = "09259012345",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("James@345"),
+                            PasswordHash = "James@345",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -122,7 +121,7 @@ namespace CCISBookIT.Data
                             FullName = "Michelle Clemente Lopez",
                             Email = "michellelopez@gmail.com",
                             PhoneNumber = "09260123456",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Michelle@456"),
+                            PasswordHash = "Michelle@456",
                             Role = UserRole.Faculty.ToString(),
                         },
                         new User()
@@ -131,7 +130,7 @@ namespace CCISBookIT.Data
                             FullName = "Zabdiel Joseph De Belen Manzana",
                             Email = "zabdielpogi123@gmail.com",
                             PhoneNumber = "09271234567",
-                            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Zabdiel@567"),
+                            PasswordHash = "Zabdiel@567",
                             Role = UserRole.Admin.ToString(),
                         }
                     });

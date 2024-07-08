@@ -87,18 +87,21 @@ namespace CCISBookIT.Services_and_Interfaces.Services
            .Where(u => u.Role == "Faculty") // Adjust based on your user role structure
            .Select(u => new User
            {
+               FacultyID = u.FacultyID,
                FullName = u.FullName,
-               Email = u.Email
+               Email = u.Email,
+               PhoneNumber = u.PhoneNumber,
+               Role = u.Role,
                // Map other properties as needed
            })
            .ToList();
 
             var csvBuilder = new StringBuilder();
-            csvBuilder.AppendLine("User Name,Email");
+            csvBuilder.AppendLine("Faculty ID, Full Name, Email, Contact Number, Role");
 
             foreach (var user in facultyUsers)
             {
-                csvBuilder.AppendLine($"{user.FullName},{user.Email}");
+                csvBuilder.AppendLine($"{user.FacultyID},{user.FullName},{user.Email},{user.PhoneNumber},{user.Role}");
             }
 
             return Encoding.UTF8.GetBytes(csvBuilder.ToString());
