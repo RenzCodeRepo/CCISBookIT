@@ -47,7 +47,7 @@ namespace CCISBookIT.Models
         [Required(ErrorMessage = "Faculty ID is required")]
         public string FacultyId { get; set; }  // Foreign key to User entity
 
-        public User User { get; set; }  // Navigation property to User
+        public AppUser User { get; set; }  // Navigation property to User
         public Booking()
         {
             Date = DateTime.Today; // Initialize with today's date or any other default date

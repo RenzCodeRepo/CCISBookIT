@@ -7,8 +7,8 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 {
     public class RoomServices : IRoomService
     {
-        private readonly ApplicationDbContext _context;
-        public RoomServices(ApplicationDbContext context)
+        private readonly AppDbContext _context;
+        public RoomServices(AppDbContext context)
         {
             _context = context;
         }

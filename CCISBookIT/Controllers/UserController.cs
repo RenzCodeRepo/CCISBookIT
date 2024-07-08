@@ -57,7 +57,7 @@ namespace CCISBookIT.Controllers
         // POST: User/Edit/{facultyId}
         [HttpPost("User/Edit/{facultyId}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string facultyId, [Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] User updatedUser)
+        public async Task<IActionResult> Edit(string facultyId, [Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] AppUser updatedUser)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace CCISBookIT.Controllers
         // GET: User/Create
         public IActionResult Create()
         {
-            var newUser = new User
+            var newUser = new AppUser
             {
                 Role = "Faculty" // Set default role to "Faculty"
             };
@@ -81,7 +81,7 @@ namespace CCISBookIT.Controllers
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] User user)
+        public async Task<IActionResult> Create([Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] AppUser user)
         {
             if (!ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace CCISBookIT.Controllers
                 user.Role = "Faculty"; // Set default role if not provided
             }
 
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash); // Hash the user's password
+            user.PasswordHash = user.PasswordHash; // Hash the user's password
             await _userService.Add(user); // Add new user asynchronously
             return RedirectToAction(nameof(Index)); // Redirect to Index action after successful creation
         }

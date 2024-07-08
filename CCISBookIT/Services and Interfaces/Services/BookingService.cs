@@ -10,8 +10,8 @@ namespace CCISBookIT.Services_and_Interfaces.Services
     public class BookingService : IBookingService
     {
 
-        private readonly ApplicationDbContext _context;
-        public BookingService(ApplicationDbContext context)
+        private readonly AppDbContext _context;
+        public BookingService(AppDbContext context)
         {
             _context = context;
         }
@@ -38,7 +38,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             await _context.SaveChangesAsync();
         }
 
-        Task<IEnumerable<Booking>> IBookingService.FilterBooking(DateTime Date, Room RoomType, User FullName)
+        Task<IEnumerable<Booking>> IBookingService.FilterBooking(DateTime Date, Room RoomType, AppUser FullName)
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,6 @@
 ﻿using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CCISBookIT.Data
@@ -10,7 +11,8 @@ namespace CCISBookIT.Data
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
                 context.Database.EnsureCreated();
 
@@ -34,9 +36,9 @@ namespace CCISBookIT.Data
                 //Users FuLLName = First Name, Middle Name, Last Name
                 if (!context.Users.Any())
                 {
-                    context.Users.AddRange(new List<User>()
+                    context.Users.AddRange(new List<AppUser>()
                     {
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF001",
                             FullName = "Maloi Ricalde Manzana",
@@ -45,7 +47,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Maloi@567",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF002",
                             FullName = "Chaeyoung Marie Reyes Mendoza",
@@ -54,7 +56,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Chaeyoung@567",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF003",
                             FullName = "Sheena Mae Burgos Catacutan",
@@ -63,7 +65,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Sheena@789",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF004",
                             FullName = "Ariana Grande Bautista",
@@ -72,7 +74,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Ariana@890",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF005",
                             FullName = "Frank Morales Ocean",
@@ -80,7 +82,7 @@ namespace CCISBookIT.Data
                             PhoneNumber = "09215678901",
                             PasswordHash = "Frank@901",
                             Role = UserRole.Faculty.ToString(),
-                        },new User()
+                        },new AppUser()
                         {
                             FacultyID = "CCISF006",
                             FullName = "Freddie Mercury Watson",
@@ -88,7 +90,7 @@ namespace CCISBookIT.Data
                             PhoneNumber = "09226789012",
                             PasswordHash = "Freddie@012",
                             Role = UserRole.Faculty.ToString() ,
-                        },new User()
+                        },new AppUser()
                         {
                             FacultyID = "CCISF007",
                             FullName = "Lebron James Bryan",
@@ -97,7 +99,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Lebron@123",
                             Role = UserRole.Faculty.ToString() ,
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF008",
                             FullName = "Renz Niño Baladjay",
@@ -106,7 +108,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Renz@234",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF009",
                             FullName = "Jamescarl Quitarinio Dean",
@@ -115,7 +117,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "James@345",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISF010",
                             FullName = "Michelle Clemente Lopez",
@@ -124,7 +126,7 @@ namespace CCISBookIT.Data
                             PasswordHash = "Michelle@456",
                             Role = UserRole.Faculty.ToString(),
                         },
-                        new User()
+                        new AppUser()
                         {
                             FacultyID = "CCISA011",
                             FullName = "Zabdiel Joseph De Belen Manzana",

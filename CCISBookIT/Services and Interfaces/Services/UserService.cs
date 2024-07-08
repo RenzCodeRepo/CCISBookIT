@@ -12,16 +12,16 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 {
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
         // Constructor injection of ApplicationDbContext
-        public UserService(ApplicationDbContext context)
+        public UserService(AppDbContext context)
         {
             _context = context;
         }
 
         // Add a new user to the database
-        public async Task Add(User user)
+        public async Task Add(AppUser user)
         {
             if (await UserExists(user.FacultyID))
             {
@@ -44,13 +44,13 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 
 
         // Retrieve all users sorted by FacultyID
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<AppUser>> GetAll()
         {
             return await _context.Users.OrderBy(u => u.FacultyID).ToListAsync();
         }
 
         // Update user information in the database
-        public async Task<User> Update(string facultyId, User updatedUser)
+        public async Task<AppUser> Update(string facultyId, AppUser updatedUser)
         {
             _context.Update(updatedUser);
             await _context.SaveChangesAsync();
@@ -71,7 +71,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
         }
 
         // Retrieve a user by FacultyID from the database
-        public async Task<User> GetById(string facultyId)
+        public async Task<AppUser> GetById(string facultyId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.FacultyID == facultyId);
             if (user == null)
@@ -85,7 +85,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
         {
             var facultyUsers = _context.Users
            .Where(u => u.Role == "Faculty") // Adjust based on your user role structure
-           .Select(u => new User
+           .Select(u => new AppUser
            {
                FacultyID = u.FacultyID,
                FullName = u.FullName,

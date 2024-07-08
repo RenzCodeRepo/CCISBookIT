@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CCISBookIT.Data.Enum;
+using Microsoft.AspNetCore.Identity;
 
 namespace CCISBookIT.Models
 {
-    public class User
+    public class AppUser : IdentityUser 
     {
-        [Key]
+        
         [RegularExpression(@"^CCISF\d{3}$", ErrorMessage = "Faculty ID must be in the format CCISF followed by three digits.")]
         [Display(Name = "Faculty ID")]
         public string FacultyID { get; set; }  // Faculty ID, serves as the primary key
@@ -34,7 +35,7 @@ namespace CCISBookIT.Models
 
         public ICollection<Booking> Bookings { get; set; }  // Navigation property to Booking entities
 
-        public User()
+        public AppUser()
         {
             Bookings = new List<Booking>();  // Initialize the navigation property collection in the constructor
         }
