@@ -14,7 +14,6 @@ namespace CCISBookIT.Data
         {
 
         }
-
         // DbSet properties for your entities
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
@@ -33,7 +32,7 @@ namespace CCISBookIT.Data
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.User)
                 .WithMany(u => u.Bookings)
-                .HasForeignKey(b => b.FacultyId)
+                .HasForeignKey(b => b.FacultyID)
                 .HasPrincipalKey(u => u.FacultyID);
 
             modelBuilder.Entity<AppUser>()

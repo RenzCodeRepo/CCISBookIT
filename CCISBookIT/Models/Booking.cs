@@ -45,7 +45,7 @@ namespace CCISBookIT.Models
         [ForeignKey("User")]
         [Display(Name = "Faculty ID")]
         [Required(ErrorMessage = "Faculty ID is required")]
-        public string FacultyId { get; set; }  // Foreign key to User entity
+        public string FacultyID { get; set; }  // Foreign key to User entity
 
         public AppUser User { get; set; }  // Navigation property to User
         public Booking()

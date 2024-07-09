@@ -73,7 +73,7 @@ namespace CCISBookIT.Controllers
         {
             var newUser = new AppUser
             {
-                Role = "Faculty" // Set default role to "Faculty"
+                /*Role = "Faculty"*/ // Set default role to "Faculty"
             };
             return View(newUser); // Return create view with a new user instance
         }
@@ -94,10 +94,10 @@ namespace CCISBookIT.Controllers
                 return View(user); // Return the create view with error message if user already exists
             }
 
-            if (string.IsNullOrEmpty(user.Role))
-            {
-                user.Role = "Faculty"; // Set default role if not provided
-            }
+            //if (string.IsNullOrEmpty(user.Role))
+            //{
+            //    user.Role = "Faculty"; // Set default role if not provided
+            //}
 
             user.PasswordHash = user.PasswordHash; // Hash the user's password
             await _userService.Add(user); // Add new user asynchronously
@@ -125,15 +125,15 @@ namespace CCISBookIT.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult DownloadFacultyUsersCsv()
-        {
-            var csvData = _userService.GenerateUsers();
+        //public IActionResult DownloadFacultyUsersCsv()
+        //{
+        //    var csvData = _userService.GenerateUsers();
 
-            // Generate file name with current date
-            string fileName = $"FacultyUsers_{DateTime.Now.ToString("yyyyMMdd")}.csv";
+        //    Generate file name with current date
+        //    string fileName = $"FacultyUsers_{DateTime.Now.ToString("yyyyMMdd")}.csv";
 
-            // Return the CSV file as a FileResult with appropriate headers
-            return File(csvData, "text/csv", fileName);
-        }
+        //    Return the CSV file as a FileResult with appropriate headers
+        //    return File(csvData, "text/csv", fileName);
+        //}
     }
 }

@@ -2,150 +2,122 @@
 using CCISBookIT.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CCISBookIT.Data
 {
     public class AppDbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static async Task Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
+                string adminUserEmail = "renzbaladjay25@gmail.com";
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if (adminUser == null)
+                {
+                    var newAdminUser = new AppUser()
+                    {
+                        FacultyID = "CCISA001",
+                        UserName = "renzbaladjay",  // Username without spaces
+                        FullName = "Renz Niño Baladjay",  // Full name with spaces
+                        Email = adminUserEmail,
+                        EmailConfirmed = true,
+                        PhoneNumber = "09305215979"
+                    };
+                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                string appUser1Email = "michellelopez@gmail.com";
+                var appUser1 = await userManager.FindByEmailAsync(appUser1Email);
+                if (appUser1 == null)
+                {
+                    var newAppUser = new AppUser()
+                    {
+                        FacultyID = "CCISF001",
+                        UserName = "michellelopez",  // Username without spaces
+                        FullName = "Michelle Kyla Lopez",  // Full name with spaces
+                        Email = appUser1Email,
+                        EmailConfirmed = true,
+                        PhoneNumber = "09260123456"
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
+
+                string appUser2Email = "jamescarldean@gmail.com";
+                var appUser2 = await userManager.FindByEmailAsync(appUser2Email);
+                if (appUser2 == null)
+                {
+                    var newAppUser = new AppUser()
+                    {
+                        FacultyID = "CCISF002",
+                        UserName = "jamescarldean",  // Username without spaces
+                        FullName = "Jamescarl Quitarinio Dean",  // Full name with spaces
+                        Email = appUser2Email,
+                        EmailConfirmed = true,
+                        PhoneNumber = "09259012345"
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
+
+                string appUser3Email = "zabdiel@gmail.com";
+                var appUser3 = await userManager.FindByEmailAsync(appUser3Email);
+                if (appUser3 == null)
+                {
+                    var newAppUser = new AppUser()
+                    {
+                        FacultyID = "CCISF003",
+                        UserName = "zabdiel",  // Username without spaces
+                        FullName = "Zabdiel Joseph Manzana",  // Full name with spaces
+                        Email = appUser3Email,
+                        EmailConfirmed = true,
+                        PhoneNumber = "09271234567"
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
+            }
+
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.EnsureCreated();
 
-                //Rooms
                 if (!context.Rooms.Any())
                 {
                     context.Rooms.AddRange(new List<Room>()
-                {
-                    new Room { RoomNo = "S501", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S502", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S503", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S504", RoomType = RoomType.Lecture.ToString() },
-                    new Room { RoomNo = "S505", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S508", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S510", RoomType = RoomType.Laboratory.ToString() },
-                    new Room { RoomNo = "S511", RoomType = RoomType.Laboratory.ToString() }
-                });
-                    context.SaveChanges();
-                }
-
-                //Users FuLLName = First Name, Middle Name, Last Name
-                if (!context.Users.Any())
-                {
-                    context.Users.AddRange(new List<AppUser>()
                     {
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF001",
-                            FullName = "Maloi Ricalde Manzana",
-                            Email = "maloimanzana@gmail.com",
-                            PhoneNumber = "09171234567",
-                            PasswordHash = "Maloi@567",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF002",
-                            FullName = "Chaeyoung Marie Reyes Mendoza",
-                            Email = "chaemacle@gmail.com",
-                            PhoneNumber = "09182345678",
-                            PasswordHash = "Chaeyoung@567",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF003",
-                            FullName = "Sheena Mae Burgos Catacutan",
-                            Email = "shecaminute@gmail.com",
-                            PhoneNumber = "09193456789",
-                            PasswordHash = "Sheena@789",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF004",
-                            FullName = "Ariana Grande Bautista",
-                            Email = "arigaba@gmail.com",
-                            PhoneNumber = "09204567890",
-                            PasswordHash = "Ariana@890",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF005",
-                            FullName = "Frank Morales Ocean",
-                            Email = "frankoceanlover911@gmail.com",
-                            PhoneNumber = "09215678901",
-                            PasswordHash = "Frank@901",
-                            Role = UserRole.Faculty.ToString(),
-                        },new AppUser()
-                        {
-                            FacultyID = "CCISF006",
-                            FullName = "Freddie Mercury Watson",
-                            Email = "freddiequeen@gmail.com",
-                            PhoneNumber = "09226789012",
-                            PasswordHash = "Freddie@012",
-                            Role = UserRole.Faculty.ToString() ,
-                        },new AppUser()
-                        {
-                            FacultyID = "CCISF007",
-                            FullName = "Lebron James Bryan",
-                            Email = "Lebron@gmail.com",
-                            PhoneNumber = "09237890123",
-                            PasswordHash = "Lebron@123",
-                            Role = UserRole.Faculty.ToString() ,
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF008",
-                            FullName = "Renz Niño Baladjay",
-                            Email = "renznino@gmail.com",
-                            PhoneNumber = "09248901234",
-                            PasswordHash = "Renz@234",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF009",
-                            FullName = "Jamescarl Quitarinio Dean",
-                            Email = "jamescarl@gmail.com",
-                            PhoneNumber = "09259012345",
-                            PasswordHash = "James@345",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISF010",
-                            FullName = "Michelle Clemente Lopez",
-                            Email = "michellelopez@gmail.com",
-                            PhoneNumber = "09260123456",
-                            PasswordHash = "Michelle@456",
-                            Role = UserRole.Faculty.ToString(),
-                        },
-                        new AppUser()
-                        {
-                            FacultyID = "CCISA011",
-                            FullName = "Zabdiel Joseph De Belen Manzana",
-                            Email = "zabdielpogi123@gmail.com",
-                            PhoneNumber = "09271234567",
-                            PasswordHash = "Zabdiel@567",
-                            Role = UserRole.Admin.ToString(),
-                        }
+                        new Room { RoomNo = "S501", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S502", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S503", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S504", RoomType = RoomType.Lecture.ToString() },
+                        new Room { RoomNo = "S505", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S508", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S510", RoomType = RoomType.Laboratory.ToString() },
+                        new Room { RoomNo = "S511", RoomType = RoomType.Laboratory.ToString() }
                     });
                     context.SaveChanges();
                 }
-                //Bookinga
+
                 if (!context.Bookings.Any())
                 {
                     var rooms = context.Rooms.ToList();
-                    //BookingId = $"{RoomNo}_{Date:yyyyMMdd}_{StartTime:HHmm}";
                     context.Bookings.AddRange(new List<Booking>()
                     {
-
                         new Booking()
                         {
                             BookingId = "S501-20240521-0900",
@@ -156,10 +128,9 @@ namespace CCISBookIT.Data
                             Purpose = "Lecture",
                             Status = Status.Expired.ToString(),
                             RoomNo = "S501",
-                            FacultyId = "CCISF001",
+                            FacultyID = "CCISF003",
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S501")
                         },
-
                         new Booking()
                         {
                             BookingId = "S511-20240613-1800",
@@ -170,11 +141,10 @@ namespace CCISBookIT.Data
                             Purpose = "Laboratory",
                             Status = Status.Expired.ToString(),
                             RoomNo = "S511",
-                            FacultyId = "CCISF004",
+                            FacultyID = "CCISF002",
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S511")
                         },
-
-                         new Booking()
+                        new Booking()
                         {
                             BookingId = "S504-20240520-1630",
                             Date = new DateTime(2024, 05, 20, 16, 30, 00),
@@ -184,11 +154,10 @@ namespace CCISBookIT.Data
                             Purpose = "Lecture",
                             Status = Status.Cancelled.ToString(),
                             RoomNo = "S504",
-                            FacultyId = "CCISF006",
+                            FacultyID = "CCISF001",
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S504")
                         },
-
-                         new Booking()
+                        new Booking()
                         {
                             BookingId = "S510-20240520-1630",
                             Date = new DateTime(2024, 05, 20, 16, 30, 00),
@@ -198,10 +167,9 @@ namespace CCISBookIT.Data
                             Purpose = "Lecture",
                             Status = Status.Active.ToString(),
                             RoomNo = "S510",
-                            FacultyId = "CCISF002",
+                            FacultyID = "CCISF002",
                             Room = rooms.FirstOrDefault(r => r.RoomNo == "S510")
                         },
-
                         new Booking()
                         {
                             BookingId = "S503B-20240417-1030",
@@ -212,15 +180,13 @@ namespace CCISBookIT.Data
                             Purpose = "Lecture",
                             Status = Status.Cancelled.ToString(),
                             RoomNo = "S503",
-                            FacultyId = "CCISF005",
-                            Room = rooms.FirstOrDefault(r => r.RoomNo == "S503B")
+                            FacultyID = "CCISF001",
+                            Room = rooms.FirstOrDefault(r => r.RoomNo == "S503")
                         }
                     });
                     context.SaveChanges();
                 }
-
             }
         }
     }
 }
-

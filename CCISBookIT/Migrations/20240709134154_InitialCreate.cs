@@ -32,16 +32,15 @@ namespace CCISBookIT.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FacultyID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -184,14 +183,14 @@ namespace CCISBookIT.Migrations
                     Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoomNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FacultyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    FacultyID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Bookings_AspNetUsers_FacultyId",
-                        column: x => x.FacultyId,
+                        name: "FK_Bookings_AspNetUsers_FacultyID",
+                        column: x => x.FacultyID,
                         principalTable: "AspNetUsers",
                         principalColumn: "FacultyID",
                         onDelete: ReferentialAction.Cascade);
@@ -249,9 +248,9 @@ namespace CCISBookIT.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_FacultyId",
+                name: "IX_Bookings_FacultyID",
                 table: "Bookings",
-                column: "FacultyId");
+                column: "FacultyID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_RoomNo",

@@ -100,7 +100,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 
             if (!string.IsNullOrEmpty(filterUserId))
             {
-                bookings = bookings.Where(b => b.FacultyId == filterUserId);
+                bookings = bookings.Where(b => b.FacultyID == filterUserId);
             }
 
             return await bookings.ToListAsync();
@@ -117,7 +117,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             // Data rows
             foreach (var booking in bookings)
             {
-                sb.AppendLine($"{booking.BookingId},{booking.Date},{booking.StartTime},{booking.Duration},{booking.EndTime},{booking.Purpose},{booking.Status},{booking.RoomNo},{booking.FacultyId}");
+                sb.AppendLine($"{booking.BookingId},{booking.Date},{booking.StartTime},{booking.Duration},{booking.EndTime},{booking.Purpose},{booking.Status},{booking.RoomNo},{booking.FacultyID}");
             }
 
             return Encoding.UTF8.GetBytes(sb.ToString());

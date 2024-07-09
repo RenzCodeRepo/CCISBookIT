@@ -12,8 +12,8 @@
         <td>@Html.DisplayFor(model => model.FacultyID)</td>
     </tr>
     <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.FullName)</strong></td>
-        <td>@Html.DisplayFor(model => model.FullName)</td>
+        <td><strong>@Html.DisplayNameFor(model => model.UserName)</strong></td>
+        <td>@Html.DisplayFor(model => model.UserName)</td>
     </tr>
     <tr>
         <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
@@ -23,10 +23,10 @@
         <td><strong>@Html.DisplayNameFor(model => model.PhoneNumber)</strong></td>
         <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
     </tr>
-    <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.Role)</strong></td>
-        <td>@Html.DisplayFor(model => model.Role)</td>
-    </tr>
+    @* <tr>
+        <td><strong>@Html.DisplayNameFor(model => model.Roles)</strong></td>
+        <td>@Html.DisplayFor(model => model.Roles)</td>
+    </tr> *@
 </table>
 
 <a asp-action="Index" class="btn btn-primary">Back to List</a> <!-- Button/link to navigate back to the list of users -->

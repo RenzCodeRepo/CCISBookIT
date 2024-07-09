@@ -43,7 +43,7 @@ namespace CCISBookIT.Controllers
 
             if (!string.IsNullOrEmpty(filterUserId))
             {
-                bookings = bookings.Where(b => b.FacultyId == filterUserId);
+                bookings = bookings.Where(b => b.FacultyID == filterUserId);
             }
 
             // Pass filters to view via ViewBag or model if needed
@@ -160,7 +160,7 @@ namespace CCISBookIT.Controllers
                     Purpose = model.Purpose,
                     Status = model.Status,
                     RoomNo = model.RoomNo,
-                    FacultyId = model.FacultyId
+                    FacultyID = model.FacultyID 
                 };
 
                 // Add booking to the context and save changes

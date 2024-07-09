@@ -73,7 +73,7 @@
                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Purpose)</th>
                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Status)</th>
                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNo)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FacultyId)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FacultyID)</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -90,7 +90,7 @@
                         <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td>
                         <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
                         <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyId)</td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyID)</td>
                         <td class="align-middle">
                             @if (item.Status == "Expired" || item.Status == "Cancelled")
                             {

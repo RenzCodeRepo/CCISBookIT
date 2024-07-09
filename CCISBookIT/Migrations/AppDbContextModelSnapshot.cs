@@ -35,7 +35,6 @@ namespace CCISBookIT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -65,19 +64,13 @@ namespace CCISBookIT.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -119,7 +112,7 @@ namespace CCISBookIT.Migrations
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<string>("FacultyId")
+                    b.Property<string>("FacultyID")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -140,7 +133,7 @@ namespace CCISBookIT.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("FacultyId");
+                    b.HasIndex("FacultyID");
 
                     b.HasIndex("RoomNo");
 
@@ -298,7 +291,7 @@ namespace CCISBookIT.Migrations
                 {
                     b.HasOne("CCISBookIT.Models.AppUser", "User")
                         .WithMany("Bookings")
-                        .HasForeignKey("FacultyId")
+                        .HasForeignKey("FacultyID")
                         .HasPrincipalKey("FacultyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
