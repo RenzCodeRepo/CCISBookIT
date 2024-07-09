@@ -22,7 +22,7 @@ namespace CCISBookIT.Controllers
         // GET: User/Index
         public async Task<IActionResult> Index()
         {
-            var users = (await _userService.GetAll()).OrderBy(u => u.FacultyID).ToList(); // Retrieve and sort users by FacultyID
+            var users = (await _userService.GetAllUsersAsync()); // Retrieve and sort users by FacultyID
 
             return View(users); // Pass sorted users to the "Index" view
         }

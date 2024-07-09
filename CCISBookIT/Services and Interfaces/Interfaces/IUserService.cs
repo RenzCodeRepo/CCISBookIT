@@ -6,7 +6,7 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
 {
     public interface IUserService
     {
-        Task<IEnumerable<AppUser>> GetAll(); // Retrieves all users asynchronously.
+        Task<List<AppUser>> GetAllUsersAsync(); // Retrieves all users asynchronously.
 
         Task Add(AppUser user); // Adds a new user synchronously.
 

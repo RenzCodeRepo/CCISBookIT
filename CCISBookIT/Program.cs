@@ -30,7 +30,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
-
+builder.Services.AddScoped<UserManager<AppUser>>();
 var app = builder.Build();
 
 //Seeding

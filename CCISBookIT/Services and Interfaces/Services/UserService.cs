@@ -1,6 +1,7 @@
 ﻿using CCISBookIT.Data;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 {
     public class UserService : IUserService
     {
+        public readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
 
         // Constructor injection of ApplicationDbContext
-        public UserService(AppDbContext context)
+        public UserService(AppDbContext context, UserManager<AppUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -44,9 +47,9 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 
 
         // Retrieve all users sorted by FacultyID
-        public async Task<IEnumerable<AppUser>> GetAll()
+        public async Task<List<AppUser>> GetAllUsersAsync()
         {
-            return await _context.Users.OrderBy(u => u.FacultyID).ToListAsync();
+            return await _userManager.Users.ToListAsync();
         }
 
         // Update user information in the database
