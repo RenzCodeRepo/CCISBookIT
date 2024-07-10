@@ -2,7 +2,50 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <!-- Home title screen -->
+    <div class="homepageText">
+        <h1><span class="yellow">CCIS</span><span class="red">BOOKIT</span></h1>
+        <h2 class="appDesc">A Booking Management System</h2>
+    </div>
+
+<style>
+    .homepageText {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Arial Black', sans-serif;           
+    font-size: 80px;                                  
+    font-weight: bold;                                
+    color: #ffd700;                                 
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); 
+    -webkit-text-stroke: 2px white;                 
+    margin-bottom: 10px;                              
+}
+
+span.yellow {
+    color: #ffd700;
+}
+
+span.red {
+    color: #800000;
+}
+
+.span.white {
+    color: white; 
+}
+
+.appDesc {
+    font-family: arial, sans-serif;                      
+    font-size: 50px;                                      
+    color: white;                                      
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);     
+    -webkit-text-stroke: 0.8px #5e6062;                 
+    margin-top: 0;                                        
+}
+</style>

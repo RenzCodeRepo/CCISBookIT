@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CCISBookIT - @ViewData["Title"]</title>
+    <link rel="icon" type="image" href="/images/CCISBookITLogo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <!-- Web-app logo and name -->
+            <div class="navbar-brand">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/CCISBookITLogo.png" alt="CCISBookIT LOGO">CCISBookIT
+                </a>
+            </div>
+            <!-- Web-app functions -->
+            <ul class="navbar-center">
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">HOME</a></li>
+                <li><a asp-area="" asp-controller="" asp-action="Index">ADD RESERVATION</a></li>
+                <li><a asp-area="" asp-controller="" asp-action="Index">VIEW RESERVATION</a></li>
+                <li><a asp-area="" asp-controller="" asp-action="Index">FAQs</a></li>
+            </ul>
+            <!-- Drop-down button -->
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <img src="/images/userIcon.png" alt="Profile Icon">
+                    <i class="arrow down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a asp-area="" asp-controller="" asp-action="Index">
+                        <img src="/images/userIcon.png" alt="View Profile Icon"> VIEW PROFILE
+                    </a>
+                    <a asp-area="" asp-controller="" asp-action="Index">
+                        <img src="/images/logoutIcon.png" alt="Log Out Icon"> LOGOUT
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Background image layer -->
+    <div class="background"></div>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h2>ABOUT US</h2>
+            <p>
+                CCIS BOOKIT is a web-based application developed to simplify the process of
+                booking of lecture rooms and laboratories for the College of Computer and Information
+                Sciences (CCIS) at the Polytechnic University of the Philippines.
+            </p>
+            <p style="color: #ffd700;">&copy; 2024 CCIS-BookIT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+<style>
+/* NAVIGATION BAR STYLING */
+/* Set up the body and container to take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.container {
+    flex: 1; /* Allow the container to grow and fill available space */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    padding: 20px; /* Optional: add padding to the content */
+}
+
+/* Create a separate background layer */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/backgroundIMG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(5px); /* Adjust the blur value as needed */
+    z-index: -3; /* Ensure background is behind all content */
+}
+
+/* Style for the navigation bar container */
+.navbar {
+    height: auto;                      
+    overflow: hidden;     
+    display: flex; 
+    align-items: center;               
+    justify-content: space-between;    
+    padding: 0 20px;                 
+    background-color: white;     
+    box-shadow: 0 8px 4px -4px gray; 
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.navbar a {
+    color: #8b0000;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+
+/* Center the navigation items */
+ .navbar-center {
+    font-size: 20px;
+    font-weight: 600;
+    color: #8b0000;   
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-center a:hover {
+    background-color: #ddd; 
+    color: #5D0101;  
+}
+
+/* Style for the logo and app name */
+.navbar-brand {
+    display: flex;      
+    align-items: center;    
+    text-decoration: none;  
+    font-size: 26px;        
+    font-weight: 600;       
+    color: #8b0000;   
+}
+
+/* Style for the logo image */
+.navbar-brand img {
+    height: 50px;       
+    margin-right: 10px;
+}
+
+/* Container for the dropdown button */
+.dropdown {
+    display: flex;
+    align-items: center;    
+}
+
+/* Style for the dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    font-weight: 600;
+    color: #8b0000;          
+    border: none;               
+    outline: none;              
+    padding: 14px 20px;         
+    background-color: inherit;  
+    font-family: inherit;       
+    margin: 0;                  
+    cursor: pointer;            
+    display: flex;              
+    align-items: center;        
+}
+
+/* Style for the dropdown button image */
+.dropdown .dropbtn img {
+    height: 30px;       
+    margin-right: 5px;  
+}
+
+/* Style for the dropdown menu */
+.dropdown-content {
+    display: none;               
+    position: absolute;          
+    right: 0;                    
+    background-color: #f9f9f9; 
+    width: 200px;                
+    height: 120px;               
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+    margin-top: 120px;          
+    margin-right: 40px;      
+    z-index: 2;
+}
+
+/* Style for the functions (view profile & logout) inside the dropdown menu */
+.dropdown-content a {
+    float: none; 
+    padding: 12px 16px;         
+    text-decoration: none;     
+    display: flex;            
+    align-items: center;        
+    text-align: left;           
+    font-weight: 600;          
+    color: #8b0000;          
+}
+
+/* Style for the images inside the dropdown menu */
+.dropdown-content a img {
+    height: 30px;       
+    margin-right: 10px; 
+}
+
+/* Hover effect for the functions (view profile & logout) inside the dropdown menu */
+.dropdown-content a:hover {
+    background-color: #ddd;  
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; 
+}
+
+/* Style for the down arrow icon in the dropdown button */
+.arrow.down {
+    border: solid #8b0000;            
+    border-width: 0 3px 3px 0;          
+    display: inline-block;             
+    padding: 3px;                       
+    margin-left: 5px;                   
+    transform: rotate(45deg);           
+    -webkit-transform: rotate(45deg);   
+}
+
+/* Ensure footer is always at the bottom */
+.footer {
+    text-align: center; 
+    padding: 2px;                   
+    background-color: #800000;
+    width: 100%; 
+    position: absolute;
+    bottom: 0;  
+    z-index: 1;                
+}
+
+.footer-content {   
+    font-size: 12px;                        
+    color: white;                         
+    padding-left: 20px;                     
+    padding-right: 20px;                    
+}
+
+</style>
+
