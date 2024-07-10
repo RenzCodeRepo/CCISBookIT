@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "List of Bookings";
     var roomNumbers = new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" }; // Room numbers from your image
+
+    // Check if any filter is applied
+    bool filtersApplied = !string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
+                           !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
+                           !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString());
 }
 
 <div class="row">
@@ -35,30 +40,24 @@
                         }
                     </select>
                 </div>
-
-                <div class="col">
-                    <label for="filterUserId" class="form-label">Filter by User ID:</label>
-                    <input type="text" id="filterUserId" name="filterUserId" class="form-control" />
-                </div>
                 <div class="col align-self-end">
                     <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
                 </div>
-
             </div>
         </form>
 
         <div class="text-right mb-3">
-            @if (!string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
-            !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
-            !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString()) ||
-            !string.IsNullOrEmpty(ViewBag.FilterUserId?.ToString()))
+            @if (filtersApplied)
             {
                 <a href="@Url.Action("DownloadBookingsCsv", "Booking", new {
-                    filterDate = ViewBag.FilterDate,
-                    filterStatus = ViewBag.FilterStatus,
-                    filterRoomNo = ViewBag.FilterRoomNo,
-                    filterUserId = ViewBag.FilterUserId
-                })" class="btn btn-success">Download CSV</a>
+            filterDate = ViewBag.FilterDate,
+            filterStatus = ViewBag.FilterStatus,
+            filterRoomNo = ViewBag.FilterRoomNo,
+        })" class="btn btn-success">Download CSV</a>
+            }
+            else
+            {
+                <a href="@Url.Action("DownloadBookingsCsv", "Booking")" class="btn btn-success">Download CSV</a>
             }
         </div>
 

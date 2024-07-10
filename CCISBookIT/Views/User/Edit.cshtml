@@ -1,4 +1,4 @@
-﻿@model CCISBookIT.Models.AppUser // Specifies that the model for this view is of type User
+﻿@model CCISBookIT.ViewModels.EditUserViewModel // Specifies that the model for this view is of type User
 
 @{
     ViewData["Title"] = "Edit User"; // Sets the title of the view
@@ -29,18 +29,7 @@
         <input asp-for="PhoneNumber" class="form-control" /> <!-- Input field for PhoneNumber -->
     </div>
 
-    <div class="form-group" style="display: none;">
-        <!-- Hidden input field for PasswordHash -->
-        <label asp-for="PasswordHash"></label>
-        <input asp-for="PasswordHash" type="text" class="form-control" readonly />
-    </div>
-
-   @*  <div class="form-group">
-        <label asp-for="Role."></label> <!-- Label for Role -->
-        <input asp-for="Role" class="form-control" readonly /> <!-- Readonly input field for Role -->
-    </div> *@
-
     <button type="submit" class="btn btn-primary">Save</button> <!-- Save button to submit the form -->
 </form>
 
-<a asp-action="Index" class="btn btn-primary">Back to List</a> <!-- Button/link to navigate back to the list of users -->
+<a asp-action="Detail" asp-controller="User" class="btn btn-primary">Cancel</a>

@@ -1,18 +1,40 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<AppUser> signInManager
+@inject UserManager<AppUser> userManager
 
 <ul class="navbar-nav">
     @if (signInManager.IsSignedIn(User))
     {
+        var user = await userManager.GetUserAsync(User);
+        if (await userManager.IsInRoleAsync(user, "Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Index">Rooms</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">View Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">View Reservations</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">View Reservations</a>
+            </li>
+        }
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 @User.Identity!.Name!
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">
-                        Logout
-                    </a>
+                    <!-- Modify this link to point to the user's profile detail view -->
+                   <a class="dropdown-item" href="@Url.Action("Detail", "User", new { id = user.FacultyID })">View Profile</a>
+
+                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
                 </li>
             </ul>
         </li>

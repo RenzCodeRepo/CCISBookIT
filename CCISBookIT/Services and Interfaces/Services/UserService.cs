@@ -84,30 +84,5 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             return user;
         }
 
-        //public byte[] GenerateUsers()
-        //{
-        //    var facultyUsers = _context.Users
-        //   .Where(u => u.Role == "Faculty") // Adjust based on your user role structure
-        //   .Select(u => new AppUser
-        //   {
-        //       FacultyID = u.FacultyID,
-        //       UserName = u.FullName,
-        //       Email = u.Email,
-        //       PhoneNumber = u.PhoneNumber,
-        //       Role = u.Role,
-        //       Map other properties as needed
-        //   })
-        //   .ToList();
-
-        //    var csvBuilder = new StringBuilder();
-        //    csvBuilder.AppendLine("Faculty ID, Full Name, Email, Contact Number, Role");
-
-        //    foreach (var user in facultyUsers)
-        //    {
-        //        csvBuilder.AppendLine($"{user.FacultyID},{user.FullName},{user.Email},{user.PhoneNumber},{user.Role}");
-        //    }
-
-        //    return Encoding.UTF8.GetBytes(csvBuilder.ToString());
-        //}
     }
 }

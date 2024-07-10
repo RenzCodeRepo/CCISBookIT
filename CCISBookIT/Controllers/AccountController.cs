@@ -23,6 +23,10 @@ namespace CCISBookIT.Controllers
         }
         public IActionResult Login()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var response = new LoginViewModel();
             return View();
         }
@@ -43,7 +47,7 @@ namespace CCISBookIT.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Room");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 TempData["Error"] = "Incorrect Password. Try Again";
@@ -76,6 +80,7 @@ namespace CCISBookIT.Controllers
                 FacultyID = registerViewModel.FacultyID,
                 FullName = registerViewModel.FullName,
                 Email = registerViewModel.Email,
+                EmailConfirmed = true,
                 PhoneNumber = registerViewModel.PhoneNumber,
                 UserName = registerViewModel.FullName.Replace(" ", "")
             };
@@ -84,9 +89,8 @@ namespace CCISBookIT.Controllers
             if (newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-                return RedirectToAction("Index", "Room");
+                return RedirectToAction("Login", "Account");
             }
-
             return RedirectToAction("Index", "Home");
         }
 

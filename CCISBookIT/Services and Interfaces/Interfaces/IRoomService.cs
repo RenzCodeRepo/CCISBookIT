@@ -11,5 +11,6 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
         Task<Room> GetbyRoomNo(string roomNo); // Retrieves a room by room number.
         bool RoomExists(string roomNo); // Checks if a room exists by room number.
         Task<Room> Update(string roomNo, Room updatedRoom); // Updates an existing room
+        byte[] GenerateCsvFile(List<Room> rooms);
     }
 }

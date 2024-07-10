@@ -9,6 +9,7 @@
         <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
 
         <table class="table">
+            <a class="btn btn-primary" asp-action="ExportCsv" >Download Report</a>
             <thead>
                 <tr class="text-center">
                     <th>@Html.DisplayNameFor(model => model.RoomNo)</th> <!-- Display header for RoomNo -->

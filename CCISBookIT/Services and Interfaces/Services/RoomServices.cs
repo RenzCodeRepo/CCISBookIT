@@ -2,6 +2,7 @@
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace CCISBookIT.Services_and_Interfaces.Services
 {
@@ -43,6 +44,22 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             _context.Update(updatedRoom);
             await _context.SaveChangesAsync();
             return updatedRoom;
+        }
+
+        public byte[] GenerateCsvFile(List<Room> rooms)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // Header
+            sb.AppendLine("RoomNo,RoomType");
+
+            // Data rows
+            foreach (var room in rooms)
+            {
+                sb.AppendLine($"{room.RoomNo},{room.RoomType}");
+            }
+
+            return Encoding.UTF8.GetBytes(sb.ToString());
         }
     }
 }

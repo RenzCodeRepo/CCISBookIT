@@ -17,7 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
+    <None Include="wwwroot\images\backgroundIMG.jpg" />
+    <None Include="wwwroot\images\CCISBookITLogo.png" />
+    <None Include="wwwroot\images\checkIcon.png" />
+    <None Include="wwwroot\images\edituserIcon.png" />
+    <None Include="wwwroot\images\logoutIcon.png" />
+    <None Include="wwwroot\images\userIcon.png" />
   </ItemGroup>
 
 </Project>

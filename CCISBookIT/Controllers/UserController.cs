@@ -1,6 +1,8 @@
 ﻿using CCISBookIT.Data;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
+using CCISBookIT.Services_and_Interfaces.Services;
+using CCISBookIT.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +14,14 @@ namespace CCISBookIT.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService; // Declare IUserService interface
+        private readonly UserManager<AppUser> _userManager;
+
 
         // Constructor injection of IUserService
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, UserManager<AppUser> userManager)
         {
             _userService = userService;
+            _userManager = userManager;
         }
 
         // GET: User/Index
@@ -24,14 +29,16 @@ namespace CCISBookIT.Controllers
         {
             var users = (await _userService.GetAllUsersAsync()); // Retrieve and sort users by FacultyID
 
-            return View(users); // Pass sorted users to the "Index" view
+            var sortedUsers = users.OrderBy(u => u.FacultyID).ToList(); // Sort users by FacultyID
+
+            return View(sortedUsers); // Pass sorted users to the "Index" view
         }
 
         // GET: User/Detail/{facultyId}
         [HttpGet("User/Detail/{facultyId}")]
         public async Task<IActionResult> Detail(string facultyId)
         {
-            var user = await _userService.GetById(facultyId);
+            var user = await _userManager.FindByFacultyIDAsync(facultyId);
 
             if (user == null)
             {
@@ -45,28 +52,55 @@ namespace CCISBookIT.Controllers
         [HttpGet("User/Edit/{facultyId}")]
         public async Task<IActionResult> Edit(string facultyId)
         {
-            var userDetail = await _userService.GetById(facultyId);
+            var userDetail = await _userManager.FindByFacultyIDAsync(facultyId);
             if (userDetail == null)
             {
                 return NotFound(); // Return 404 if user does not exist
             }
-
-            return View(userDetail); // Pass user details to the "Edit" view
+            var editUserVM = new EditUserViewModel
+            {
+                FacultyID = userDetail.FacultyID,
+                FullName = userDetail.FullName,
+                Email = userDetail.Email,
+                PhoneNumber = userDetail.PhoneNumber
+            };
+            return View(editUserVM); // Pass user details to the "Edit" view
         }
 
         // POST: User/Edit/{facultyId}
         [HttpPost("User/Edit/{facultyId}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string facultyId, [Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] AppUser updatedUser)
+        public async Task<IActionResult> Edit(string facultyId, EditUserViewModel editUserVM)
         {
-            if (!ModelState.IsValid)
+            if (facultyId != editUserVM.FacultyID)
             {
-                return View(updatedUser); // Return the edit view with validation errors
+                return NotFound();
             }
 
-            await _userService.Update(facultyId, updatedUser); // Update user details
-            return RedirectToAction(nameof(Index)); // Redirect to Index action after successful edit
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByFacultyIDAsync(facultyId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.FacultyID = editUserVM.FacultyID;
+                user.FullName = editUserVM.FullName;
+                user.Email = editUserVM.Email;
+                user.PhoneNumber = editUserVM.PhoneNumber;
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Detail", "User", new { id = editUserVM.FacultyID });
+                }
+            }
+
+            return View(editUserVM);
         }
+
+
 
         // GET: User/Create
         public IActionResult Create()
@@ -124,16 +158,8 @@ namespace CCISBookIT.Controllers
             await _userService.Delete(facultyId);
             return RedirectToAction(nameof(Index));
         }
-
-        //public IActionResult DownloadFacultyUsersCsv()
-        //{
-        //    var csvData = _userService.GenerateUsers();
-
-        //    Generate file name with current date
-        //    string fileName = $"FacultyUsers_{DateTime.Now.ToString("yyyyMMdd")}.csv";
-
-        //    Return the CSV file as a FileResult with appropriate headers
-        //    return File(csvData, "text/csv", fileName);
-        //}
     }
 }
+
+
+

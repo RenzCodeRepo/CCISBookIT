@@ -3,6 +3,7 @@ using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using CCISBookIT.Services_and_Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CCISBookIT.Controllers
@@ -10,10 +11,12 @@ namespace CCISBookIT.Controllers
     public class RoomController : Controller
     {
         private readonly IRoomService _roomService;
+        private readonly AppDbContext _context;
 
-        public RoomController(IRoomService roomService)
+        public RoomController(IRoomService roomService, AppDbContext context)
         {
             _roomService = roomService; // Constructor injection
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -58,6 +61,15 @@ namespace CCISBookIT.Controllers
 
             await _roomService.Update(RoomNo, updatedRoom);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportCsv()
+        {
+            var rooms = await _context.Rooms.ToListAsync();
+            var csv = _roomService.GenerateCsvFile(rooms);
+            var fileName = $"RoomsReport_{DateTime.Now:yyyyMMdd}.csv";
+            return File(csv, "text/csv", fileName);
         }
 
     }
