@@ -140,5 +140,28 @@ namespace CCISBookIT.Services_and_Interfaces.Services
 
             await _context.SaveChangesAsync();
         }
+
+        public IEnumerable<Booking> GetUserBookings(string facultyID, string filterDate, string filterStatus, string filterRoomNo)
+        {
+            var bookings = _context.Bookings.Where(b => b.FacultyID == facultyID);
+
+            if (!string.IsNullOrEmpty(filterDate))
+            {
+                var date = DateTime.Parse(filterDate);
+                bookings = bookings.Where(b => b.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(filterStatus))
+            {
+                bookings = bookings.Where(b => b.Status == filterStatus);
+            }
+
+            if (!string.IsNullOrEmpty(filterRoomNo))
+            {
+                bookings = bookings.Where(b => b.RoomNo == filterRoomNo);
+            }
+
+            return bookings.ToList();
+        }
     }
 }

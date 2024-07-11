@@ -6,6 +6,7 @@ namespace CCISBookIT.ViewModels
     {
         [Display(Name = "Faculty ID")]
         [Required(ErrorMessage = "Faculty ID is required.")]
+        [RegularExpression(@"^(CCISF|CCISA)\d{3}$", ErrorMessage = "Faculty ID is invalid.")]
         public string FacultyID { get; set; }
 
         [Display(Name = "Full Name")]

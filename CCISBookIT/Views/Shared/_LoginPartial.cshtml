@@ -21,7 +21,13 @@
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">View Reservations</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Add Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="ViewReservations">View Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="FAQ" asp-action="Index">FAQ</a>
             </li>
         }
 
@@ -31,10 +37,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                    <!-- Modify this link to point to the user's profile detail view -->
-                   <a class="dropdown-item" href="@Url.Action("Detail", "User", new { id = user.FacultyID })">View Profile</a>
-
-                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
+                    <a class="dropdown-item" href="@Url.Action("Detail", "User", new { id = user.FacultyID })">View Profile</a>
+                    <a class="dropdown-item" href="javascript:confirmLogout()">Logout</a>
                 </li>
             </ul>
         </li>
@@ -49,3 +53,11 @@
         </li>
     }
 </ul>
+
+<script type="text/javascript">
+    function confirmLogout() {
+        if (confirm("Are you sure you want to logout?")) {
+            window.location.href = '@Url.Action("Logout", "Account")';
+        }
+    }
+</script>

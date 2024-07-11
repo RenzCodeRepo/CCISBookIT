@@ -2,9 +2,11 @@
 using CCISBookIT.Data.Enum;
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Claims;
 
 namespace CCISBookIT.Controllers
 {
@@ -12,11 +14,15 @@ namespace CCISBookIT.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IRoomService _roomService;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly AppDbContext _context;
 
-        public BookingController(IBookingService bookingService, IRoomService roomService)
+        public BookingController(IBookingService bookingService, IRoomService roomService, UserManager<AppUser> userManager, AppDbContext context)
         {
+            _context = context;
             _bookingService = bookingService;
             _roomService = roomService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(DateTime? filterDate, string filterStatus, string filterRoomNo)
@@ -202,6 +208,19 @@ namespace CCISBookIT.Controllers
                 filters = filters.Substring(0, filters.Length - 1);
 
             return filters;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewReservations()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var userFacultyID = user.FacultyID; // Get the FacultyID from the current user
+
+            var userBookings = await _context.Bookings
+                .Where(b => b.FacultyID == userFacultyID)
+                .ToListAsync();
+
+            return View(userBookings);
         }
     }
 }

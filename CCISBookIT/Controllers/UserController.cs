@@ -27,13 +27,22 @@ namespace CCISBookIT.Controllers
         // GET: User/Index
         public async Task<IActionResult> Index()
         {
-            var users = (await _userService.GetAllUsersAsync()); // Retrieve and sort users by FacultyID
+            var users = await _userService.GetAllUsersAsync();
+            var usersWithoutAdmins = new List<AppUser>();
 
-            var sortedUsers = users.OrderBy(u => u.FacultyID).ToList(); // Sort users by FacultyID
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                if (!roles.Contains("Admin"))
+                {
+                    usersWithoutAdmins.Add(user);
+                }
+            }
+
+            var sortedUsers = usersWithoutAdmins.OrderBy(u => u.FacultyID).ToList(); // Sort users by FacultyID
 
             return View(sortedUsers); // Pass sorted users to the "Index" view
         }
-
         // GET: User/Detail/{facultyId}
         [HttpGet("User/Detail/{facultyId}")]
         public async Task<IActionResult> Detail(string facultyId)
@@ -100,43 +109,6 @@ namespace CCISBookIT.Controllers
             return View(editUserVM);
         }
 
-
-
-        // GET: User/Create
-        public IActionResult Create()
-        {
-            var newUser = new AppUser
-            {
-                /*Role = "Faculty"*/ // Set default role to "Faculty"
-            };
-            return View(newUser); // Return create view with a new user instance
-        }
-
-        // POST: User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FacultyID, FullName, Email, PhoneNumber, PasswordHash, Role")] AppUser user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(user); // Return the create view with validation errors
-            }
-
-            if (await _userService.UserExists(user.FacultyID))
-            {
-                ModelState.AddModelError(string.Empty, $"User with FacultyID '{user.FacultyID}' already exists.");
-                return View(user); // Return the create view with error message if user already exists
-            }
-
-            //if (string.IsNullOrEmpty(user.Role))
-            //{
-            //    user.Role = "Faculty"; // Set default role if not provided
-            //}
-
-            user.PasswordHash = user.PasswordHash; // Hash the user's password
-            await _userService.Add(user); // Add new user asynchronously
-            return RedirectToAction(nameof(Index)); // Redirect to Index action after successful creation
-        }
 
         // GET: User/Delete/{facultyId}
         public async Task<IActionResult> Delete(string facultyId)

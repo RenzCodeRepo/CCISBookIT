@@ -14,6 +14,7 @@ namespace CCISBookIT.Services_and_Interfaces.Interfaces
         Task<List<Booking>> GetFilteredBookingsAsync(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId);
         byte[] GenerateCsvFile(List<Booking> bookings);
         Task UpdateExpiredBookings();
+        IEnumerable<Booking> GetUserBookings(string facultyID, string filterDate, string filterStatus, string filterRoomNo);
     }
 }
 
