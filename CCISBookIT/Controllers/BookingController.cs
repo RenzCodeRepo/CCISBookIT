@@ -19,7 +19,7 @@ namespace CCISBookIT.Controllers
             _roomService = roomService;
         }
 
-        public async Task<IActionResult> Index(DateTime? filterDate, string filterStatus, string filterRoomNo, string filterUserId)
+        public async Task<IActionResult> Index(DateTime? filterDate, string filterStatus, string filterRoomNo)
         {
             await _bookingService.UpdateExpiredBookings();
 
@@ -41,16 +41,10 @@ namespace CCISBookIT.Controllers
                 bookings = bookings.Where(b => b.RoomNo == filterRoomNo);
             }
 
-            if (!string.IsNullOrEmpty(filterUserId))
-            {
-                bookings = bookings.Where(b => b.FacultyID == filterUserId);
-            }
-
             // Pass filters to view via ViewBag or model if needed
             ViewBag.FilterDate = filterDate;
             ViewBag.FilterStatus = filterStatus;
             ViewBag.FilterRoomNo = filterRoomNo;
-            ViewBag.FilterUserId = filterUserId;
 
             return View(bookings.ToList());
         }

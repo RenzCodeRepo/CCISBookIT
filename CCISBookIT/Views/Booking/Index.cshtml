@@ -46,78 +46,116 @@
             </div>
         </form>
 
-        <div class="text-right mb-3">
-            @if (filtersApplied)
-            {
-                <a href="@Url.Action("DownloadBookingsCsv", "Booking", new {
-            filterDate = ViewBag.FilterDate,
-            filterStatus = ViewBag.FilterStatus,
-            filterRoomNo = ViewBag.FilterRoomNo,
-        })" class="btn btn-success">Download CSV</a>
-            }
-            else
-            {
-                <a href="@Url.Action("DownloadBookingsCsv", "Booking")" class="btn btn-success">Download CSV</a>
-            }
-        </div>
-
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().BookingId)</th>
-                    <th>Date</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().StartTime)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Duration)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().EndTime)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Purpose)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Status)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNo)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FacultyID)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="text-right mb-3">
+                @if (filtersApplied)
                 {
-                    <tr class="text-center">
-                        <!-- Other columns -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.BookingId)</td>
-                        <td class="align-middle">@item.Date.ToString("MM/dd/yyyy")</td> <!-- Format Date as MM/dd/yyyy -->
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.StartTime)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Duration)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.EndTime)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
-                        <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyID)</td>
-                        <td class="align-middle">
-                            @if (item.Status == "Expired" || item.Status == "Cancelled")
-                            {
-                                <button type="button" class="btn btn-secondary" disabled>
-                                    @if (item.Status == "Expired")
-                                    {
-                                        <span>Expired</span>
-                                    }
-                                    else if (item.Status == "Cancelled")
-                                    {
-                                        <span>Cancelled</span>
-                                    }
-                                </button>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
-                                    <i class="bi bi-x-circle"></i> Cancel <!-- Cancel button with icon -->
-                                </a>
-                            }
-                            <!-- Details button -->
-                            <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
-                                <i class="bi bi-info-circle"></i> Details <!-- Details button with icon -->
-                            </a>
-                        </td>
-                    </tr>
+                    <a href="@Url.Action("DownloadBookingsCsv", "Booking", new {
+                        filterDate = ViewBag.FilterDate,
+                        filterStatus = ViewBag.FilterStatus,
+                        filterRoomNo = ViewBag.FilterRoomNo,
+                    })" class="btn btn-success">Download CSV</a>
                 }
-            </tbody>
-        </table>
+                else
+                {
+                    <a href="@Url.Action("DownloadBookingsCsv", "Booking")" class="btn btn-success">Download CSV</a>
+                }
+            </div>
+
+            <h3>All Bookings</h3>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().BookingId)</th>
+                        <th>Date</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().StartTime)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Duration)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().EndTime)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Purpose)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Status)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNo)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FacultyID)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.BookingId)</td>
+                            <td class="align-middle">@item.Date.ToString("MM/dd/yyyy")</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.StartTime)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Duration)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.EndTime)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyID)</td>
+                            <td class="align-middle">
+                                @if (item.Status == "Active")
+                                {
+                                    <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </a>
+                                }
+                                <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
+                                    <i class="bi bi-info-circle"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if (User.IsInRole("Faculty"))
+        {
+            <h3>My Bookings</h3>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().BookingId)</th>
+                        <th>Date</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().StartTime)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Duration)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().EndTime)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Purpose)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Status)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNo)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(u => u.FacultyID == User.Identity.Name))
+                    {
+                        <tr class="text-center">
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.BookingId)</td>
+                            <td class="align-middle">@item.Date.ToString("MM/dd/yyyy")</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.StartTime)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Duration)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.EndTime)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Purpose)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
+                            <td class="align-middle">
+                                @if (item.Status == "Active")
+                                {
+                                    <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </a>
+                                }
+                                <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
+                                    <i class="bi bi-info-circle"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>You are not authorized to view this page.</p>
+        }
     </div>
 </div>
