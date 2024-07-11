@@ -45,7 +45,24 @@
                 </div>
             </div>
         </form>
-
+        @if (filtersApplied)
+        {
+            <div class="alert alert-info" role="alert">
+                Filters Applied:
+                @if (!string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()))
+                {
+                    <span class="badge bg-secondary">Date: @ViewBag.FilterDate?.ToString("MM/dd/yyyy")</span>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()))
+                {
+                    <span class="badge bg-secondary">Status: @ViewBag.FilterStatus</span>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString()))
+                {
+                    <span class="badge bg-secondary">Room: @ViewBag.FilterRoomNo</span>
+                }
+            </div>
+        }
         @if (User.IsInRole("Admin"))
         {
             <div class="text-right mb-3">
