@@ -3,6 +3,7 @@ using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using CCISBookIT.Services_and_Interfaces.Services;
 using CCISBookIT.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace CCISBookIT.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles ="Admin")]
         // GET: User/Index
         public async Task<IActionResult> Index()
         {
@@ -43,6 +45,8 @@ namespace CCISBookIT.Controllers
 
             return View(sortedUsers); // Pass sorted users to the "Index" view
         }
+
+        [Authorize]
         // GET: User/Detail/{facultyId}
         [HttpGet("User/Detail/{facultyId}")]
         public async Task<IActionResult> Detail(string facultyId)
@@ -65,6 +69,7 @@ namespace CCISBookIT.Controllers
             return View(model); // Pass user details to the "Detail" view
         }
 
+        [Authorize]
         // GET: User/Edit/{facultyId}
         [HttpGet("User/Edit/{facultyId}")]
         public async Task<IActionResult> Edit(string facultyId)
@@ -84,6 +89,7 @@ namespace CCISBookIT.Controllers
             return View(editUserVM); // Pass user details to the "Edit" view
         }
 
+        [Authorize]
         // POST: User/Edit/{facultyId}
         [HttpPost("User/Edit/{facultyId}")]
         [ValidateAntiForgeryToken]
@@ -117,7 +123,7 @@ namespace CCISBookIT.Controllers
             return View(editUserVM);
         }
 
-
+        [Authorize]
         // GET: User/Delete/{facultyId}
         public async Task<IActionResult> Delete(string facultyId)
         {
@@ -130,6 +136,7 @@ namespace CCISBookIT.Controllers
             return View(user); // Pass user details to the "Delete" view
         }
 
+        [Authorize] 
         // POST: User/DeleteConfirmed/{facultyId}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

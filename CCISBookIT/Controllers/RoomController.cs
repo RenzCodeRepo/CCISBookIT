@@ -2,6 +2,7 @@
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using CCISBookIT.Services_and_Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CCISBookIT.Controllers
             _roomService = roomService; // Constructor injection
             _context = context;
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var rooms = await _roomService.GetAll(); // Retrieve all rooms asynchronously
@@ -26,6 +27,7 @@ namespace CCISBookIT.Controllers
             return View(rooms); // Pass rooms to the "Index" view
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Room/Detail/{RoomNo}")]
         public async Task<IActionResult> Detail(string RoomNo)
         {
@@ -39,6 +41,7 @@ namespace CCISBookIT.Controllers
             return View(room); // Pass user details to the "Detail" view
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Room/Edit/{RoomNo}")]
         public async Task<IActionResult> Edit(string RoomNo)
         {
@@ -50,6 +53,7 @@ namespace CCISBookIT.Controllers
             return View(roomNo);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Room/Edit/{RoomNo}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string RoomNo,[Bind("RoomNo, RoomType")] Room updatedRoom)
@@ -63,6 +67,7 @@ namespace CCISBookIT.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ExportCsv()
         {

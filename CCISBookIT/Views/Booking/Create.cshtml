@@ -12,19 +12,19 @@
 
     <div class="form-group">
         <label asp-for="StartTime"></label>
-        <input asp-for="StartTime" type="time" class="form-control" />
+        <input asp-for="StartTime" id="StartTime" type="time" class="form-control" />
         <span asp-validation-for="StartTime" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Duration"></label>
-        <input asp-for="Duration" type="number" step="0.1" class="form-control" />
+        <input asp-for="Duration" id="Duration" type="number" step="0.1" class="form-control" />
         <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="EndTime"></label>
-        <input asp-for="EndTime" class="form-control" readonly />
+        <input asp-for="EndTime" id="EndTime" class="form-control" readonly />
     </div>
 
     <div class="form-group">
@@ -35,7 +35,13 @@
 
     <div class="form-group">
         <label asp-for="RoomNo"></label>
-        <input asp-for="RoomNo" class="form-control" />
+        <select asp-for="RoomNo" class="form-control">
+            <option value="">Select Room Number</option>
+            @foreach (var roomNumber in new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" })
+            {
+                <option value="@roomNumber">@roomNumber</option>
+            }
+        </select>
         <span asp-validation-for="RoomNo" class="text-danger"></span>
     </div>
 
