@@ -102,9 +102,13 @@ namespace CCISBookIT.Controllers
         // GET: /Booking/Create
         public async Task<IActionResult> Create()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Assuming you're using Identity
+            var user = await _userManager.FindByIdAsync(userId);
+
             var newBooking = new Booking
             {
-                Status = "Active" // Set default role to "Faculty"
+                FacultyID = user.FacultyID,  // Set FacultyID based on the current user
+                Status = "Active" // Set default status to "Active"
             };
             return View(newBooking); // Return create view with a new user instance;
         }
@@ -127,7 +131,7 @@ namespace CCISBookIT.Controllers
 
             if (existingBooking)
             {
-                ModelState.AddModelError(string.Empty, "The same booking already exists. Please modify the booking details."); //applied in general not for each user
+                ModelState.AddModelError(string.Empty, "The same booking already exists. Please modify the booking details.");
                 return View(model);
             }
 
@@ -160,13 +164,13 @@ namespace CCISBookIT.Controllers
                     Purpose = model.Purpose,
                     Status = model.Status,
                     RoomNo = model.RoomNo,
-                    FacultyID = model.FacultyID 
+                    FacultyID = model.FacultyID // Ensure FacultyID is set correctly
                 };
 
                 // Add booking to the context and save changes
                 await _bookingService.Add(booking);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ViewReservations", "Booking");
             }
 
             // If ModelState is not valid, return the form with errors

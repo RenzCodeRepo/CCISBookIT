@@ -93,12 +93,7 @@
                             <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
                             <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyID)</td>
                             <td class="align-middle">
-                                @if (item.Status == "Active")
-                                {
-                                    <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
-                                        <i class="bi bi-x-circle"></i> Cancel
-                                    </a>
-                                }
+                               
                                 <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
                                     <i class="bi bi-info-circle"></i> Details
                                 </a>

@@ -39,13 +39,12 @@
         <span asp-validation-for="RoomNo" class="text-danger"></span>
     </div>
 
+    <!-- Ensure FacultyID is set as a hidden field -->
     <div class="form-group">
-        <label asp-for="FacultyID"></label>
-        <input asp-for="FacultyID" class="form-control" />
+        <input asp-for="FacultyID" type="hidden" class="form-control" />
         <span asp-validation-for="FacultyID" class="text-danger"></span>
     </div>
 
-    
     <button type="submit" class="btn btn-primary">Create Booking</button>
 </form>
 
