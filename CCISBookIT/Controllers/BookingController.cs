@@ -243,8 +243,16 @@ namespace CCISBookIT.Controllers
                 userBookings = userBookings.Where(b => b.RoomNo == filterRoomNo);
             }
 
-            // Execute the query and retrieve filtered bookings
+            // Order by date, newest first
+            userBookings = userBookings.OrderByDescending(b => b.Date);
+
+            // Execute the query and retrieve filtered and ordered bookings
             var filteredBookings = await userBookings.ToListAsync();
+
+            // Pass filter values to the view for display
+            ViewBag.FilterDate = filterDate;
+            ViewBag.FilterStatus = filterStatus;
+            ViewBag.FilterRoomNo = filterRoomNo;
 
             return View(filteredBookings);
         }
