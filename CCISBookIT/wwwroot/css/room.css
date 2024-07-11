@@ -1,0 +1,85 @@
+﻿
+
+body {
+    background-image: url('/images/backgroundIMG.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    margin-top: 20px; 
+
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow: hidden; 
+    border-radius: 10px;
+
+ 
+}
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+    .table th {
+        background-color: maroon;
+        color: white;
+        font-weight: bold;
+
+
+    }
+
+    .table td {
+        vertical-align: middle;
+        
+    }
+
+.btn-primary {
+    background-color: maroon;
+    border-color: maroon;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: red;
+        border-color: red;
+    }
+
+
+.download-btn { /*Download Report Button*/
+    position: absolute;
+    bottom: 20px; 
+    right: 50px; 
+    text-align: center;
+    color: #fff; 
+    background: maroon;
+    border-radius: 10px;
+    border-color: white;
+    padding: 10px;
+}
+
+
+.btn-info{ /*Detail Button*/
+    color: black;
+    background-color: goldenrod;
+    border-color: black;
+}
+
+h1 { /*List Of Rooms*/
+    text-align: center;
+    color: #fff;
+    background-color: rgba(128, 0, 0, 1);
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 8px 20px;
+    font-size: 30px;
+    width: fit-content;
+    margin: 20px auto;
+}

@@ -3,13 +3,17 @@
 @{
     ViewData["Title"] = "List of Rooms";
 }
+<link rel="stylesheet" href="~/css/room.css" />
 
-<div class="row">
+<div class="container">
+    <h1>@ViewData["Title"]</h1> <!-- Display the title of the page -->
+</div>
+
+<div class="table-container">
     <div class="col-md-8 offset-md-2">
-        <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
+        <a class="btn btn-primary download-btn" asp-action="ExportCsv">Download Report</a>
 
         <table class="table">
-            <a class="btn btn-primary" asp-action="ExportCsv" >Download Report</a>
             <thead>
                 <tr class="text-center">
                     <th>@Html.DisplayNameFor(model => model.RoomNo)</th> <!-- Display header for RoomNo -->
@@ -18,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model) @* <!-- Loop through each room in the model --> *@
+                @foreach (var item in Model)
                 {
                     <tr class="text-center">
                         <td class="align-middle">
