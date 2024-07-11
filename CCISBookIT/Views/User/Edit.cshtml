@@ -30,6 +30,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button> <!-- Save button to submit the form -->
-</form>
 
-<a asp-action="Detail" asp-controller="User" class="btn btn-primary">Cancel</a>
+    <a asp-action="Detail" asp-controller="User" asp-route-id="@Model.FacultyID" class="btn btn-primary">Cancel</a>
+</form>
