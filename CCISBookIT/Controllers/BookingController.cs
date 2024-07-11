@@ -215,16 +215,39 @@ namespace CCISBookIT.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewReservations()
+        public async Task<IActionResult> ViewReservations(string filterDate, string filterStatus, string filterRoomNo)
         {
             var user = await _userManager.GetUserAsync(User);
             var userFacultyID = user.FacultyID; // Get the FacultyID from the current user
 
-            var userBookings = await _context.Bookings
-                .Where(b => b.FacultyID == userFacultyID)
-                .ToListAsync();
+            // Start with all bookings for the current user
+            var userBookings = _context.Bookings
+                .Where(b => b.FacultyID == userFacultyID);
 
-            return View(userBookings);
+            // Apply filters
+            if (!string.IsNullOrEmpty(filterDate))
+            {
+                if (DateTime.TryParse(filterDate, out var parsedDate))
+                {
+                    userBookings = userBookings.Where(b => b.Date.Date == parsedDate.Date);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(filterStatus))
+            {
+                userBookings = userBookings.Where(b => b.Status == filterStatus);
+            }
+
+            if (!string.IsNullOrEmpty(filterRoomNo))
+            {
+                userBookings = userBookings.Where(b => b.RoomNo == filterRoomNo);
+            }
+
+            // Execute the query and retrieve filtered bookings
+            var filteredBookings = await userBookings.ToListAsync();
+
+            return View(filteredBookings);
         }
+
     }
 }

@@ -3,13 +3,16 @@
 @{
     ViewData["Title"] = "My Reservations";
     var roomNumbers = new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" }; // Room numbers from your image
+    bool filtersApplied = !string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
+                           !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
+                           !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString());
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>@ViewData["Title"]</h2>
 
-        <form asp-action="ViewReservation" asp-controller="Booking" method="get">
+        <form asp-action="ViewReservations" asp-controller="Booking" method="get">
             <div class="row mb-3">
                 <div class="col">
                     <label for="filterDate" class="form-label">Filter by Date:</label>
@@ -40,6 +43,25 @@
                 </div>
             </div>
         </form>
+
+        @if (filtersApplied)
+        {
+            <div class="alert alert-info" role="alert">
+                Filters Applied:
+                @if (!string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()))
+                {
+                    <span class="badge bg-secondary">Date: @ViewBag.FilterDate?.ToString("MM/dd/yyyy")</span>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()))
+                {
+                    <span class="badge bg-secondary">Status: @ViewBag.FilterStatus</span>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString()))
+                {
+                    <span class="badge bg-secondary">Room: @ViewBag.FilterRoomNo</span>
+                }
+            </div>
+        }
 
         <h3>My Bookings</h3>
         <table class="table">
