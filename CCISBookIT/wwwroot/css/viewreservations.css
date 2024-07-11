@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('/images/backgroundIMG.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #800000;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    background: rgb(236, 233, 233);
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+    .table thead {
+        background-color: #800000;
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #800000;
+    border-color: #800000;
+}
+
+    .btn-primary:hover {
+        background-color: #600000;
+        border-color: #600000;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+.btn-info {
+    background-color: maroon;
+    border-color: black;
+    color: white;
+}
+
+    .btn-info:hover {
+        background-color: red;
+        border-color: black;
+    }
+
+.btn-success {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    text-align: center;
+    color: #fff;
+    background: green;
+    border-radius: 10px;
+    border-color: white;
+    padding: 10px;
+}
+
+    .btn-success:hover {
+        background-color: lightgreen;
+        border-color: #1e7e34;
+    }
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #800000;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
