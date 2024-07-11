@@ -1,29 +1,45 @@
-﻿@model CCISBookIT.Models.AppUser // Specifies that the model for this view is of type User
+﻿@model AppUser
 
 @{
-    ViewData["Title"] = "Delete User"; // Sets the title of the view
+    ViewData["Title"] = "Delete User";
 }
 
-<h1>Delete User</h1> <!-- Main heading -->
-<h3>Are you sure you want to delete this user?</h3> <!-- Subheading -->
+<h1>Delete User</h1>
 
+<h3>Are you sure you want to delete this user?</h3>
 <div>
-    <h4>@Model.UserName</h4> <!-- Displays the full name of the user -->
-    <hr /> <!-- Horizontal line for separation -->
-
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email) <!-- Displays a label for the Email property -->
+    <h4>@Model.FullName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FacultyID)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email) <!-- Displays the email address of the user -->
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FacultyID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
 
-    <form asp-action="Delete" method="post">
-        <!-- Form to submit the deletion action -->
-        <input type="hidden" asp-for="FacultyID" /> <!-- Hidden field to store the FacultyID of the user to be deleted -->
-        <input type="submit" value="Delete" class="btn btn-danger" /> <!-- Delete button -->
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a> <!-- Cancel button to go back to the Index page -->
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="FacultyID" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Detail" asp-route-id="@Model.FacultyID" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

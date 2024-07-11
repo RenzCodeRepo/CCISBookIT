@@ -1,4 +1,4 @@
-﻿@model AppUser // Specifies that the model for this view is of type User
+﻿@model CCISBookIT.ViewModels.UserDetailViewModel // Specifies that the model for this view is of type UserDetailViewModel
 
 @{
     ViewData["Title"] = "User Details"; // Sets the title of the view
@@ -8,24 +8,28 @@
 
 <table class="table">
     <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.FacultyID)</strong></td>
-        <td>@Html.DisplayFor(model => model.FacultyID)</td>
+        <td><strong>@Html.DisplayNameFor(model => model.User.FacultyID)</strong></td>
+        <td>@Html.DisplayFor(model => model.User.FacultyID)</td>
     </tr>
     <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.FullName)</strong></td>
-        <td>@Html.DisplayFor(model => model.FullName)</td>
+        <td><strong>@Html.DisplayNameFor(model => model.User.FullName)</strong></td>
+        <td>@Html.DisplayFor(model => model.User.FullName)</td>
     </tr>
     <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
-        <td>@Html.DisplayFor(model => model.Email)</td>
+        <td><strong>@Html.DisplayNameFor(model => model.User.Email)</strong></td>
+        <td>@Html.DisplayFor(model => model.User.Email)</td>
     </tr>
     <tr>
-        <td><strong>@Html.DisplayNameFor(model => model.PhoneNumber)</strong></td>
-        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+        <td><strong>@Html.DisplayNameFor(model => model.User.PhoneNumber)</strong></td>
+        <td>@Html.DisplayFor(model => model.User.PhoneNumber)</td>
     </tr>
 </table>
 
 <div class="mb-3">
     <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Close</a> <!-- Button/link to navigate back to the list of users -->
-    <a asp-action="Edit" asp-controller="User" asp-route-id="@Model.FacultyID" class="btn btn-success">Edit Profile</a> <!-- Edit button/link -->
+    <a asp-action="Edit" asp-controller="User" asp-route-id="@Model.User.FacultyID" class="btn btn-success">Edit Profile</a> <!-- Edit button/link -->
+    @if (!Model.IsAdmin)
+    {
+        <a asp-action="Delete" asp-controller="User" asp-route-facultyId="@Model.User.FacultyID" class="btn btn-danger">Delete</a> <!-- Delete button/link -->
+    }
 </div>

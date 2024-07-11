@@ -54,7 +54,15 @@ namespace CCISBookIT.Controllers
                 return NotFound(); // Return 404 if user does not exist
             }
 
-            return View(user); // Pass user details to the "Detail" view
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+            var model = new UserDetailViewModel
+            {
+                User = user,
+                IsAdmin = isAdmin
+            };
+
+            return View(model); // Pass user details to the "Detail" view
         }
 
         // GET: User/Edit/{facultyId}
@@ -113,7 +121,7 @@ namespace CCISBookIT.Controllers
         // GET: User/Delete/{facultyId}
         public async Task<IActionResult> Delete(string facultyId)
         {
-            var user = await _userService.GetById(facultyId);
+            var user = await _userManager.FindByFacultyIDAsync(facultyId);
             if (user == null)
             {
                 return NotFound(); // Return 404 if user does not exist
@@ -127,6 +135,10 @@ namespace CCISBookIT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string facultyId)
         {
+            if (string.IsNullOrEmpty(facultyId))
+            {
+                return NotFound(); // Return 404 if facultyId is null or empty
+            }
             await _userService.Delete(facultyId);
             return RedirectToAction(nameof(Index));
         }
