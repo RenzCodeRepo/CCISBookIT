@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CCISBookIT.Controllers
@@ -149,6 +150,29 @@ namespace CCISBookIT.Controllers
             await _userService.Delete(facultyId);
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "Admin")]
+        // Action to download users as CSV with current date in file name
+        public async Task<IActionResult> DownloadFacultyUsersCsv()
+        {
+            var users = await _userService.GetAllUsersAsync();
+
+            // Prepare CSV content
+            StringBuilder csvContent = new StringBuilder();
+            csvContent.AppendLine("FacultyID,FullName,Email,PhoneNumber");
+
+            foreach (var user in users)
+            {
+                csvContent.AppendLine($"{user.FacultyID},{user.FullName},{user.Email},{user.PhoneNumber}");
+            }
+
+            // Prepare file name with current date
+            string fileName = $"users_{DateTime.Now:yyyyMMdd}.csv";
+
+            // Prepare and return the CSV file as a downloadable file
+            byte[] buffer = Encoding.UTF8.GetBytes(csvContent.ToString());
+            return File(buffer, "text/csv", fileName);
+        }
+
     }
 }
 

@@ -2,6 +2,7 @@
 using CCISBookIT.Models;
 using CCISBookIT.Services_and_Interfaces.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace CCISBookIT.Services_and_Interfaces.Services
             {
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
-            }   
+            }
         }
 
 

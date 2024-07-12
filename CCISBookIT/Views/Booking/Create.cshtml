@@ -1,58 +1,139 @@
 ﻿@model Booking
 
-<form asp-action="Create" method="post">
+@section Styles {
+    <link rel="stylesheet" href="/css/Create.css" />
+    <link rel="stylesheet" href="/css/Map.css" />
+}
+
+<form class="reserve-container" asp-action="Create" method="post">
     <!-- Display validation summary -->
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Date"></label>
-        <input asp-for="Date" type="date" class="form-control" />
-        <span asp-validation-for="Date" class="text-danger"></span>
-    </div>
+    <h2>RESERVE A ROOM</h2>
+    <div class="form-and-map-container">
+        <div class="form-container">
+            <div class="form-group">
+                <label asp-for="Date" class="custom-label"></label>
+                <input asp-for="Date" type="date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="StartTime"></label>
-        <input asp-for="StartTime" id="StartTime" type="time" class="form-control" />
-        <span asp-validation-for="StartTime" class="text-danger"></span>
-    </div>
+            <div class="time-container">
+                <div class="time-field form-group">
+                    <label asp-for="StartTime" class="custom-label"></label>
+                    <input asp-for="StartTime" id="StartTime" type="time" class="form-control" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+                <div class="time-field form-group">
+                    <label asp-for="EndTime" class="custom-label"></label>
+                    <input asp-for="EndTime" id="EndTime" class="form-control" readonly />
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Duration"></label>
-        <input asp-for="Duration" id="Duration" type="number" step="0.1" class="form-control" />
-        <span asp-validation-for="Duration" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="custom-label"></label>
+                <input asp-for="Duration" id="Duration" type="number" step="0.1" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="EndTime"></label>
-        <input asp-for="EndTime" id="EndTime" class="form-control" readonly />
-    </div>
+            <div class="form-group">
+                <label asp-for="Purpose" class="custom-label"></label>
+                <input asp-for="Purpose" class="form-control" />
+                <span asp-validation-for="Purpose" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Purpose"></label>
-        <input asp-for="Purpose" class="form-control" />
-        <span asp-validation-for="Purpose" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="RoomNo" class="custom-label"></label>
+                <select asp-for="RoomNo" class="form-control">
+                    <option value="">Select Room Number</option>
+                    @foreach (var roomNumber in new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" })
+                    {
+                        <option value="@roomNumber">@roomNumber</option>
+                    }
+                </select>
+                <span asp-validation-for="RoomNo" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="RoomNo"></label>
-        <select asp-for="RoomNo" class="form-control">
-            <option value="">Select Room Number</option>
-            @foreach (var roomNumber in new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" })
-            {
-                <option value="@roomNumber">@roomNumber</option>
-            }
-        </select>
-        <span asp-validation-for="RoomNo" class="text-danger"></span>
-    </div>
+            <!-- Ensure FacultyID is set as a hidden field -->
+            <div class="form-group">
+                <input asp-for="FacultyID" type="hidden" class="form-control" />
+                <span asp-validation-for="FacultyID" class="text-danger"></span>
+            </div>
 
-    <!-- Ensure FacultyID is set as a hidden field -->
-    <div class="form-group">
-        <input asp-for="FacultyID" type="hidden" class="form-control" />
-        <span asp-validation-for="FacultyID" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create Booking</button>
+            <div class="form-buttons">
+                <a asp-action="Index" asp-controller="Home" class="cancel">Close</a>
+                <button type="submit" class="reserve">Create Booking</button>
+            </div>
 </form>
+
+        </div>
+
+<!-- Placeholder for the map or any content on the right side -->
+<div class="map">
+    <div class="map-container">
+        <!-- Rectangle and Buttons for S501-3 -->
+        <div class="rectangle_S501-3"></div>
+        <div class="button_S501-3 laboratory" style="top: 63px;">S503</div>
+        <div class="button_S501-3 laboratory" style="top: 105px;">S502</div>
+        <div class="button_S501-3 laboratory" style="top: 147px">S501</div>
+
+        <!-- Rectangle and Buttons for S504-6 -->
+        <div class="rectangle_S504-6"></div>
+        <div class="button_S504-6 lecture" style="width: 50px; left: 190px;">S504</div>
+        <div class="button_S504-6 laboratory" style="width: 60px; left: 115px;">S505</div>
+        <div class="button_S504-6 faculty" style="width: 60px; left: 40px;">S506</div>
+
+        <!-- Rectangle and Buttons for S507-12B -->
+        <div class="rectangle_S507-12B"></div>
+        <div class="button_S507-12B office" style="height: 28px; top: 60px;">S507</div>
+        <div class="button_S507-12B laboratory" style="height: 28px; top: 100px;">S508</div>
+        <div class="unavailable" style="height: 28px; top: 140px;">S509</div>
+        <div class="button_S507-12B laboratory" style="height: 28px; top: 180px;">S510</div>
+        <div class="button_S507-12B laboratory" style="height: 28px; top: 220px;">S511</div>
+        <div class="stockRoom" style="height: 28px; top: 260px;">S512A</div>
+        <div class="stockRoom" style="height: 28px; top: 300px;">S512B</div>
+        <div class="button_S507-12B chairperson" style="height: 40px; top: 340px;">S512</div>
+
+        <!-- Rectangle and Buttons for S513-15 -->
+        <div class="rectangle_S513-15"></div>
+        <div class="button_S513-15 chairperson" style="width: 50px; left: 190px;">S515</div>
+        <div class="button_S513-15 faculty" style="width: 60px; left: 115px;">S514</div>
+        <div class="button_S513-15 faculty" style="width: 60px; left: 40px;">S513</div>
+
+        <!-- Rectangle and Buttons for S516-18 -->
+        <div class="rectangle_S516-18"></div>
+        <div class="button_S516-18 office" style="top: 265px;">S516</div>
+        <div class="button_S516-18 faculty" style="top: 308px;">S517</div>
+        <div class="button_S516-18 faculty" style="top: 350px;">S518</div>
+
+        <div class="rectangle_bridge"></div>
+
+        <!-- Other elements -->
+        <img src="/images/emergencyExit.png" class="exiticon" style="top: 8px;">
+        <img src="/images/emergencyExit.png" class="exiticon" style="top: 410px;">
+
+        <img src="/images/stairsIcon.png" class="stairsIcon" style="top: 65px;">
+        <img src="/images/stairsIcon.png" class="stairsIcon" style="top: 180px;">
+        <img src="/images/stairsIcon.png" class="stairsIcon" style="top: 355px;">
+
+        <div class="text-block" style="top: 95px;"></div>
+        <div class="text-block" style="top: 270px;"></div>
+
+        <img src="/images/restroomIcon.png" class="restroomIcon" style="top: 65px;">
+        <img src="/images/restroomIcon.png" class="restroomIcon" style="top: 355px;">
+
+        <img src="/images/elevatorIcon.png" class="elevatorIcon">
+
+        <div class="bg-block" style="top: 60px; left: 105px;"></div>
+        <div class="bg-block" style="top: 60px; left: 139px;"></div>
+        <div class="bg-block" style="top: 175px; left: 105px;"></div>
+        <div class="bg-block" style="top: 175px; left: 139px;"></div>
+        <div class="bg-block" style="top: 350px; left: 105px;"></div>
+        <div class="bg-block" style="top: 350px; left: 139px;"></div>
+
+    </div>
+</div>
+    </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

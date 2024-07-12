@@ -2,68 +2,66 @@
 
 @{
     ViewData["Title"] = "List of Bookings";
-    var roomNumbers = new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" }; // Room numbers from your image
+    var roomNumbers = new List<string> { "S501", "S502", "S503", "S504", "S505", "S508", "S510", "S511" };
 
-    // Check if any filter is applied
     bool filtersApplied = !string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
                            !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
                            !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString());
 }
 
-<div class="row">
-    <div class="col-md-12 offset-md-0">
-        <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
+@section Styles{
+    <link rel="stylesheet" href="/css/viewbookings.css" />
+}
 
-        <form asp-action="Index" asp-controller="Booking" method="get">
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="filterDate" class="form-label">Filter by Date:</label>
-                    <input type="date" id="filterDate" name="filterDate" class="form-control" value="@ViewBag.FilterDate?.ToString("yyyy-MM-dd")" />
-                </div>
-                <div class="col">
-                    <label for="filterStatus" class="form-label">Filter by Status:</label>
-                    <select id="filterStatus" name="filterStatus" class="form-control">
-                        <option value="">All</option>
-                        <option value="Active">Active</option>
-                        <option value="Expired">Expired</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
-                </div>
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
 
-                <div class="col">
-                    <label for="filterRoomNo" class="form-label">Filter by Room:</label>
-                    <select id="filterRoomNo" name="filterRoomNo" class="form-control">
-                        <option value="">All</option>
-                        @foreach (var room in roomNumbers)
-                        {
-                            <option value="@room">@room</option>
-                        }
-                    </select>
-                </div>
-                <div class="col align-self-end">
-                    <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
-                </div>
+    <form asp-action="Index" asp-controller="Booking" method="get">
+        <div class="row mb-3">
+            <div class="col">
+                <label for="filterDate" class="form-label">Filter by Date:</label>
+                <input type="date" id="filterDate" name="filterDate" class="form-control" value="@ViewBag.FilterDate?.ToString("yyyy-MM-dd")" />
             </div>
-        </form>
-
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="text-right mb-3">
-                @if (filtersApplied)
-                {
-                    <a href="@Url.Action("DownloadBookingsCsv", "Booking", new {
-                        filterDate = ViewBag.FilterDate,
-                        filterStatus = ViewBag.FilterStatus,
-                        filterRoomNo = ViewBag.FilterRoomNo,
-                    })" class="btn btn-success">Download CSV</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("DownloadBookingsCsv", "Booking")" class="btn btn-success">Download CSV</a>
-                }
+            <div class="col">
+                <label for="filterStatus" class="form-label">Filter by Status:</label>
+                <select id="filterStatus" name="filterStatus" class="form-control">
+                    <option value="">All</option>
+                    <option value="Active">Active</option>
+                    <option value="Expired">Expired</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
             </div>
+            <div class="col">
+                <label for="filterRoomNo" class="form-label">Filter by Room:</label>
+                <select id="filterRoomNo" name="filterRoomNo" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var room in roomNumbers)
+                    {
+                        <option value="@room">@room</option>
+                    }
+                </select>
+            </div>
+            <div class="col align-self-end">
+                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+            </div>
+        </div>
+    </form>
 
-            <h3>All Bookings</h3>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="text-right mb-3">
+            @if (filtersApplied)
+            {
+                <a href="@Url.Action("DownloadBookingsCsv", "Booking", new { filterDate = ViewBag.FilterDate, filterStatus = ViewBag.FilterStatus, filterRoomNo = ViewBag.FilterRoomNo })" class="btn btn-success">Download CSV</a>
+            }
+            else
+            {
+                <a href="@Url.Action("DownloadBookingsCsv", "Booking")" class="btn btn-success">Download CSV</a>
+            }
+        </div>
+
+        <h3>All Bookings</h3>
+        <div class="table-container">
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -93,7 +91,12 @@
                             <td class="align-middle">@Html.DisplayFor(modelItem => item.RoomNo)</td>
                             <td class="align-middle">@Html.DisplayFor(modelItem => item.FacultyID)</td>
                             <td class="align-middle">
-                               
+                                @if (item.Status == "Active")
+                                {
+                                    <a href="@Url.Action("CancelConfirmation", "Booking", new { BookingId = item.BookingId })" class="btn btn-danger">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </a>
+                                }
                                 <a href="@Url.Action("Detail", "Booking", new { BookingId = item.BookingId })" class="btn btn-info">
                                     <i class="bi bi-info-circle"></i> Details
                                 </a>
@@ -102,10 +105,12 @@
                     }
                 </tbody>
             </table>
-        }
-        else if (User.IsInRole("Faculty"))
-        {
-            <h3>My Bookings</h3>
+        </div>
+    }
+    else if (User.IsInRole("Faculty"))
+    {
+        <h3>My Bookings</h3>
+        <div class="table-container">
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -147,10 +152,10 @@
                     }
                 </tbody>
             </table>
-        }
-        else
-        {
-            <p>You are not authorized to view this page.</p>
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <p>You are not authorized to view this page.</p>
+    }
 </div>

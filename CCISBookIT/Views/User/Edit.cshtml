@@ -1,36 +1,50 @@
-﻿@model CCISBookIT.ViewModels.EditUserViewModel // Specifies that the model for this view is of type User
+﻿@model CCISBookIT.ViewModels.EditUserViewModel
 
 @{
-    ViewData["Title"] = "Edit User"; // Sets the title of the view
+    ViewData["Title"] = "Edit User";
+}
+@section Styles {
+    <link rel="stylesheet" href="/css/ProfileEdit.css" />
 }
 
-<h2>Edit Profile</h2> <!-- Main heading -->
+<div class="background-container">
+    <div class="edit-container">
+        <h2>Edit Profile</h2>
 
-<form asp-action="Edit" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Validation summary for model errors -->
 
-    <div class="form-group">
-        <label asp-for="FacultyID"></label> <!-- Label for FacultyID -->
-        <input asp-for="FacultyID" class="form-control" readonly /> <!-- Readonly input field for FacultyID -->
+
+        <div class="form-container">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Validation summary for model errors -->
+
+                <div class="form-group">
+                    <label asp-for="FacultyID"></label> <!-- Label for FacultyID -->
+                    <input asp-for="FacultyID" class="form-control" readonly /> <!-- Readonly input field for FacultyID -->
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FullName"></label> <!-- Label for FullName -->
+                    <input asp-for="FullName" class="form-control" /> <!-- Input field for FullName -->
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email"></label> <!-- Label for Email -->
+                    <input asp-for="Email" class="form-control" /> <!-- Input field for Email -->
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber"></label> <!-- Label for PhoneNumber -->
+                    <input asp-for="PhoneNumber" class="form-control" /> <!-- Input field for PhoneNumber -->
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="save">Save</button> <!-- Save button to submit the form -->
+                    <button>
+                        <a asp-action="Detail" asp-controller="User" asp-route-id="@Model.FacultyID" class="cancel">Cancel</a>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="FullName"></label> <!-- Label for FullName -->
-        <input asp-for="FullName" class="form-control" /> <!-- Input field for FullName -->
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email"></label> <!-- Label for Email -->
-        <input asp-for="Email" class="form-control" /> <!-- Input field for Email -->
-    </div>
-
-    <div class="form-group">
-        <label asp-for="PhoneNumber"></label> <!-- Label for PhoneNumber -->
-        <input asp-for="PhoneNumber" class="form-control" /> <!-- Input field for PhoneNumber -->
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button> <!-- Save button to submit the form -->
-    <a asp-action="Detail" asp-controller="User" asp-route-id="@Model.FacultyID" class="btn btn-primary">Cancel</a>
-</form>
-
-
+</div>
+</div>

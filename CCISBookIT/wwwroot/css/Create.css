@@ -1,0 +1,115 @@
+﻿/* General body styling */
+body {
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+.reserve-container {
+    width: 1150px;
+    height: 620px;
+    background-image: linear-gradient(138deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for the profile header */
+.reserve-container h2 {
+    font-family: 'Arial Black', sans-serif;             
+    font-size: 30px;
+    color: #800000;                                     
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);     
+    -webkit-text-stroke: 0.5px white;                   
+    text-align: center;                                   
+    margin-bottom: 10px;
+    margin-top: 20px;                                     
+}
+
+/* Styling for the form and map container */
+.form-and-map-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #800000;
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.4); /* Text shadow for labels */
+}
+
+/* Styling for the form container */
+.form-container {
+    width: 500px;
+    flex: 1;
+}
+
+.custom-label {
+    font-size: 18px;
+    color: #800000;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+    padding: 4px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    display: block;
+}
+
+
+/* Styling for the time fields */
+.time-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.time-field {
+    flex: 1;
+}
+
+/* Flexbox container for form buttons */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Styling for the form buttons delete */
+.form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;             /* Border radius */
+    cursor: pointer;
+}
+
+/* Specific styling for the delete button */
+.form-buttons .cancel {
+    background-color: #800000;
+    text-decoration: none;
+    font-size: 18px;                /* Font size */
+    font-weight: bold;              /* Bold font weight */
+    color: #fff;                  /* Text color */
+}
+
+.form-buttons .cancel:hover {
+    background-color: #ff4c4c;
+}
+
+/* Specific styling for the save button */
+.form-buttons .reserve {
+    background-color: #800000;    /* Background color */ 
+    font-size: 18px;                /* Font size */
+    font-weight: bold;              /* Bold font weight */
+    color: #fff;                  /* Text color */
+}
+
+.form-buttons .reserve:hover {
+    background-color: #4caf50;
+}
+
+
+/* Styling for the map placeholder */
+.map {
+    width: 420px;
+    height: 500px;
+}

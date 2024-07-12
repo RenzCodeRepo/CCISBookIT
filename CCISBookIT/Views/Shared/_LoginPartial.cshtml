@@ -3,64 +3,70 @@
 @inject UserManager<AppUser> userManager
 @inject IUrlHelper urlHelper
 
-<ul class="navbar-nav">
+@section Styles {
+    <link rel="stylesheet" href="/css/mainLayout.css" />
+}
+
+<ul>
     @if (signInManager.IsSignedIn(User))
     {
         var user = await userManager.GetUserAsync(User);
-        if (user != null)
+        if (await userManager.IsInRoleAsync(user, "Admin"))
         {
-            if (await userManager.IsInRoleAsync(user, "Admin"))
-            {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Index">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">View Accounts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">View Reservations</a>
-                </li>
-            }
-            else
-            {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Create">Add Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="ViewReservations">View Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="FAQ" asp-action="Index">FAQ</a>
-                </li>
-            }
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    @User.Identity!.Name!
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="@Url.Action("Detail", "User", new { id = user.FacultyID })">View Profile</a>
-                        <a class="dropdown-item" href="javascript:confirmLogout()">Logout</a>
-                    </li>
-                </ul>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Room" asp-action="Index">Rooms</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="User" asp-action="Index">View Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Booking" asp-action="Index">View Reservations</a>
             </li>
         }
         else
         {
-            <script type="text/javascript">
-                window.location.href = '@urlHelper.Action("Logout", "Account")';
-            </script>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Booking" asp-action="Create">Add Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Booking" asp-action="ViewReservations">View Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="FAQ" asp-action="Index">FAQ</a>
+            </li>
         }
+
+        <li class="dropdown">
+            <a href="#" id="navbarDropdown" class="dropdown-toggle">
+                @User.Identity!.Name!
+            </a>
+            <ul class="dropdown-content" aria-labelledby="navbarDropdown">
+                <li>
+                    <!-- Modify this link to point to the user's profile detail view -->
+                    <a class="dropdown-item" href="@Url.Action("Detail", "User", new { id = user.FacultyID })">
+                        <img src="/images/userIcon.png" alt="View Profile Icon">View Profile
+                    </a>
+                    <a class="dropdown-item" href="javascript:confirmLogout()">
+                        <img src="/images/logoutIcon.png" alt="Log Out Icon">Logout
+                    </a>
+                </li>
+            </ul>
+        </li>
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-        </li>
+    <li class="navbar-right">
+        <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+    </li>
+    <li class="navbar-right">
+        <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+    </li>
     }
 </ul>
 

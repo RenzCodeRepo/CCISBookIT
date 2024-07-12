@@ -1,5 +1,4 @@
-﻿﻿
-body {
+﻿body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
     display: flex;
@@ -138,21 +137,17 @@ span.red {
     margin-bottom: 10px;
 }
 
-    .text-center p {
+    .text-center a.btn-Login {
+        text-decoration: none;
+        color: #fff !important;
         font-family: 'Poppins', sans-serif;
         font-size: 18px;
-        color: #fff !important;
         text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
         margin-bottom: 5px;
+        text-decoration: none;
     }
 
-.btn-Login a {
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #0a5ac7;
-}
-
-    .btn-Login a:hover {
-        color: #40c057;
-    }
+        .text-center a.btn-Login:hover {
+            color: #ffd700 !important;
+            text-decoration: none;
+        }

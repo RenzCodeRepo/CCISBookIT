@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "List of Rooms";
 }
-
+@section Styles {
+    <link rel="stylesheet" href="/css/viewbookings.css" />
+}
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <h2>@ViewData["Title"]</h2> <!-- Display the title of the page -->
-
+        <div class="table-container">
         <table class="table">
             <a class="btn btn-primary" asp-action="ExportCsv" >Download Report</a>
             <thead>
@@ -39,5 +41,6 @@
                 }
             </tbody>
         </table>
+        </div>
     </div>
 </div>

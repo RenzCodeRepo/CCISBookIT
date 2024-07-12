@@ -1,0 +1,132 @@
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+}
+
+/* Styling for the background container */
+.background-container {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Column direction to stack elements */
+    align-items: center; /* Center elements horizontally */
+    min-height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflow content */
+    margin: 0; /* Remove default margin */
+}
+
+    /* Styling for the blurred background image */
+    .background-container::before {
+        content: ""; /* Empty content for pseudo-element */
+        background-image: url('../images/backgroundIMG.jpg'); /* Background image */
+        background-size: cover; /* Cover entire container */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        position: absolute; /* Absolute positioning */
+        top: 0; /* Top position */
+        left: 0; /* Left position */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        filter: blur(3px); /* Blur effect */
+        z-index: -1; /* Behind other elements */
+    }
+
+.edit-container {
+    width: 1000px; /* Adjust width */
+    height: 550px; /* Adjust height */
+    background-image: linear-gradient(138deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    border-radius: 10px;
+    margin-top: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Column direction for internal elements */
+    align-items: center; /* Center align internal elements */
+}
+
+    /* Styling for the profile header */
+    .edit-container h2 {
+        font-family: 'Arial Black', sans-serif; /* Set font family */
+        font-size: 40px;
+        color: #800000; /* Set text color to red */
+        text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Text shadow for better visibility */
+        -webkit-text-stroke: 0.5px white; /* White border around the letters for WebKit */
+        text-align: center; /* Center text horizontally */
+        margin-bottom: 10px;
+        margin-top: 20px; /* Reduce top margin */
+    }
+
+/* Styling for the form container */
+.form-container {
+    flex-grow: 1;
+    width: 80%;
+    margin-left: 80px;
+}
+
+    /* Styling for the form */
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px; /* Increased gap for form groups */
+    }
+
+/* Flexbox container for form groups */
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the form labels */
+.form-container label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #800000;
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.4); /* Text shadow for labels */
+    flex-shrink: 0; /* Prevents label from shrinking */
+    width: 150px; /* Set fixed width for labels */
+}
+
+/* Styling for the form inputs */
+.form-container input {
+    font-size: 20px; /* Font size */
+    font-family: 'arial', sans-serif; /* Set font family */
+    padding: 10px;
+    border: 1px solid #969292;
+    border-radius: 5px;
+    flex-grow: 1; /* Allows input to grow to fill space */
+}
+
+/* Flexbox container for form buttons */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+    /* Styling for the form buttons delete */
+    .form-buttons button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px; /* Border radius */
+        cursor: pointer;
+        background-color: #800000;
+    }
+
+    /* Specific styling for the delete button */
+    .form-buttons .cancel {
+        text-decoration: none;
+        font-size: 18px; /* Font size */
+        font-weight: bold; /* Bold font weight */
+        color: #fff; /* Text color */
+    }
+
+
+    /* Specific styling for the save button */
+    .form-buttons .save {
+        background-color: #800000; /* Background color */
+        font-size: 18px; /* Font size */
+        font-weight: bold; /* Bold font weight */
+        color: #fff; /* Text color */
+    }
+
+        .form-buttons .save:hover {
+            background-color: #4caf50;
+        }

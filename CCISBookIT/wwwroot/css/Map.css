@@ -1,0 +1,299 @@
+﻿
+/* MAP */
+
+
+/* General body styling */
+body {
+    font-family: 'Poppins', sans-serif; /* Set font family */
+    color: #fff; /* Text color */
+}
+
+.map-container {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background-color: rgb(225, 225, 225); /* Set the background to white */
+    border: 3px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.exiticon {
+    position: absolute;
+    border: 2px solid rgb(64, 192, 87); /* Add this line to create a black border */
+    width: auto;
+    height: 20px;
+    z-index: 3; /* Highest z-index for images */
+    left: 10px;
+}
+
+.stairsIcon {
+    position: absolute;
+    width: auto;
+    height: 25px;
+    z-index: 3; /* Highest z-index for images */
+    left: 145px;
+}
+
+.restroomIcon {
+    position: absolute;
+    width: auto;
+    height: 25px;
+    z-index: 3; /* Highest z-index for images */
+    left: 110px;
+}
+
+.elevatorIcon {
+    position: absolute;
+    width: auto;
+    height: 25px;
+    z-index: 3; /* Highest z-index for images */
+    top: 180px;
+    left: 110px;
+}
+
+.text-block {
+    position: absolute;
+    background-color: white;
+    border: 5px solid rgb(97, 97, 97); /* Add this line to create a black border */
+    padding: 5px;
+    width: 50px;
+    height: 60px;
+    left: 105px;
+}
+
+.bg-block {
+    position: absolute;
+    background-color: white;
+    border: 3px solid rgb(174, 174, 174); /* Add this line to create a black border */
+    width: 30px;
+    height: 30px;
+}
+
+/* Rectangles */
+.rectangle_S501-3,
+.rectangle_S504-6,
+.rectangle_S507-12B,
+.rectangle_S513-15,
+.rectangle_S516-18,
+.rectangle_bridge {
+    position: absolute; /* Ensure they have a position property */
+    z-index: 1; /* Lower z-index for rectangles */
+}
+
+/* Buttons */
+.button_S501-3,
+.button_S504-6,
+.button_S507-12B,
+.button_S513-15,
+.button_S516-18,
+.unavailable,
+.stockRoom {
+    position: absolute; /* Ensure they have a position property */
+    z-index: 2; /* Higher z-index for buttons */
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+/* HOVER EFFECTS */ /*
+.button_S501-3:hover,
+.button_S504-6:hover,
+.button_S507-12B:hover,
+.button_S513-15:hover,
+.button_S516-18:hover {
+    color: #330000;
+    background-color: #ffd700;
+}
+*/
+.laboratory:hover {
+    color: #330000;
+    background-color: #ffd700;
+}
+
+.lecture:hover {
+    color: #330000;
+    background-color: #209be4;
+}
+
+.faculty:hover {
+    color: #330000;
+    background-color: #ff0000;
+}
+
+.office:hover {
+    color: #330000;
+    background-color: white;
+    border: 1px solid #330000; /* Add this line to create a black border */
+}
+
+.chairperson:hover {
+    color: #330000;
+    background-color: #f75d02;
+}
+
+.unavailable {
+    position: absolute;
+    padding: 5px;
+    background-color: #616161;
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+    top: 5px;
+    left: 15px;
+}
+
+.stockRoom {
+    position: absolute;
+    padding: 5px;
+    background-color: #adadad; /* Background color */
+    border: none;
+    color: black;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+    top: 5px;
+    left: 15px;
+}
+
+
+.rectangle_bridge {
+    position: absolute;
+    background-color: white;
+    width: 180px;
+    height: 100px;
+    top: 180px;
+    left: 210px;
+}
+
+.rectangle_S501-3 {
+    position: absolute;
+    background-color: white;
+    width: 80px;
+    height: 215px;
+    top: 5px;
+    left: 210px;
+}
+
+.button_S501-3 {
+    position: absolute;
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+    height: 28px;
+    left: 220px;
+}
+
+.rectangle_S504-6 {
+    position: absolute;
+    background-color: white;
+    width: 280px;
+    height: 50px;
+    top: 3px;
+    left: 10px;
+}
+
+.button_S504-6 {
+    position: absolute;
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    height: 28px;
+    top: 8px;
+}
+
+.rectangle_S507-12B {
+    position: absolute;
+    background-color: white;
+    width: 75px;
+    height: 435px;
+    top: 5px;
+    left: 10px;
+}
+
+.button_S507-12B {
+    position: absolute;
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+    top: 5px;
+    left: 15px;
+}
+
+.rectangle_S513-15 {
+    position: absolute;
+    background-color: white;
+    width: 280px;
+    height: 50px;
+    top: 390PX;
+    left: 10px;
+}
+
+.button_S513-15 {
+    position: absolute;
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    height: 28px;
+    top: 397px;
+}
+
+.rectangle_S516-18 {
+    position: absolute;
+    background-color: white;
+    width: 80px;
+    height: 170px;
+    top: 270px;
+    left: 210px;
+}
+
+.button_S516-18 {
+    position: absolute;
+    padding: 5px;
+    background-color: #b11e1e; /* Background color */
+    border: none;
+    color: #fff;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+    height: 28px;
+    left: 220px;
+}

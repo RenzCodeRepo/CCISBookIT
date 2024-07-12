@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
     display: flex;
@@ -24,7 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%; /* Make sure the container takes the full height of the body */
-    margin-top: 40px !important;
+    margin-top: 20px !important;
 }
 
 /* Style for the transparent container */
@@ -90,7 +89,6 @@ span.red {
     font-weight: bold;
     color: #800000 !important;
 }
-
 /* Style for the  buttons */
 .button-container {
     margin-top: 10px;
@@ -124,27 +122,25 @@ span.red {
     .btn-Cancel a {
         text-decoration: none;
     }
-
 .text-center {
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-    .text-center p {
+
+    .text-center a.btn-Forgot,
+    .text-center a.btn-Register {
+        text-decoration: none;
+        color: #fff !important;
         font-family: 'Poppins', sans-serif;
         font-size: 18px;
-        color: #fff !important;
         text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
         margin-bottom: 5px;
+        text-decoration: none;
     }
 
-.btn-Register a {
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #0a5ac7;
-}
-
-    .btn-Register a:hover {
-        color: #40c057;
-    }
+        .text-center a.btn-Forgot:hover,
+        .text-center a.btn-Register:hover {
+            color: #ffd700 !important;
+            text-decoration: none;
+        }

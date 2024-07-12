@@ -7,7 +7,9 @@
                            !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
                            !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString());
 }
-
+@section Styles {
+    <link rel="stylesheet" href="/css/viewbookings.css" />
+}
 <div class="row">
     <div class="col-md-12">
         <h2>@ViewData["Title"]</h2>
@@ -64,6 +66,7 @@
         }
 
         <h3>My Bookings</h3>
+        <div class="table-container"> 
         <table class="table">
             <thead>
                 <tr class="text-center">
@@ -105,5 +108,6 @@
                 }
             </tbody>
         </table>
+       </div>
     </div>
 </div>

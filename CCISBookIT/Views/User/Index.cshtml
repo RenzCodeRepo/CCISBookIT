@@ -5,12 +5,15 @@
 @{
     ViewData["Title"] = "List of Users";
 }
+@section Styles {
+    <link rel="stylesheet" href="/css/viewbookings.css" />
+}
 
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <h2>@ViewData["Title"]</h2>
         <a href="@Url.Action("DownloadFacultyUsersCsv", "User")" class="btn btn-primary">Download Faculty Users CSV</a>
-
+        <div class="table-container">
         <table class="table">
             <thead>
                 <tr class="text-center">
@@ -64,5 +67,6 @@
                 }
             </tbody>
         </table>
+        </div>
     </div>
 </div>

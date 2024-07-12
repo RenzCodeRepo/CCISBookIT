@@ -1,0 +1,76 @@
+/* Apply background to the body */
+/* Apply background to the body */
+body {
+    background-color: #f0f8ff; /* Light blue background color */
+    background-image: url('../images/backgroundIMG.jpg'); /* Background image */
+    background-size: cover; /* Ensure the image covers the entire page */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-attachment: fixed; /* Fix the background image */
+}
+
+/* Style the table */
+.table_form {
+    background-image: linear-gradient(138deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow for a 3D effect */
+    margin-bottom: 20px;
+    width: 750px;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 200px;
+    margin-bottom: 250px;
+    font-size: 27px
+}
+
+    .table_form h2 {
+        font-family: 'Arial Black', sans-serif; /* Set font family */
+        font-size: 50px; /* Font size */
+        text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Text shadow for better visibility */
+        -webkit-text-stroke: 0.5px white; /* White border around the letters for WebKit */
+        color: #800000;
+    }
+
+
+
+.table_form1 {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 800px;
+    text-align: left;
+    margin-left: 70px;
+    font-size: 25px;
+}
+
+
+.Strong {
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Style the table rows */
+.table_form tr {
+    height: 40px; /* Set height for the rows */
+}
+
+/* Style the table cells */
+.table_form td {
+    padding: 15px; /* Add padding to the cells */
+}
+
+
+
+/* Style the buttons */
+.btn {
+    margin-right: 100px; /* Add space between the buttons */
+    margin-left: 100px;
+    text-align: center;
+
+}
+
+/* Optional: Style the page header */
+h1 {
+    color: #333; /* Dark color for the heading */
+    margin-bottom: 20px;
+}

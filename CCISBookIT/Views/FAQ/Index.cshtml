@@ -1,6 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "FAQs"; // Sets the title of the view
 }
-<h1>HI</h1>
+@section Styles {
+    <link rel="stylesheet" href="/css/faq.css" />
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCISBookIT - FAQs</title>
+    <link rel="icon" type="image" href="~/CCISBookITLogo.png">
+    <link rel="stylesheet" href="~/css/faq.css"> <!-- Ensure path is correct -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container" style="background-image: url('~/images/backgroundIMG.jpg');">
+        <!-- Navigation Bar -->
+        @* Replace with your navigation bar code *@
+        <div class="table-container">
+            <!-- Home title screen -->
+            <div class="FAQs-container">
+                <h1><span class="yellow">CCIS</span><span class="red">BOOKIT</span><span class="white"> FAQs</span></h1>
+
+                <div class="faq-section">
+                    <h2>General Information</h2>
+                    <details>
+                        <summary>Q1: What is the Classroom Booking Web Application?</summary>
+                        <p>The Classroom Booking Web Application is an online platform that allows faculty and staff of the College of Computer and Information Sciences to reserve classrooms for various academic purposes, such as meetings, study sessions, and conferences.</p>
+                    </details>
+                    <details>
+                        <summary>Q2: Who can use the Classroom Booking Web Application?</summary>
+                        <p>The application is available exclusively to the faculty and staff of the College of Computer and Information Sciences.</p>
+                    </details>
+
+                    <h2>Account and Access</h2>
+                    <details>
+                        <summary>Q3: How do I create an account?</summary>
+                        <p>Faculty and staff can create an account by registering on the sign-up page using their faculty ID and email address.</p>
+                    </details>
+                    <details>
+                        <summary>Q4: What should I do if I can't log in?</summary>
+                        <p>If you are having trouble logging in, ensure you are using your correct faculty ID and password. If the problem persists, contact the IT support team for assistance.</p>
+                    </details>
+
+                    <h2>Making Reservations</h2>
+                    <details>
+                        <summary>Q5: How do I make a reservation?</summary>
+                        <p>To make a reservation, log in to your account, navigate to the 'Make a Reservation' page, select your desired date, time, and room, and then submit your booking request.</p>
+                    </details>
+                    <details>
+                        <summary>Q6: Can I book multiple rooms at the same time?</summary>
+                        <p>Yes, you can book multiple rooms simultaneously, provided that each room is available at the selected date and time.</p>
+                    </details>
+                    <details>
+                        <summary>Q7: How far in advance can I book a room?</summary>
+                        <p>You can book rooms up to one month in advance. This policy ensures fair access to all users.</p>
+                    </details>
+
+                    <h2>Managing Reservations</h2>
+                    <details>
+                        <summary>Q8: How do I view my current reservations?</summary>
+                        <p>Log in to your account and go to the 'View Reservations' page. Here, you can see all your current and past reservations.</p>
+                    </details>
+                    <details>
+                        <summary>Q9: Can I cancel a reservation?</summary>
+                        <p>Yes, you can cancel a reservation by going to the 'View Reservations' page, selecting the reservation you want to cancel, and clicking the 'Cancel' button.</p>
+                    </details>
+                    <details>
+                        <summary>Q10: What happens if I don't use my reserved room?</summary>
+                        <p>If you do not use your reserved room and do not cancel in advance, it may result in a warning. Repeated no-shows can lead to temporary suspension of your booking privileges.</p>
+                    </details>
+
+                    <h2>Room and Equipment</h2>
+                    <details>
+                        <summary>Q11: What types of rooms are available for booking?</summary>
+                        <p>The application offers a variety of rooms, including lecture halls, computer labs, meeting rooms, and study spaces.</p>
+                    </details>
+
+                    <h2>Troubleshooting and Support</h2>
+                    <details>
+                        <summary>Q12: What should I do if the room I reserved is locked or occupied?</summary>
+                        <p>If you encounter any issues with room access or occupancy, contact the facility management team immediately for assistance.</p>
+                    </details>
+                    <details>
+                        <summary>Q13: Who should I contact for technical support?</summary>
+                        <p>For technical support, reach out to the IT support team via email at support@ccisbookit.com or call the support hotline at (123) 456-7890.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

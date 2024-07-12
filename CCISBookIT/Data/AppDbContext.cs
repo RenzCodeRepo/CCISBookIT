@@ -41,5 +41,10 @@ namespace CCISBookIT.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
+        internal IEnumerable<object> GetAllUsersAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

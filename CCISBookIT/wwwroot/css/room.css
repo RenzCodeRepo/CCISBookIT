@@ -1,0 +1,105 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/images/backgroundIMG.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #800000;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: rgb(236, 233, 233);
+    border-radius: 15px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.table-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+    .table thead {
+        background-color: #800000;
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 2px;
+}
+
+.btn-primary {
+    background-color: #800000;
+    border-color: #800000;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: #600000;
+        border-color: #600000;
+    }
+
+.btn-info {
+    background-color: maroon;
+    border-color: black;
+    color: white;
+}
+
+    .btn-info:hover {
+        background-color: #8B0000;
+        border-color: black;
+    }
+
+.download-btn {
+    margin-bottom: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
