@@ -1,0 +1,134 @@
+﻿body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+}
+
+/* Styling for the background container */
+.background-container {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Column direction to stack elements */
+    align-items: center; /* Center elements horizontally */
+    min-height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflow content */
+    margin: 0; /* Remove default margin */
+}
+
+    /* Styling for the blurred background image */
+    .background-container::before {
+        content: ""; /* Empty content for pseudo-element */
+        background-image: url(../images/backgroundIMG.jpg); /* Background image */
+        background-size: cover; /* Cover entire container */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        position: absolute; /* Absolute positioning */
+        top: 0; /* Top position */
+        left: 0; /* Left position */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        filter: blur(3px); /* Blur effect */
+        z-index: -1; /* Behind other elements */
+    }
+
+.FAQs-container {
+    width: 900px; /* Adjust width */
+    padding: 30px; /* Add padding */
+    background-image: linear-gradient(138deg, rgba(255, 255, 255, 0.😎 0%, rgba(255, 255, 255, 0.4) 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Column direction for internal elements */
+    align-items: center; /* Center align internal elements */
+}
+
+    /* Styling for the profile header */
+    .FAQs-container h1 {
+        font-family: 'Arial Black', sans-serif; /* Set font family */
+        font-size: 40px;
+        text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Text shadow for better visibility */
+        -webkit-text-stroke: 0.5px white; /* White border around the letters for WebKit */
+        text-align: center; /* Center text horizontally */
+        margin-bottom: 10px;
+        margin-top: 10px; /* Reduce top margin */
+    }
+
+h1 {
+    font-family: 'Arial Black', sans-serif; /* Set font family */
+    font-size: 80px; /* Set font size */
+    font-weight: bold; /* Set font weight */
+    color: #ffd700; /* Set fallback text color */
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Add shadow for better visibility */
+    -webkit-text-stroke: 2px white; /* Add white border around the letters for webkit browsers */
+    margin-bottom: 10px; /* Reduce bottom margin to bring texts closer */
+}
+
+span.yellow {
+    color: #ffd700; /* (CCIS) Set text color to yellow */
+}
+
+span.red {
+    color: #800000; /* (BOOKIT) Set text color to red */
+}
+
+span.white {
+    color: white; /* (FAQs) Set text color to red */
+    -webkit-text-stroke: 1px #b2b2b2; /* Add white border around the letters for webkit browsers */
+}
+
+.faq-section {
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Full width */
+}
+
+    .faq-section h2 {
+        font-size: 28px;
+        color: #800000;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .faq-section p {
+        font-size: 16px;
+        color: #333;
+        margin: 10px 0;
+    }
+
+details {
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    summary:hover {
+        color: #0056b3;
+    }
+
+/* Justify text in answers */
+details p {
+    font-family: 'Poppins'; /* Apply Poppins font */
+    text-align: justify;
+    font-weight: normal; /* Ensure text is not bold */
+}
+
+footer {
+    text-align: center;
+    height: auto; /* Set height to auto */
+    padding: 20px; /* Add padding */
+    background-color: #800000; /* Set background color */
+    width: 100%; /* Set width to 100% of the viewport */
+}
+
+.footer-content {
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+    font-size: 12px; /* Set font size */
+    color: white; /* Set text color */
+    padding-left: 20px; /* Add padding to the left */
+    padding-right: 20px; /* Add padding to the right */
+}
