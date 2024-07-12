@@ -1,34 +1,26 @@
 ﻿body {
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
     background: url('/images/backgroundIMG.jpg');
     background-size: cover;
     background-position: center;
     color: #800000;
-    margin: 0;
-    padding: 0;
 }
 
-.container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-h1 {
+h2 {
     font-size: 30px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     background: rgb(236, 233, 233);
     border-radius: 15px;
     font-weight: bold;
     padding: 10px;
 }
 
-.table-container {
+.container {
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
@@ -39,7 +31,6 @@ h1 {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    width: 100%;
 }
 
     .table thead {
@@ -75,6 +66,17 @@ h1 {
         border-color: #600000;
     }
 
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
 .btn-info {
     background-color: maroon;
     border-color: black;
@@ -85,10 +87,6 @@ h1 {
         background-color: #8B0000;
         border-color: black;
     }
-
-.download-btn {
-    margin-bottom: 15px;
-}
 
 .text-center {
     text-align: center;

@@ -8,11 +8,9 @@
     bool filtersApplied = !string.IsNullOrEmpty(ViewBag.FilterDate?.ToString()) ||
                            !string.IsNullOrEmpty(ViewBag.FilterStatus?.ToString()) ||
                            !string.IsNullOrEmpty(ViewBag.FilterRoomNo?.ToString());
-}
-@section Styles {
-    <link rel="stylesheet" href="/css/viewreservations.css" />
-}
 
+}
+<link rel="stylesheet" href="/css/viewreservations.css" />
 <div class="row">
     
     <div class="col-md-12 offset-md-0">
