@@ -10,13 +10,14 @@ namespace CCISBookIT.Controllers
 {
     public class AccountController : Controller
     {
-        
+        private readonly EmailService _emailService;
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext context, EmailService emailService)
         {
+            _emailService = emailService;
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
@@ -101,5 +102,76 @@ namespace CCISBookIT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost()]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null) return RedirectToAction("ForgotPasswordConfirmation", "Account");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { token, email = user.Email }, Request.Scheme);
+
+            await _emailService.SendEmailAsync(
+                user.Email,
+                "Reset Password",
+                $"Please reset your password by <a href='{callbackUrl}'>clicking here</a>."
+            );
+
+            return RedirectToAction("ForgotPasswordConfirmation", "Account");
+        }
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ResetPassword(string token = null)
+        {
+            if (token == null)
+            {
+                return BadRequest("A token must be supplied for password reset.");
+            }
+            var model = new ResetPasswordViewModel { Token = token };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation" , "Account");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View();
+        }
+
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
     }
 }

@@ -28,7 +28,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
+builder.Services.AddTransient<EmailService>();
 builder.Services.AddScoped<UserManager<AppUser>>();
 var app = builder.Build();
 
